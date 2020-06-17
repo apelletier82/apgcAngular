@@ -1,0 +1,9 @@
+<a mat-list-item (click)="toggleExpand()">    
+    <mat-icon fontSet="fas" [fontIcon]="fontIcon"></mat-icon>
+    <span> 
+        {{category}} 
+        <span class="category-fill-remaining-space"></span>
+        <mat-icon class="category-expanded-icon" fontSet="fas" [fontIcon] = "(expanded && expanded===true) ? 'fa-chevron-up' : 'fa-chevron-down'"></mat-icon>        
+    </span>        
+</a>
+<ng-content *ngIf="expanded"></ng-content> 
