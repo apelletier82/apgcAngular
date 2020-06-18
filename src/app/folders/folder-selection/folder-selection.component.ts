@@ -33,7 +33,7 @@ export class FolderSelectionComponent implements OnInit {
 
   selectedYearOption: string;
 
-  constructor(private _appContext: AppContext,
+  constructor(public appContext: AppContext,
     private _folderService: FolderService,
     public dialogRef: MatDialogRef<FolderSelectionComponent>) {
   }
@@ -43,22 +43,13 @@ export class FolderSelectionComponent implements OnInit {
       this._originalFolders = res.slice();
       this.folders = res.slice();
 
-      if (this._appContext.folderId) {  
-        this.selectedFolderOption = this._appContext.folderId.toString();
+      if (this.appContext.folderId) {  
+        this.selectedFolderOption = this.appContext.folderId.toString();
       }
-      if (this._appContext.yearId) {
-        this.selectedYearOption = this._appContext.yearId.toString();
+      if (this.appContext.yearId) {
+        this.selectedYearOption = this.appContext.yearId.toString();
       }      
     });
-  }
-
-  doFilterFolder(event: Event): void {
-    const filterExpression = (event.target as HTMLInputElement).value;
-    this.folders = this._originalFolders.filter(
-      fld => fld.folderName.toLocaleLowerCase().indexOf(
-        filterExpression.toLocaleLowerCase()
-      ) > -1
-    );
   }
 
   getSelectedFolderYears(): FolderYear[] {
@@ -77,8 +68,8 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   onOkClick(): void {
-    this._appContext.folderId = +this.selectedFolderOption;
-    this._appContext.yearId = +this.selectedYearOption;
+    this.appContext.folderId = +this.selectedFolderOption;
+    this.appContext.yearId = +this.selectedYearOption;
     
     this.dialogRef.close()    
   }
@@ -90,15 +81,7 @@ export class FolderSelectionComponent implements OnInit {
     return false;
   }
 
-  getCurrentFolderId(): number {
-    return this._appContext.folderId;
-  }
-
-  getCurrentYearId(): number {
-    return this._appContext.yearId;
-  }
-
-  applyFilter(event: Event): void{
+  applyFolderFilter(event: Event): void{
     const filterValueLowerCase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     this.folders = this._originalFolders.filter(
         f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowerCase) > -1);

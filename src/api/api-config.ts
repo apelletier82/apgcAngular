@@ -1,0 +1,1 @@
+export const FOLDER_API_URL = '/api/mock/folders';

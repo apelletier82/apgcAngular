@@ -7,7 +7,7 @@ import { AppContext } from './app-context';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  title = 'apgc';
   constructor(public appContext: AppContext){
   }    
 }

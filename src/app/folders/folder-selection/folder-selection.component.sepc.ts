@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FolderSelectionComponent } from './folder-selection.component';
+import { FoldersModule } from '../folders.module';
 
-describe('FolderSelectionComponent', () => {
+describe('FolderSelectionComponent', () => {  
   let component: FolderSelectionComponent;
   let fixture: ComponentFixture<FolderSelectionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FolderSelectionComponent ]
+      declarations: [ FolderSelectionComponent ],
+      imports:[FoldersModule]
     })
     .compileComponents();
   }));
