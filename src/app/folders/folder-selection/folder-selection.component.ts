@@ -79,8 +79,8 @@ export class FolderSelectionComponent implements OnInit {
   onOkClick(): void {
     this._appContext.folderId = +this.selectedFolderOption;
     this._appContext.yearId = +this.selectedYearOption;
-
-    this.dialogRef.close();
+    
+    this.dialogRef.close()    
   }
 
   canEnableOk(): boolean {
@@ -96,5 +96,11 @@ export class FolderSelectionComponent implements OnInit {
 
   getCurrentYearId(): number {
     return this._appContext.yearId;
+  }
+
+  applyFilter(event: Event): void{
+    const filterValueLowerCase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+    this.folders = this._originalFolders.filter(
+        f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowerCase) > -1);
   }
 }

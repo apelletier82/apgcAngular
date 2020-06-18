@@ -1,30 +1,33 @@
-<h1 mat-dialog-title>Select folder</h1>
+<h1 mat-dialog-title>Open folder</h1>
 <div mat-dialog-content>
     <mat-vertical-stepper #stepper>
-        <mat-step [stepControl]="folderStepGroup">
-            <div #folderStepGroup>
-                <ng-template matStepLabel>Select a folder</ng-template>
+        <mat-step label="Select a folder" [stepControl]="folderStepGroup">
+            <div #folderStepGroup>                
+                <mat-form-field class="full-width">
+                    <mat-label>Search</mat-label>
+                    <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFilter($event)">
+                </mat-form-field>
                 <mat-selection-list class="folderList" [multiple]="false" [(ngModel)]="selectedFolderOption"
                     (ngModelChange)="stepper.next()">
-                    <mat-list-option *ngFor="let folder of folders" 
-                        [value]="folder.folderId">
+                    <mat-list-option *ngFor="let folder of folders" [value]="folder.folderId">
                         <span>  
-                            <img class="folder-logo" [src]="folder.logo">                          
-                            {{ folder.folderName }}      
-                            <mat-icon *ngIf="folder.folderId === getCurrentFolderId()" fontSet="fas" fontIcon="fa-check-circle"></mat-icon>
+                            <img class="small-Logo" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
+                            <span *ngIf="folder.logo">                         
+                                {{ folder.folderName }}      
+                                <mat-icon class="currentSelected" *ngIf="folder.folderId === getCurrentFolderId()" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
+                            </span>
                         </span>
                     </mat-list-option>   
                 </mat-selection-list>
             </div>
         </mat-step>
-        <mat-step [stepControl]="yearStepGroup">
-            <div #yearStepGroup>
-                <ng-template matStepLabel>Select a year within the folder</ng-template>
+        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
+            <div #yearStepGroup>                
                 <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearOption">
                     <mat-list-option *ngFor="let year of selectedFolderYears" [value]="year.yearId">
                         <span>  
                             {{ year.year }}                            
-                            <mat-icon *ngIf="year.yearId === getCurrentYearId()" fontSet="fas" fontIcon="fa-check-circle"></mat-icon>
+                            <mat-icon class="currentSelected" *ngIf="year.yearId === getCurrentYearId()" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
                         </span>
                     </mat-list-option>
                 </mat-selection-list>

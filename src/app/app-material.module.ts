@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
 
@@ -24,6 +25,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatButtonModule,
     MatGridListModule,
     MatFormFieldModule,
+    MatInputModule,
     MatDialogModule,
     MatStepperModule
   ],
@@ -35,8 +37,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatButtonModule,
     MatGridListModule,
     MatFormFieldModule,
+    MatInputModule,
     MatDialogModule,
-    MatStepperModule   
+    MatStepperModule 
   ]
 })
 export class AppMaterialModule { }

@@ -7,3 +7,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .apgc-flex-space {
     flex: 1 1 auto;
 }
+
+.small-Logo {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;    
+    vertical-align: middle;
+}
+
+.full-width {
+    width: 100%;
+}

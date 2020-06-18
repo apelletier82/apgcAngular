@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
     providedIn:'root'
 })
 export class AppContext {    
-    folderId: number;
-    folderName: string;
-    yearId: number;
-    yearName: string;     
+    folderId: number;    
+    yearId: number;   
 }
