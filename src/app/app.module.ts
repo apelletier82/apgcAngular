@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppMenuCategoryItemModule } from './app-menu-category-item/app-menu-category-item.module';
 import { AppToolbarModule } from './app-toolbar/app-toolbar.module';
+import { FoldersModule } from './folders/folders.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,13 @@ import { AppToolbarModule } from './app-toolbar/app-toolbar.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     AppMenuCategoryItemModule,
-    AppToolbarModule
+    AppToolbarModule,
+    FoldersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

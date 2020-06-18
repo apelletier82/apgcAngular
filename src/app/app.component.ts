@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AppContext } from './app-context';
 
 @Component({
   selector: 'apgc-root',
@@ -8,6 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(){    
+  constructor(public appContext: AppContext){
   }    
 }

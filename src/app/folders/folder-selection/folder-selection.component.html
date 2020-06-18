@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Select folder</h1>
+<div mat-dialog-content>
+    <mat-vertical-stepper #stepper>
+        <mat-step [stepControl]="folderStepGroup">
+            <div #folderStepGroup>
+                <ng-template matStepLabel>Select a folder</ng-template>
+                <mat-selection-list class="folderList" [multiple]="false" [(ngModel)]="selectedFolderOption"
+                    (ngModelChange)="stepper.next()">
+                    <mat-list-option *ngFor="let folder of folders" 
+                        [value]="folder.folderId">
+                        <span>  
+                            <img class="folder-logo" [src]="folder.logo">                          
+                            {{ folder.folderName }}      
+                            <mat-icon *ngIf="folder.folderId === getCurrentFolderId()" fontSet="fas" fontIcon="fa-check-circle"></mat-icon>
+                        </span>
+                    </mat-list-option>   
+                </mat-selection-list>
+            </div>
+        </mat-step>
+        <mat-step [stepControl]="yearStepGroup">
+            <div #yearStepGroup>
+                <ng-template matStepLabel>Select a year within the folder</ng-template>
+                <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearOption">
+                    <mat-list-option *ngFor="let year of selectedFolderYears" [value]="year.yearId">
+                        <span>  
+                            {{ year.year }}                            
+                            <mat-icon *ngIf="year.yearId === getCurrentYearId()" fontSet="fas" fontIcon="fa-check-circle"></mat-icon>
+                        </span>
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+        </mat-step>
+</mat-vertical-stepper>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button (click)="onOkClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Ok</button>
+</div>

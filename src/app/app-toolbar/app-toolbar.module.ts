@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AppToolbarComponent } from './app-toolbar.component';
 import { AppMaterialModule } from '../app-material.module';
+import { FoldersModule } from '../folders/folders.module';
 
 
 
@@ -11,10 +12,14 @@ import { AppMaterialModule } from '../app-material.module';
   imports: [
     CommonModule,
     RouterModule,
-    AppMaterialModule
+    AppMaterialModule,
+    FoldersModule
   ],
   exports:[
     AppToolbarComponent
+  ],
+  entryComponents:[
+    
   ]
 })
 export class AppToolbarModule { }

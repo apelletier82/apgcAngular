@@ -1,9 +1,14 @@
 .category-expanded-icon {
     font-size: 12px;
     position: absolute;
+    bottom: 7px;
     right: 3px;
 }
 
 .category-fill-remaining-space {
     flex: 1 1 auto;
+}
+
+.ng-content{
+    margin-left: 10px;
 }

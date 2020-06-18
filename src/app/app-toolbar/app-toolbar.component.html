@@ -2,7 +2,16 @@
     <button mat-icon-button name="btnMenu" id="btnMenu" (click)="menuClick()">
         <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="mat-headline">AP Gestion Co {{ title }} </h1>
+    <button mat-flat-button color="primary" (click)="onOpenFolderClick()">
+        <span *ngIf="(!appContext?.folderId || appContext?.folderId ===0)">
+            <mat-icon fontSet="fas" fontIcon="fa-folder-open"></mat-icon>
+            Open folder
+        </span>                
+        <span *ngIf="appContext?.folderId > 0">
+            <mat-icon fontSet="fas" fontIcon="fa-folder"></mat-icon>        
+            <h2 class="mat-title">{{ appContext?.folderName }} {{ appContext?.yearName }}</h2>
+        </span>
+    </button>
     <router-outlet name="toolbar-left"></router-outlet>
     <span class="apgc-toolbar-fill-remaining-space"></span>    
     <router-outlet name="toolbar-right"></router-outlet>
