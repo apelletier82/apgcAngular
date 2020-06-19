@@ -7,6 +7,7 @@ import { AppMaterialModule } from '../app-material.module';
 import { FolderSelectionComponent } from './folder-selection/folder-selection.component';
 import { FOLDER_API_URL } from 'src/api/api-config';
 import { HttpClientModule } from '@angular/common/http';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 

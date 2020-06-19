@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
-import { AppContext } from 'src/app/app-context';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FolderService } from '../folder.service';
 import { Folder } from '../folder';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
+import { FolderSelectionData } from './folder-selection-data';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -11,7 +12,6 @@ import { FolderYear } from '../folder-year';
   styleUrls: ['./folder-selection.component.scss']
 })
 export class FolderSelectionComponent implements OnInit {
-
   private _originalFolders: Folder[];
   private _selectedFolderOption: string;
 
@@ -23,37 +23,38 @@ export class FolderSelectionComponent implements OnInit {
   }
   set selectedFolderOption(value: string){
     this._selectedFolderOption = value;
-    if (value && value != '') {
+    if (value) {
       this.selectedFolderYears = this.getSelectedFolderYears()
     }
     else {
       this.selectedFolderYears = [];
     } 
-  }
+  };
 
   selectedYearOption: string;
 
-  constructor(public appContext: AppContext,
-    private _folderService: FolderService,
-    public dialogRef: MatDialogRef<FolderSelectionComponent>) {
+  constructor(private _folderService: FolderService,
+    public dialogRef: MatDialogRef<FolderSelectionComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: FolderSelectionData) {
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void {    
+    if (this.data.folderId){
+      this._selectedFolderOption = this.data.folderId.toString();
+    };
+
+    if (this.data.yearId) {
+      this.selectedYearOption = this.data.yearId.toString();
+    }
+
     this._folderService.getFolderList().subscribe(res => {
       this._originalFolders = res.slice();
-      this.folders = res.slice();
-
-      if (this.appContext.folderId) {  
-        this.selectedFolderOption = this.appContext.folderId.toString();
-      }
-      if (this.appContext.yearId) {
-        this.selectedYearOption = this.appContext.yearId.toString();
-      }      
+      this.folders = res.slice();   
     });
   }
 
-  getSelectedFolderYears(): FolderYear[] {
-    const fldId = +this.selectedFolderOption;
+  getSelectedFolderYears(): FolderYear[] { 
+    const fldId: number = +this._selectedFolderOption; 
     const flds = this._originalFolders.filter(f => f.folderId === fldId);
     if ((!flds) || (flds.length === 0))
       return [];
@@ -62,16 +63,15 @@ export class FolderSelectionComponent implements OnInit {
     return res.years;
   }
   
-
   onCancelClick(): void {
     this.dialogRef.close();
   }
 
-  onOkClick(): void {
-    this.appContext.folderId = +this.selectedFolderOption;
-    this.appContext.yearId = +this.selectedYearOption;
-    
-    this.dialogRef.close()    
+  onSelectClick(): FolderSelectionData {
+    return {
+      folderId: +this.selectedFolderOption,
+      yearId: +this.selectedYearOption
+    };      
   }
 
   canEnableOk(): boolean {

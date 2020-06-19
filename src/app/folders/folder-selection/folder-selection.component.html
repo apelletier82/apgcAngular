@@ -14,7 +14,7 @@
                             <img class="small-Logo" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
                             <span *ngIf="folder.logo">                         
                                 {{ folder.folderName }}      
-                                <mat-icon class="currentSelected" *ngIf="folder.folderId === appContext.folderId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
+                                <mat-icon class="currentSelected" *ngIf="folder.folderId === data.folderId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
                             </span>
                         </span>
                     </mat-list-option>   
@@ -27,7 +27,7 @@
                     <mat-list-option *ngFor="let year of selectedFolderYears" [value]="year.yearId">
                         <span>  
                             {{ year.year }}                            
-                            <mat-icon class="currentSelected" *ngIf="year.yearId === appContext.yearId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
+                            <mat-icon class="currentSelected" *ngIf="year.yearId === data.yearId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
                         </span>
                     </mat-list-option>
                 </mat-selection-list>
@@ -37,5 +37,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancelClick()">Cancel</button>
-    <button mat-button (click)="onOkClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Ok</button>
+    <button mat-button [mat-dialog-close]="onSelectClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Select</button>    
 </div>
