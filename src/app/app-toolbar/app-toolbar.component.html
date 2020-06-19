@@ -1,21 +1,20 @@
 <mat-toolbar color="primary" class="apgc-toolbar">
     <button mat-icon-button name="btnMenu" id="btnMenu" (click)="menuClick()">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <mat-divider></mat-divider>
+        <mat-icon fontSet="fas" fontIcon="fa-bars"></mat-icon>
+    </button>        
     <button mat-raised-button color="accent"  *ngIf="(!appContext?.folderId || appContext?.folderId ===0)" (click)="onOpenFolderClick()">
         <h2 >
             <mat-icon fontSet="fas" fontIcon="fa-folder-open"></mat-icon>
             Open folder
         </h2>
     </button>
-    <button mat-flat-button color="primary" *ngIf="appContext?.folderId > 0" (click)="onOpenFolderClick()">        
+    <a mat-flat-button color="primary" *ngIf="appContext?.folderId > 0" (click)="onOpenFolderClick()">        
         <h2 class="mat-title">
             <img class="small-Logo" [src]="folderLogo" alt="logo" *ngIf="folderLogo">
             <mat-icon fontSet="fas" fontIcon="fa-folder" *ngIf="!folderLogo"></mat-icon>             
             {{ folderName }} - {{ folderYearName }}
         </h2>        
-    </button>
+    </a>
     <router-outlet name="toolbar-left"></router-outlet>
     <span class="apgc-toolbar-fill-remaining-space"></span>    
     <router-outlet name="toolbar-right"></router-outlet>

@@ -22,7 +22,7 @@ export class AppToolbarComponent implements OnInit {
     public dialog: MatDialog, private folderService: FolderService) { }
 
   ngOnInit(): void { 
-    this.getFolderInformation();      
+    this.updateFolderInformation();      
   }
 
   menuClick(){
@@ -31,26 +31,25 @@ export class AppToolbarComponent implements OnInit {
 
   onOpenFolderClick(){
     const dialogRef = this.dialog.open(FolderSelectionComponent);
-    dialogRef.afterClosed().subscribe(result => this.getFolderInformation());
+    dialogRef.afterClosed().subscribe(result => this.updateFolderInformation());
   }
 
-  getFolderInformation(): void {
+  updateFolderInformation(): void {
     this.folderName = undefined;
     this.folderYearName = undefined;
     this.folderLogo = undefined;
-
+    
     if (this.appContext.folderId) {
-      this.folderService.getFolder(this.appContext.folderId).subscribe(
-        result => {
+      this.folderService.getFolder(this.appContext.folderId).subscribe(result =>  {          
           this.folderName = result.folderName;
           this.folderLogo = result.logo;
-        });
-
-      if (this.appContext.yearId) {
-        this.folderService.getFolderYear(this.appContext.folderId, this.appContext.yearId).subscribe(
-          result => this.folderYearName = result.year.toString());
-      }
+        
+        if (this.appContext.yearId) {
+          const fldYears = result.years.filter(y => y.yearId === this.appContext.yearId);
+          if (fldYears && fldYears.length === 1)
+            this.folderYearName = fldYears[0].year.toString();        
+        }
+      });
     }
   }
-
 }

@@ -11,24 +11,13 @@ import { FOLDER_API_URL } from '../../api/api-config';
 })
 export class FolderService {
 
-  constructor(private _httpClient: HttpClient,
-      @Inject(FOLDER_API_URL) private _apiUrl) { }
+  constructor(private _httpClient: HttpClient) {} 
 
   getFolderList(): Observable<Folder[]> {
-    return this._httpClient.get<Folder[]>(`${this._apiUrl}/folders`);
+    return this._httpClient.get<Folder[]>(`${FOLDER_API_URL}/folders`);
   }
 
   getFolder(folderId: number): Observable<Folder> {
-    return this._httpClient.get<Folder>(`${this._apiUrl}/${folderId}`);        
+    return this._httpClient.get<Folder>(`${FOLDER_API_URL}/${folderId}`);
   }  
-
-  getFolderYears(folderId: number): Observable<FolderYear[]> {
-    return this.getFolder(folderId).pipe(map(f => f.years));
-  }
-
-  getFolderYear(folderId: number, yearId: number): Observable<FolderYear> {
-    return this.getFolderYears(folderId).pipe(
-      map(years => years.filter(y => y.yearId === yearId).shift())
-      );
-  }
 }

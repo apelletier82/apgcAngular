@@ -21,9 +21,6 @@ import { HttpClientModule } from '@angular/common/http';
     FoldersRoutingModule,
     AppMaterialModule   
   ],
-  providers: [
-    { provide: FOLDER_API_URL, useValue: FOLDER_API_URL }
-  ],
   entryComponents:[
     FolderSelectionComponent
   ]
