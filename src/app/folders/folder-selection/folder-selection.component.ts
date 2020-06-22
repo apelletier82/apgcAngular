@@ -4,7 +4,6 @@ import { Folder } from '../folder';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelectionData } from './folder-selection-data';
-import { Data } from '@angular/router';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -39,17 +38,18 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {    
-    if (this.data.folderId){
-      this._selectedFolderOption = this.data.folderId.toString();
-    };
-
-    if (this.data.yearId) {
-      this.selectedYearOption = this.data.yearId.toString();
-    }
-
     this._folderService.getFolderList().subscribe(res => {
       this._originalFolders = res.slice();
-      this.folders = res.slice();   
+      this.folders = res.slice();
+
+
+      if (this.data.folderId){
+        this.selectedFolderOption = this.data.folderId.toString();
+      };
+  
+      if (this.data.yearId) {
+        this.selectedYearOption = this.data.yearId.toString();
+      }      
     });
   }
 
@@ -61,10 +61,6 @@ export class FolderSelectionComponent implements OnInit {
 
     const res = flds.shift();
     return res.years;
-  }
-  
-  onCancelClick(): void {
-    this.dialogRef.close();
   }
 
   onSelectClick(): FolderSelectionData {

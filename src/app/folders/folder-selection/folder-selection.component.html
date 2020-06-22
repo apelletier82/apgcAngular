@@ -33,9 +33,9 @@
                 </mat-selection-list>
             </div>
         </mat-step>
-</mat-vertical-stepper>
+    </mat-vertical-stepper>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button [mat-dialog-close]="onSelectClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Select</button>    
 </div>

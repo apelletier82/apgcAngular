@@ -34,9 +34,12 @@ export class AppToolbarComponent implements OnInit {
     const dialogRef = this.dialog.open(FolderSelectionComponent, {
       data: { folderId: this.appContext.folderId, yearId: this.appContext.yearId }
     });
-    dialogRef.afterClosed().subscribe(result => 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { 
         this.updateFolderInformation((<FolderSelectionData>result).folderId, 
-          (<FolderSelectionData>result).yearId));
+          (<FolderSelectionData>result).yearId);
+        }
+    });
   }
 
   updateFolderInformation(folderId: number, yearId: number): void {
