@@ -23,7 +23,7 @@ export class FolderSelectionComponent implements OnInit {
   set selectedFolderOption(value: string) {
     this.internalSelectedFolderOption = value;
     if (value) {
-      this.selectedFolderYears = this.getSelectedFolderYears();
+      this.selectedFolderYears = this.getSelectedFolderYears(+value);
     }
     else {
       this.selectedFolderYears = [];
@@ -45,7 +45,7 @@ export class FolderSelectionComponent implements OnInit {
 
 
       if (this.data.folderId) {
-        this.internalSelectedFolderOption = this.data.folderId.toString();
+        this.selectedFolderOption = this.data.folderId.toString();
       }
 
       if (this.data.yearId) {
@@ -54,9 +54,8 @@ export class FolderSelectionComponent implements OnInit {
     });
   }
 
-  getSelectedFolderYears(): FolderYear[] {
-    const fldId: number = +this.internalSelectedFolderOption;
-    const flds = this.originalFolders.filter(f => f.folderId === fldId);
+  getSelectedFolderYears(folderId: number): FolderYear[] {
+    const flds = this.originalFolders.filter(f => f.folderId === folderId);
     if ((!flds) || (flds.length === 0)) {
       return [];
     }
@@ -73,7 +72,7 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   canEnableOk(): boolean {
-    if (this.internalSelectedFolderOption && this.selectedYearOption) {
+    if (this.selectedFolderOption && this.selectedYearOption) {
       return true;
     }
 
