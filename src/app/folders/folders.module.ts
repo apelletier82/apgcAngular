@@ -12,17 +12,17 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [    
+  declarations: [
     FolderSelectionComponent
   ],
   imports: [
-    CommonModule, 
-    HttpClientModule,   
+    CommonModule,
+    HttpClientModule,
     FormsModule,
     FoldersRoutingModule,
-    AppMaterialModule   
+    AppMaterialModule
   ],
-  entryComponents:[
+  entryComponents: [
     FolderSelectionComponent
   ]
 })

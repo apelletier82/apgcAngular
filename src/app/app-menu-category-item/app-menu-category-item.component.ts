@@ -8,18 +8,18 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AppMenuCategoryItemComponent implements OnInit {
 
   @Input() category: string;
-  @Input() expanded: boolean = true;
+  @Input() expanded = true;
   @Input() fontIcon: string;
 
   constructor() { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     if (this.expanded && this.expanded === true) {
       this.expanded = true;
     }
     else {
-      this.expanded = false
-    }    
+      this.expanded = false;
+    }
   }
 
   toggleExpand() {

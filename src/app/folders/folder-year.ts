@@ -1,14 +1,14 @@
-export interface FolderYear  {
+export interface FolderYear {
     yearId: number;
     year: number;
     DateFrom: Date;
     DateTo: Date;
-    closingDate: Date;      
+    closingDate: Date;
     creationDate: Date;
     creationUser: string;
     changeDate: Date;
-    changeUser: string;    
+    changeUser: string;
     deleted: boolean;
     deletionDate: Date;
-    deletionUser: string;    
+    deletionUser: string;
 }

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { AppContext } from './app-context';
 
 @Component({
@@ -8,6 +8,6 @@ import { AppContext } from './app-context';
 })
 export class AppComponent {
   title = 'apgc';
-  constructor(public appContext: AppContext){
-  }    
+  constructor(public appContext: AppContext) {
+  }
 }

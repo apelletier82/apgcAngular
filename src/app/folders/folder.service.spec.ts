@@ -8,13 +8,13 @@ describe('FoldersService', () => {
   let testController: HttpTestingController;
 
   const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
-  
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports:[
+      imports: [
         HttpClientTestingModule]
     });
-    
+
     testController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(FolderService);
   });
@@ -25,8 +25,8 @@ describe('FoldersService', () => {
     expect(service).toBeTruthy();
   });
 
-  
-  it('#getFolderList should return array of folders', (done: DoneFn) => {        
+
+  it('#getFolderList should return array of folders', (done: DoneFn) => {
     service.getFolderList().subscribe(
       value => {
         expect(value).toBeDefined();
@@ -38,11 +38,11 @@ describe('FoldersService', () => {
     done();
   });
 
-  it('#getFolder should return a folder', (done:DoneFn) => {        
+  it('#getFolder should return a folder', (done: DoneFn) => {
     service.getFolder(1).subscribe(
-        value => expect(value).toBeDefined() && expect(value.folderId).toEqual(1));
+      value => expect(value).toBeDefined() && expect(value.folderId).toEqual(1));
     const req = testController.expectOne(`${FOLDER_API_URL}/1`);
     req.flush(FOLDERS_MOCK);
     done();
-  });  
+  });
 });

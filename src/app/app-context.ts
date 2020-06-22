@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
-export class AppContext {    
-    folderId: number;    
-    yearId: number;   
+export class AppContext {
+    folderId: number;
+    yearId: number;
 }

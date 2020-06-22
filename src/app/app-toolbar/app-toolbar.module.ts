@@ -15,11 +15,11 @@ import { FoldersModule } from '../folders/folders.module';
     AppMaterialModule,
     FoldersModule
   ],
-  exports:[
+  exports: [
     AppToolbarComponent
   ],
-  entryComponents:[
-    
+  entryComponents: [
+
   ]
 })
 export class AppToolbarModule { }

@@ -14,7 +14,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
-    
+
   ],
   imports: [
     CommonModule,
@@ -29,7 +29,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatDialogModule,
     MatStepperModule
   ],
-  exports:[
+  exports: [
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
@@ -39,7 +39,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatStepperModule 
+    MatStepperModule
   ]
 })
 export class AppMaterialModule { }

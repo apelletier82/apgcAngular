@@ -9,10 +9,10 @@ describe('AppToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppToolbarComponent ],
-      imports:[FoldersModule]
+      declarations: [AppToolbarComponent],
+      imports: [FoldersModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

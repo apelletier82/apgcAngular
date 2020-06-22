@@ -11,53 +11,55 @@ import { FolderSelectionData } from './folder-selection-data';
   styleUrls: ['./folder-selection.component.scss']
 })
 export class FolderSelectionComponent implements OnInit {
-  private _originalFolders: Folder[];
-  private _selectedFolderOption: string;
+  private originalFolders: Folder[];
+  private internalSelectedFolderOption: string;
 
   folders: Folder[];
   selectedFolderYears: FolderYear[];
 
   get selectedFolderOption(): string {
-    return this._selectedFolderOption;
+    return this.internalSelectedFolderOption;
   }
-  set selectedFolderOption(value: string){
-    this._selectedFolderOption = value;
+  set selectedFolderOption(value: string) {
+    this.internalSelectedFolderOption = value;
     if (value) {
-      this.selectedFolderYears = this.getSelectedFolderYears()
+      this.selectedFolderYears = this.getSelectedFolderYears();
     }
     else {
       this.selectedFolderYears = [];
-    } 
-  };
+    }
+  }
 
   selectedYearOption: string;
 
-  constructor(private _folderService: FolderService,
+  constructor(
+    private folderService: FolderService,
     public dialogRef: MatDialogRef<FolderSelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FolderSelectionData) {
   }
 
-  ngOnInit(): void {    
-    this._folderService.getFolderList().subscribe(res => {
-      this._originalFolders = res.slice();
+  ngOnInit(): void {
+    this.folderService.getFolderList().subscribe(res => {
+      this.originalFolders = res.slice();
       this.folders = res.slice();
 
 
-      if (this.data.folderId){
-        this.selectedFolderOption = this.data.folderId.toString();
-      };
-  
+      if (this.data.folderId) {
+        this.internalSelectedFolderOption = this.data.folderId.toString();
+      }
+
       if (this.data.yearId) {
         this.selectedYearOption = this.data.yearId.toString();
-      }      
+      }
     });
   }
 
-  getSelectedFolderYears(): FolderYear[] { 
-    const fldId: number = +this._selectedFolderOption; 
-    const flds = this._originalFolders.filter(f => f.folderId === fldId);
-    if ((!flds) || (flds.length === 0))
+  getSelectedFolderYears(): FolderYear[] {
+    const fldId: number = +this.internalSelectedFolderOption;
+    const flds = this.originalFolders.filter(f => f.folderId === fldId);
+    if ((!flds) || (flds.length === 0)) {
       return [];
+    }
 
     const res = flds.shift();
     return res.years;
@@ -65,21 +67,22 @@ export class FolderSelectionComponent implements OnInit {
 
   onSelectClick(): FolderSelectionData {
     return {
-      folderId: +this.selectedFolderOption,
+      folderId: +this.internalSelectedFolderOption,
       yearId: +this.selectedYearOption
-    };      
+    };
   }
 
   canEnableOk(): boolean {
-    if (this.selectedFolderOption && this.selectedYearOption)
+    if (this.internalSelectedFolderOption && this.selectedYearOption) {
       return true;
+    }
 
     return false;
   }
 
-  applyFolderFilter(event: Event): void{
+  applyFolderFilter(event: Event): void {
     const filterValueLowerCase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    this.folders = this._originalFolders.filter(
-        f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowerCase) > -1);
+    this.folders = this.originalFolders.filter(
+      f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowerCase) > -1);
   }
 }
