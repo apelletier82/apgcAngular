@@ -2,8 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { Folder } from './folder';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'
-import { FolderYear } from './folder-year';
 import { FOLDER_API_URL } from '../../api/api-config'; 
 
 @Injectable({
