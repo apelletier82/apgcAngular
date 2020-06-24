@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AppMenuCategoryItemComponent implements OnInit {
 
   @Input() category: string;
-  @Input() expanded = true;
+  @Input() expanded: boolean;
   @Input() fontIcon: string;
 
   constructor() { }

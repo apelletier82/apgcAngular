@@ -4,23 +4,22 @@ import { FoldersModule } from '../folders.module';
 import { FolderYear } from '../folder-year';
 import { FolderService } from '../folder.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FolderSelectionData } from './folder-selection-data';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Folder } from '../folder';
 
 describe('FolderSelectionComponent', () => {
   let component: FolderSelectionComponent;
   let fixture: ComponentFixture<FolderSelectionComponent>;
   let folderServiceMock;
-  const mockDialogRef = {
-    close: jasmine.createSpy('close')
-  };
-  const folderData = { folderId: undefined, yearId: undefined };
+  let mockDialogRef;
 
+  const folderData = { folderId: undefined, yearId: undefined };
   const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
   const FOLDER_MOCK = require('src/api/mock/folders/1.json');
 
   beforeEach(async(() => {
+    mockDialogRef = { close: jasmine.createSpy('close') };
     folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList', 'getFolder']);
     TestBed.configureTestingModule({
       declarations: [FolderSelectionComponent],
@@ -31,17 +30,18 @@ describe('FolderSelectionComponent', () => {
         { provide: MAT_DIALOG_DATA, useValue: folderData }
       ]
     })
-      .compileComponents(); 
+      .compileComponents();
   }));
 
-  beforeEach(() => {    
+  beforeEach(() => {
     fixture = TestBed.createComponent(FolderSelectionComponent);
     component = fixture.componentInstance;
 
     folderData.folderId = undefined;
     folderData.yearId = undefined;
-    folderServiceMock.getFolderList.and.returnValue(of(FOLDERS_MOCK));
-    folderServiceMock.getFolder.and.returnValue(of(FOLDER_MOCK));
+
+    folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
+    folderServiceMock.getFolder.and.returnValue(of<Folder>(FOLDERS_MOCK[0]));
 
     fixture.detectChanges();
   });
@@ -49,6 +49,11 @@ describe('FolderSelectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should init', () => {
+    component.ngOnInit();    
+    expect(component.folders.length).toBe(1);
+  })
 
   it('should apply folder filter', () => {
     const event = { target: { value: 'im'}};

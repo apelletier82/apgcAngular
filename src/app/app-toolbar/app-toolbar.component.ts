@@ -22,7 +22,7 @@ export class AppToolbarComponent implements OnInit {
   constructor(
     public appContext: AppContext,
     public dialog: MatDialog,
-    private folderService: FolderService) {
+    private _folderService: FolderService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class AppToolbarComponent implements OnInit {
     this.folderLogo = undefined;
 
     if (this.appContext.folderId) {
-      this.folderService.getFolder(this.appContext.folderId).subscribe(result => {
+      this._folderService.getFolder(this.appContext.folderId).subscribe(result => {
         this.folderName = result.folderName;
         this.folderLogo = result.logo;
 

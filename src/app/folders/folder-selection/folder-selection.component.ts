@@ -11,17 +11,17 @@ import { FolderSelectionData } from './folder-selection-data';
   styleUrls: ['./folder-selection.component.scss']
 })
 export class FolderSelectionComponent implements OnInit {
-  private originalFolders: Folder[];
-  private internalSelectedFolderOption: string;
+  private _originalFolders: Folder[];
+  private _selectedFolderOption: string;
 
   folders: Folder[];
   selectedFolderYears: FolderYear[];
 
   get selectedFolderOption(): string {
-    return this.internalSelectedFolderOption;
+    return this._selectedFolderOption;
   }
   set selectedFolderOption(value: string) {
-    this.internalSelectedFolderOption = value;
+    this._selectedFolderOption = value;
     if (value) {
       this.selectedFolderYears = this.getSelectedFolderYears(+value);
     }
@@ -33,14 +33,14 @@ export class FolderSelectionComponent implements OnInit {
   selectedYearOption: string;
 
   constructor(
-    private folderService: FolderService,
+    private _folderService: FolderService,
     public dialogRef: MatDialogRef<FolderSelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FolderSelectionData) {
   }
 
   ngOnInit(): void {
-    this.folderService.getFolderList().subscribe(res => {
-      this.originalFolders = res.slice();
+    this._folderService.getFolderList().subscribe(res => {
+      this._originalFolders = res.slice();
       this.folders = res.slice();
 
 
@@ -55,18 +55,17 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   getSelectedFolderYears(folderId: number): FolderYear[] {
-    const flds = this.originalFolders.filter(f => f.folderId === folderId);
+    const flds = this._originalFolders.filter(f => f.folderId === folderId);
     if ((!flds) || (flds.length === 0)) {
       return [];
     }
 
-    const res = flds.shift();
-    return res.years;
+    return flds.shift().years;
   }
 
   onSelectClick(): FolderSelectionData {
     return {
-      folderId: +this.internalSelectedFolderOption,
+      folderId: +this._selectedFolderOption,
       yearId: +this.selectedYearOption
     };
   }
@@ -80,8 +79,8 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   applyFolderFilter(event: Event): void {
-    const filterValueLowerCase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    this.folders = this.originalFolders.filter(
-      f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowerCase) > -1);
+    const filterValueLowercase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
+    this.folders = this._originalFolders.filter(
+      f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1);
   }
 }
