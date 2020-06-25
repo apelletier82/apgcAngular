@@ -34,10 +34,10 @@ describe('AppMenuCategoryItemComponent', () => {
     const compExpanded = component.expanded;
     component.toggleExpand();
     if (compExpanded === true) {
-      expect(component.expanded).toBeFalse()
+      expect(component.expanded).toBeFalse();
     }
     else {
       expect(component.expanded).toBeTrue();
     }
-  })
+  });
 });

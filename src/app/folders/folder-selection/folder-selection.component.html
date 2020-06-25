@@ -24,7 +24,7 @@
         <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
             <div #yearStepGroup>                
                 <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearOption">
-                    <mat-list-option *ngFor="let year of selectedFolderYears" [value]="year.yearId">
+                    <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year.yearId">
                         <span>  
                             {{ year.year }}                            
                             <mat-icon class="currentSelected" *ngIf="year.yearId === data.yearId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>

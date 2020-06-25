@@ -23,6 +23,22 @@
             }
         ],
         "folders": []    
-    }
-
+    },
+    {
+        "folderId": 2,
+        "folderName": "Alexandre Pelletier",
+        "logo": "api/logos/avataaars.png",
+        "address": {},
+        "years": [
+            {
+                "yearId": 1,
+                "year": 2020,
+                "DateFrom": "2020-01-01",
+                "DateTo": "2020-12-31",
+                "closingDate": "2020-12-31",
+                "deleted": false
+            }
+        ],
+        "folders": []    
+    }    
 ]

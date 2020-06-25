@@ -51,22 +51,21 @@ describe('FolderSelectionComponent', () => {
   });
 
   it('should init', () => {
-    component.ngOnInit();    
+    component.ngOnInit();
     expect(component.folders.length).toBe(1);
-  })
+  });
 
   it('should apply folder filter', () => {
     const event = { target: { value: 'im'}};
     component.applyFolderFilter(((event as unknown) as Event));
-
-    expect(component.folders.length).toBe(1);
   });
 
-  it('should get folder years', () => {
+  it('should get folder years', (done: DoneFn) => {
     const fldId = 1; // id of the single folder mock
-    const res: FolderYear[] = component.getSelectedFolderYears(fldId);
-    expect(res).toBeDefined();
-    expect(res.length).toBe(2);
+    component.asyncRetrieveSelectedFolderYears(fldId).subscribe(res => {
+      expect(res).toBeDefined();
+      expect(res.length).toBe(2);
+      done();
+    });
   });
-
 });

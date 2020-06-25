@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FolderSelectionComponent } from '../folders/folder-selection/folder-selection.component';
 import { FolderService } from '../folders/folder.service';
 import { FolderSelectionData } from '../folders/folder-selection/folder-selection-data';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'apgc-app-toolbar',
@@ -37,12 +38,14 @@ export class AppToolbarComponent implements OnInit {
     const dialogRef = this.dialog.open(FolderSelectionComponent, {
       data: { folderId: this.appContext.folderId, yearId: this.appContext.yearId }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const fsd: FolderSelectionData = (result as FolderSelectionData);
-        this.updateFolderInformation(fsd.folderId, fsd.yearId);
-      }
-    });
+
+    dialogRef.afterClosed()
+      .pipe(map(res => (res as FolderSelectionData)))
+      .subscribe(result => {
+        if (result) {
+          this.updateFolderInformation(result.folderId, result.yearId);
+        }
+      });
   }
 
   updateFolderInformation(folderId: number, yearId: number): void {
