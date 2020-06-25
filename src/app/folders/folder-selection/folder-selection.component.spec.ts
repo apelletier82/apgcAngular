@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FolderSelectionComponent } from './folder-selection.component';
 import { FoldersModule } from '../folders.module';
-import { FolderYear } from '../folder-year';
 import { FolderService } from '../folder.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
@@ -16,7 +15,6 @@ describe('FolderSelectionComponent', () => {
 
   const folderData = { folderId: undefined, yearId: undefined };
   const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
-  const FOLDER_MOCK = require('src/api/mock/folders/1.json');
 
   beforeEach(async(() => {
     mockDialogRef = { close: jasmine.createSpy('close') };
