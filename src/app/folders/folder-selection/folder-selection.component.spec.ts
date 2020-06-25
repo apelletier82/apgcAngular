@@ -50,12 +50,14 @@ describe('FolderSelectionComponent', () => {
 
   it('should init', () => {
     component.ngOnInit();
-    expect(component.folders.length).toBe(1);
+    expect(component.folders.length).toBe(2);
   });
 
   it('should apply folder filter', () => {
     const event = { target: { value: 'im'}};
     component.applyFolderFilter(((event as unknown) as Event));
+    expect(component.folders.length).toBe(1);
+    expect(component.folders[0].folderName).toBe('ImmoElec');
   });
 
   it('should get folder years', (done: DoneFn) => {

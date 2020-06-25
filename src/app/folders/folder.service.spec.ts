@@ -24,9 +24,8 @@ describe('FoldersService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-
-  it('#getFolderList should return array of folders', (done: DoneFn) => {
+  
+  it('should get and array of folders', (done: DoneFn) => {
     service.getFolderList().subscribe(
       value => {
         expect(value).toBeDefined();
@@ -38,7 +37,7 @@ describe('FoldersService', () => {
     done();
   });
 
-  it('#getFolder should return a folder', (done: DoneFn) => {
+  it('should get one folder', (done: DoneFn) => {
     service.getFolder(1).subscribe(
       value => expect(value).toBeDefined() && expect(value.folderId).toEqual(1));
     const req = testController.expectOne(`${FOLDER_API_URL}/1`);
