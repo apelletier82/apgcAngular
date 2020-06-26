@@ -1,40 +1,41 @@
 <h1 mat-dialog-title>Open folder</h1>
-<div mat-dialog-content>
-    <mat-vertical-stepper #stepper>
+<form mat-dialog-content #folderSelectForm="ngForm">
+    <mat-vertical-stepper #stepper [linear]="true">
         <mat-step label="Select a folder" [stepControl]="folderStepGroup">
-            <div #folderStepGroup>                
+            <div #folderStepGroup>
                 <mat-form-field class="full-width">
                     <mat-label>Search</mat-label>
                     <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFolderFilter($event)">
-                </mat-form-field>
-                <mat-selection-list class="folderList" [multiple]="false" [(ngModel)]="selectedFolderOption"
-                    (ngModelChange)="stepper.next()">
-                    <mat-list-option *ngFor="let folder of folders" [value]="folder.folderId">
+                </mat-form-field>                
+                <mat-selection-list class="folderList" [multiple]="false" [(ngModel)]="selectedFolderId"
+                    (ngModelChange)="stepper.next()" required min="1" name="folderList" id="folderList">
+                    <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder.folderId">
                         <span>  
                             <img class="small-Logo" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
-                            <span *ngIf="folder.logo">                         
+                            <span>                         
                                 {{ folder.folderName }}      
-                                <mat-icon class="currentSelected" *ngIf="folder.folderId === data.folderId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
+                                <mat-icon class="currentSelected" *ngIf="isSelectedFolderCurrentFolder(folder.folderId)" fontSet="fas" fontIcon="fa-circle" color="accent"></mat-icon>
                             </span>
                         </span>
                     </mat-list-option>   
-                </mat-selection-list>
+                </mat-selection-list>                
             </div>
         </mat-step>
-        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
-            <div #yearStepGroup>                
-                <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearOption">
+        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">                     
+            <div #yearStepGroup>
+                <button mat-stroked-button color="warn" (click)="stepper.previous()" *ngIf="!selectedFolderId" >First select a folder</button>
+                <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearId" required min="1" name="folderYearList" id="folderList">
                     <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year.yearId">
                         <span>  
                             {{ year.year }}                            
-                            <mat-icon class="currentSelected" *ngIf="year.yearId === data.yearId" fontSet="fas" fontIcon="fa-check-circle" color="accent"></mat-icon>
+                            <mat-icon class="currentSelected" *ngIf="isSelectedYearCurrentFolderYear(year.yearId)" fontSet="fas" fontIcon="fa-circle" color="accent"></mat-icon>
                         </span>
                     </mat-list-option>
                 </mat-selection-list>
             </div>
         </mat-step>
     </mat-vertical-stepper>
-</div>
+</form>
 <div mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button [mat-dialog-close]="onSelectClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Select</button>    

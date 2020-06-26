@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCardModule
   ],
   exports: [
     MatSidenavModule,
@@ -39,7 +41,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCardModule
   ]
 })
 export class AppMaterialModule { }

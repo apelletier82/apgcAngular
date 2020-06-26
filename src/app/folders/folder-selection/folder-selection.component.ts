@@ -4,8 +4,8 @@ import { Folder } from '../folder';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelectionData } from './folder-selection-data';
-import { Observable, of, from } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, of, from, concat } from 'rxjs';
+import { map, filter, switchMap, mergeMap, toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -14,25 +14,25 @@ import { filter, map } from 'rxjs/operators';
 })
 export class FolderSelectionComponent implements OnInit {
   private _originalFolders: Folder[];
-  private _selectedFolderOption: string;
+  folders$: Observable<Folder[]>;
 
-  folders: Folder[];
   selectedFolderYears$: Observable<FolderYear[]>;
 
-  get selectedFolderOption(): string {
-    return this._selectedFolderOption;
+  private _selectedFolderId: number;
+  get selectedFolderId(): number {
+    return this._selectedFolderId;
   }
-  set selectedFolderOption(value: string) {
-    this._selectedFolderOption = value;
+  set selectedFolderId(value: number) {
+    this._selectedFolderId = value;
     if (value) {
-      this.selectedFolderYears$ = this.asyncRetrieveSelectedFolderYears(+value);
+      this.selectedFolderYears$ = this._folderService.getFolder(+value).pipe(map(f => f.years));
     }
     else {
       this.selectedFolderYears$ = from([]);
     }
   }
 
-  selectedYearOption: string;
+  selectedYearId: number;
 
   constructor(
     private _folderService: FolderService,
@@ -41,37 +41,20 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._folderService.getFolderList().subscribe(res => {
-      this._originalFolders = res;
-      this.folders = res;
-
-      if (this.data.folderId) {
-        this.selectedFolderOption = this.data.folderId.toString();
-      }
-
-      if (this.data.yearId) {
-        this.selectedYearOption = this.data.yearId.toString();
-      }
-    });
-  }
-
-  asyncRetrieveSelectedFolderYears(folderId: number): Observable<FolderYear[]> {
-    return from(this._originalFolders)
-      .pipe(
-        filter(folder => folder.folderId === folderId),
-        map(f => f.years)
-      );
+    this.folders$ = this._folderService.getFolderList();
+    this._folderService.getFolderList().subscribe(res =>
+      this._originalFolders = res);
   }
 
   onSelectClick(): FolderSelectionData {
     return {
-      folderId: +this._selectedFolderOption,
-      yearId: +this.selectedYearOption
+      folderId: +this._selectedFolderId,
+      yearId: +this.selectedYearId
     };
   }
 
   canEnableOk(): boolean {
-    if (this.selectedFolderOption && this.selectedYearOption) {
+    if (this.selectedFolderId && this.selectedYearId) {
       return true;
     }
 
@@ -80,6 +63,20 @@ export class FolderSelectionComponent implements OnInit {
 
   applyFolderFilter(event: Event): void {
     const filterValueLowercase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    this.folders = this._originalFolders.filter(f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1);
+    this.folders$ = from(this._originalFolders).pipe(
+      filter(fld => fld.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1),
+      toArray()
+    );
+  }
+
+  isSelectedFolderCurrentFolder(folderId: number): boolean {
+    return this.data.folderId && folderId
+    && folderId === this.data.folderId;
+  }
+
+  isSelectedYearCurrentFolderYear(yearId: number): boolean {
+    return this.isSelectedFolderCurrentFolder(+this.selectedFolderId)
+      && this.data.yearId && yearId
+      && this.data.yearId === yearId;
   }
 }

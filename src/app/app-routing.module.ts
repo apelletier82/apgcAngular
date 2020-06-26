@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ContactsRoutingModule, contactRoutes } from './contacts/contacts-routing.module';
+import { ContactsRoutingModule, contactRoutes } from './contacts/contacts-routing.module';
 
 const routes: Routes = [
 ]
-.concat(contactRoutes);
+  .concat(contactRoutes);
 
 @NgModule({
   imports: [

@@ -24,7 +24,7 @@ describe('FoldersService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  
+
   it('should get and array of folders', (done: DoneFn) => {
     service.getFolderList().subscribe(
       value => {
