@@ -4,8 +4,8 @@ import { Folder } from '../folder';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelectionData } from './folder-selection-data';
-import { Observable, of, from, concat } from 'rxjs';
-import { map, filter, switchMap, mergeMap, toArray } from 'rxjs/operators';
+import { Observable, from, concat, of } from 'rxjs';
+import { map, filter, scan, toArray, reduce } from 'rxjs/operators';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -13,7 +13,7 @@ import { map, filter, switchMap, mergeMap, toArray } from 'rxjs/operators';
   styleUrls: ['./folder-selection.component.scss']
 })
 export class FolderSelectionComponent implements OnInit {
-  private _originalFolders: Folder[];
+  private _originalFolders: Folder[] = [];
   folders$: Observable<Folder[]>;
 
   selectedFolderYears$: Observable<FolderYear[]>;
@@ -41,9 +41,10 @@ export class FolderSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.folders$ = this._folderService.getFolderList();
-    this._folderService.getFolderList().subscribe(res =>
-      this._originalFolders = res);
+    this._folderService.getFolderList().subscribe(res => {
+      this.folders$ = from(res).pipe(toArray());
+      this._originalFolders = res;
+    });
   }
 
   onSelectClick(): FolderSelectionData {
@@ -64,14 +65,14 @@ export class FolderSelectionComponent implements OnInit {
   applyFolderFilter(event: Event): void {
     const filterValueLowercase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
     this.folders$ = from(this._originalFolders).pipe(
-      filter(fld => fld.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1),
+      filter<Folder>(f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1),
       toArray()
     );
   }
 
   isSelectedFolderCurrentFolder(folderId: number): boolean {
     return this.data.folderId && folderId
-    && folderId === this.data.folderId;
+      && folderId === this.data.folderId;
   }
 
   isSelectedYearCurrentFolderYear(yearId: number): boolean {

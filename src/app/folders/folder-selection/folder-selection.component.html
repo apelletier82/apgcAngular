@@ -21,7 +21,7 @@
                 </mat-selection-list>                
             </div>
         </mat-step>
-        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">                     
+        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
             <div #yearStepGroup>
                 <button mat-stroked-button color="warn" (click)="stepper.previous()" *ngIf="!selectedFolderId" >First select a folder</button>
                 <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearId" required min="1" name="folderYearList" id="folderList">
