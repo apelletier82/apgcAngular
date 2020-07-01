@@ -7,5 +7,5 @@ export interface Address {
     city: string;
     state: string;
     country: string;
-    countyISO: string;
+    countryISO: string;
 }

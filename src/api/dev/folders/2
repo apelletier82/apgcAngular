@@ -2,7 +2,17 @@
     "folderId": 2,
     "folderName": "Alexandre Pelletier",
     "logo": "api/logos/avataaars.png",
-    "address": {},
+    "address": {
+        "name":"Default",
+        "line1": "52D rue des Crêts",
+        "line2": "Mésinges",
+        "line3": "",
+        "zipCode": "74200",
+        "city":"Allinges",
+        "state":"Haute-Savoie",
+        "country":"France",
+        "countryISO":"FR"
+    },
     "years": [
         {
             "yearId": 1,

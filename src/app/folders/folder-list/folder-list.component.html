@@ -1,0 +1,42 @@
+<div>    
+    <div class="spinner-loading-center" *ngIf="folderDataSource.foldersLoading$ | async">
+        <mat-spinner></mat-spinner>    
+    </div>
+    
+    <mat-table [dataSource]="folderDataSource" matSort> 
+        <ng-container matColumnDef="folderLogo">
+            <mat-header-cell *matHeaderCellDef style="max-width:40px"></mat-header-cell>
+            <mat-cell *matCellDef="let folder" style="max-width:40px">
+                <img class="small-Logo" [src]="folder.logo" alt="\[logo\]" *ngIf="folder.logo">
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>    
+        <ng-container matColumnDef="folderName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Folder</mat-header-cell>
+            <mat-cell *matCellDef="let folder">{{folder.folderName}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+        <ng-container matColumnDef="folderLocation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
+            <mat-cell *matCellDef="let folder">{{folder.address.city}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>    
+        <ng-container matColumnDef="folderCountry">
+            <mat-header-cell *matHeaderCellDef style="max-width:35px"></mat-header-cell>
+            <mat-cell *matCellDef="let folder" style="max-width:35px">
+                <mat-icon class="$`flag-icon flag-icon-{{folder.address.countryISO | lowercase}} flag-icon-squared`"></mat-icon>            
+            </mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let folder"></mat-cell>
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+        </ng-container>
+
+        <mat-header-row  *matHeaderRowDef="displayColumns; sticky:true;"></mat-header-row>
+        <mat-row  *matRowDef="let folder; columns: displayColumns;"></mat-row>
+        <mat-footer-row  *matFooterRowDef="displayColumns; sticky:true;"></mat-footer-row>
+    </mat-table>
+</div>

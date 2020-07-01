@@ -2,7 +2,7 @@
   <apgc-app-toolbar (menuClicked)="snav.toggle()"></apgc-app-toolbar>
   
   <mat-sidenav-container class="apgc-sidenav-container">
-      <mat-sidenav #snav opened mode="side" position="start">
+      <mat-sidenav #snav mode="slide" position="start">
         <mat-nav-list>
           <a mat-list-item>
             <span>
@@ -11,26 +11,26 @@
             </span>
           </a>                  
           <apgc-app-menu-category-item *ngIf="appContext?.folderId > 0" category="Files" expanded="false" fontIcon="fa-file">
-              <a mat-list-item [routerLink]="['contacts']">Contacts</a>
+              <a mat-list-item [routerLink]="['contacts']" (click)="snav.close()">Contacts</a>
               <a mat-list-item>Products</a>              
           </apgc-app-menu-category-item>
           
           <apgc-app-menu-category-item category="Settings" expanded="false" fontIcon="fa-sliders-h">
             <ng-container *ngIf="appContext?.folderId > 0">
               <a mat-list-item>Tables</a>              
-            </ng-container>
-            <a mat-list-item>
+            </ng-container>           
+            <a mat-list-item [routerLink]="['folders']" (click)="snav.close()">
               <span>
                 <mat-icon fontSet="fas" fontIcon="fa-folder"></mat-icon>
                 Folders
-              </span>                
+              </span>                           
             </a>
           </apgc-app-menu-category-item> 
 
         </mat-nav-list>                
       </mat-sidenav>
-      <mat-sidenav-content>
-        <router-outlet #mainRouterOutlet></router-outlet>
-      </mat-sidenav-content>         
+      <mat-sidenav-content>        
+        <router-outlet #mainRouterOutlet></router-outlet>        
+      </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

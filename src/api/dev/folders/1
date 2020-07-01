@@ -2,7 +2,17 @@
     "folderId": 1,
     "folderName": "ImmoElec",
     "logo": "api/logos/immoElec.png",
-    "address": {},
+    "address": {
+        "name":"Default",
+        "line1": "13 rue des Fleurs",
+        "line2": "",
+        "line3": "",
+        "zipCode": "67000",
+        "city":"Strasbourg",
+        "state":"Bas-Rhin",
+        "country":"France",
+        "countryISO":"FR"
+    },
     "years": [
         {
             "yearId": 1,

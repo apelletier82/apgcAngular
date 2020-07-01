@@ -3,7 +3,17 @@
         "folderId": 1,
         "folderName": "ImmoElec",
         "logo": "api/logos/immoElec.png",
-        "address": {},
+        "address": {
+            "name":"Default",
+            "line1": "13 rue des Fleurs",
+            "line2": "",
+            "line3": "",
+            "zipCode": "67000",
+            "city":"Strasbourg",
+            "state":"Bas-Rhin",
+            "country":"France",
+            "countryISO":"FR"            
+        },
         "years": [
             {
                 "yearId": 1,
@@ -28,7 +38,17 @@
         "folderId": 2,
         "folderName": "Alexandre Pelletier",
         "logo": "api/logos/avataaars.png",
-        "address": {},
+        "address": {
+            "name":"Default",
+            "line1": "52D rue des Crêts",
+            "line2": "Mésinges",
+            "line3": "",
+            "zipCode": "74200",
+            "city":"Allinges",
+            "state":"Haute-Savoie",
+            "country":"France",
+            "countryISO":"FR"
+        },
         "years": [
             {
                 "yearId": 1,
@@ -40,5 +60,5 @@
             }
         ],
         "folders": []    
-    }    
+    } 
 ]

@@ -27,10 +27,10 @@
               "src/favicon.ico",
               "src/assets",
               "src/api/logos",
-              "src/api/dev/folders"
+              "src/api/dev/folders"              
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",              
               "src/styles.scss"
             ],
             "scripts": []
@@ -95,10 +95,10 @@
               "src/assets",
               "src/api/logos",
               "src/api/mock/folders",
-              "src/api/dev/folders"
+              "src/api/dev/folders"            
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",              
               "src/styles.scss"
             ],
             "scripts": []
