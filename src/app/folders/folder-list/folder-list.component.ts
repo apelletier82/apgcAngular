@@ -12,20 +12,20 @@ import { FolderListDatasource } from './folder-list-datasource';
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
   private _originalFolders: Folder[];
-  displayColumns = ['folderLogo','folderName', 'folderCountry', 'folderLocation', 'actions'];
+  displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
   folderDataSource: FolderListDatasource;
 
-  @ViewChild(MatSort) 
+  @ViewChild(MatSort)
   sort: MatSort;
 
   constructor(private _folderService: FolderService) { }
 
   ngOnInit(): void {
     this.folderDataSource = new FolderListDatasource(this._folderService);
-    this.folderDataSource.loadFloders();    
+    this.folderDataSource.loadFloders();
   }
 
-  ngAfterViewInit(): void {        
+  ngAfterViewInit(): void {
     this.folderDataSource.sort = this.sort;
   }
 

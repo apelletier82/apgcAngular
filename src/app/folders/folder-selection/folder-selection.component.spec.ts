@@ -63,7 +63,7 @@ describe('FolderSelectionComponent', () => {
       expect(res.length).toBe(1);
       expect(res[0].folderName).toBe('ImmoElec');
       done();
-    });    
+    });
   });
 
   it('should get folder years', (done: DoneFn) => {
