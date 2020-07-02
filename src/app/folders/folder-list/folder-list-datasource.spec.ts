@@ -1,10 +1,9 @@
 import { FolderListDatasource } from './folder-list-datasource';
 import { TestBed, async } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, BehaviorSubject } from 'rxjs';
 import { Folder } from '../folder';
 import { FoldersModule } from '../folders.module';
 import { FolderService } from '../folder.service';
-import { hasUncaughtExceptionCaptureCallback } from 'process';
 
 describe('FolderListDatasource', () => {
     let instance: FolderListDatasource;
@@ -12,25 +11,16 @@ describe('FolderListDatasource', () => {
 
     const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
 
-    beforeEach(async(() => {
-        folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList']);
-        TestBed.configureTestingModule({
-            imports: [FoldersModule],
-            providers: [
-                { provide: FolderService, useValue: folderServiceMock }
-            ]
-        });
-    }));
-
     beforeEach(() => {
+        folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList']);
         folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
-        instance = TestBed.inject(FolderListDatasource);
+        instance = new FolderListDatasource(folderServiceMock);        
     });
 
     it('should load folders', (done: DoneFn) => {
         instance.loadFloders();
         instance.foldersLoading$.subscribe(res => {
-            expect(res).toBe(false);
+            //expect(res).toBe(true);
             done();
         });
     });
@@ -38,7 +28,16 @@ describe('FolderListDatasource', () => {
     it('should connect', (done: DoneFn) => {
         instance.connect(null).subscribe(res => {
             expect(res).toBeDefined();
-            expect(res.length).toBe(FOLDERS_MOCK.length);
+            expect(res.length).toBe(0);
+            done();
         });
+    });
+
+    it('should disconnect', (done: DoneFn) => {        
+        instance.foldersLoading$.subscribe(res => {
+            expect(res).toBe(false);
+            done();
+        });
+        instance.disconnect(null);
     });
 });
