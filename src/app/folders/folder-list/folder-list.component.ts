@@ -10,8 +10,7 @@ import { FolderListDatasource } from './folder-list-datasource';
   templateUrl: './folder-list.component.html',
   styleUrls: ['./folder-list.component.scss']
 })
-export class FolderListComponent implements OnInit, AfterViewInit {
-  private _originalFolders: Folder[];
+export class FolderListComponent implements OnInit, AfterViewInit {  
   displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
   folderDataSource: FolderListDatasource;
 
@@ -21,7 +20,7 @@ export class FolderListComponent implements OnInit, AfterViewInit {
   constructor(private _folderService: FolderService) { }
 
   ngOnInit(): void {
-    this.folderDataSource = new FolderListDatasource(this._folderService);
+    this.folderDataSource = new FolderListDatasource(this._folderService);    
     this.folderDataSource.loadFloders();
   }
 

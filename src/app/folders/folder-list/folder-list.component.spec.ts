@@ -28,7 +28,7 @@ describe('FolderListComponent', () => {
     folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
     fixture = TestBed.createComponent(FolderListComponent); 
     component = fixture.componentInstance;
-    component.sort = matSortMock;
+    //component.sort = matSortMock;
     fixture.detectChanges();
   });
 

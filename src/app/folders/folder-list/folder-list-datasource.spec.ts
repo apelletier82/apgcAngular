@@ -1,9 +1,6 @@
 import { FolderListDatasource } from './folder-list-datasource';
-import { TestBed, async } from '@angular/core/testing';
-import { of, BehaviorSubject } from 'rxjs';
+import { of } from 'rxjs';
 import { Folder } from '../folder';
-import { FoldersModule } from '../folders.module';
-import { FolderService } from '../folder.service';
 
 describe('FolderListDatasource', () => {
     let instance: FolderListDatasource;

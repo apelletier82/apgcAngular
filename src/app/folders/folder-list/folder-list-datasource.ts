@@ -17,7 +17,7 @@ export class FolderListDatasource implements DataSource<Folder> {
     }
     set sort(value: MatSort) {
         this._sort = value;
-        this._sort.sortChange.pipe(finalize(() => this.loadFloders())).subscribe();
+        this._sort.sortChange.subscribe(() => this.loadFloders());
     }
 
     constructor(private _folderService: FolderService) { }
