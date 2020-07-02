@@ -57,7 +57,7 @@ describe('FolderSelectionComponent', () => {
   });
 
   it('should apply folder filter', (done: DoneFn) => {
-    const event = { target: { value: 'im'}};
+    const event = { target: { value: 'immo'}};
     component.applyFolderFilter(((event as unknown) as Event));
     component.folders$.subscribe(res => {
       expect(res.length).toBe(1);
