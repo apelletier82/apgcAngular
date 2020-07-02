@@ -4,8 +4,8 @@ import { Folder } from '../folder';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelectionData } from './folder-selection-data';
-import { Observable, from, concat, of } from 'rxjs';
-import { map, filter, scan, toArray, reduce } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -14,9 +14,9 @@ import { map, filter, scan, toArray, reduce } from 'rxjs/operators';
 })
 export class FolderSelectionComponent implements OnInit {
   private _originalFolders: Folder[] = [];
-  folders$: Observable<Folder[]>;
 
-  selectedFolderYears$: Observable<FolderYear[]>;
+  folders$: BehaviorSubject<Folder[]> = new BehaviorSubject([]);
+  selectedFolderYears$: BehaviorSubject<FolderYear[]> = new BehaviorSubject([]);
 
   private _selectedFolderId: number;
   get selectedFolderId(): number {
@@ -25,10 +25,12 @@ export class FolderSelectionComponent implements OnInit {
   set selectedFolderId(value: number) {
     this._selectedFolderId = value;
     if (value) {
-      this.selectedFolderYears$ = this._folderService.getFolder(+value).pipe(map(f => f.years));
+      this._folderService.getFolder(+value)
+        .pipe(map(f => f.years))
+        .subscribe(years => this.selectedFolderYears$.next(years));
     }
     else {
-      this.selectedFolderYears$ = from([]);
+      this.selectedFolderYears$.next([]);
     }
   }
 
@@ -42,7 +44,7 @@ export class FolderSelectionComponent implements OnInit {
 
   ngOnInit(): void {
     this._folderService.getFolderList().subscribe(res => {
-      this.folders$ = from(res).pipe(toArray());
+      this.folders$.next(res);
       this._originalFolders = res;
     });
   }
@@ -64,9 +66,9 @@ export class FolderSelectionComponent implements OnInit {
 
   applyFolderFilter(event: Event): void {
     const filterValueLowercase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-    this.folders$ = from(this._originalFolders).pipe(
-      filter<Folder>(f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1),
-      toArray()
+    this.folders$.next(
+      this._originalFolders
+        .filter(f => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1)
     );
   }
 
