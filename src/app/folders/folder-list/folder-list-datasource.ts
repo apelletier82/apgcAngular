@@ -56,19 +56,25 @@ export class FolderListDatasource implements DataSource<Folder> {
 
     loadFloders(): void {
         this._folderSubjectLoading.next(true);
-        const fakeObs = of(1);
+        try {
+            const fakeObs = of(1);
 
-        forkJoin([
-            fakeObs.pipe(delay(250)),
-            this._folderService.getFolderList().pipe(catchError(() => of([])))
-        ])
-        .pipe(finalize(() => this._folderSubjectLoading.next(false)))
-        .subscribe(([intv, flds]) => {
-            if (this._sort) {
-                flds = this.sortFolders(flds);
-            }
-            this._foldersSubject.next(flds);
-        });
+            forkJoin([
+                fakeObs.pipe(delay(250)),
+                this._folderService.getFolderList().pipe(catchError(() => of([])))
+            ])
+            .pipe(finalize(() => this._folderSubjectLoading.next(false)))
+            .subscribe(([intv, flds]) => {
+                if (this._sort) {
+                    flds = this.sortFolders(flds);
+                }
+                this._foldersSubject.next(flds);
+            });
+        }
+        catch (error) {
+            this._folderSubjectLoading.next(false);
+            console.log(error);
+        }
     }
 
 }

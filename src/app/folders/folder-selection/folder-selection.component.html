@@ -11,7 +11,7 @@
                     (ngModelChange)="stepper.next()" required min="1" name="folderList" id="folderList">
                     <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder.folderId">
                         <span>  
-                            <img class="small-Logo" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
+                            <img class="small-Logo mat-elevation-z1" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
                             <span>                         
                                 {{ folder.folderName }}      
                                 <mat-icon class="currentSelected" *ngIf="isSelectedFolderCurrentFolder(folder.folderId)" fontSet="fas" fontIcon="fa-circle" color="accent"></mat-icon>

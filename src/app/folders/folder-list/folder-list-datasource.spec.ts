@@ -4,20 +4,20 @@ import { Folder } from '../folder';
 
 describe('FolderListDatasource', () => {
     let instance: FolderListDatasource;
-    let folderServiceMock;
+    let folderServiceMock: any;
 
     const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
 
     beforeEach(() => {
         folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList']);
         folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
-        instance = new FolderListDatasource(folderServiceMock);        
+        instance = new FolderListDatasource(folderServiceMock);
     });
 
     it('should load folders', (done: DoneFn) => {
         instance.loadFloders();
         instance.foldersLoading$.subscribe(res => {
-            //expect(res).toBe(true);
+            // expect(res).toBe(true);
             done();
         });
     });
@@ -30,7 +30,7 @@ describe('FolderListDatasource', () => {
         });
     });
 
-    it('should disconnect', (done: DoneFn) => {        
+    it('should disconnect', (done: DoneFn) => {
         instance.foldersLoading$.subscribe(res => {
             expect(res).toBe(false);
             done();

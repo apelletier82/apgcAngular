@@ -9,13 +9,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex: 1 1 auto;
 }
 
-.small-Logo {
+.small-Logo {    
     border-radius: 50%;
     width: 32px;
     height: 32px;    
-    vertical-align: middle;
+    vertical-align: middle;    
 }
 
 .full-width {
     width: 100%;
+}
+
+.mat-row:hover {
+    background-color: rgba(0,0,0,.04);
+}
+
+.spinner-loading-center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
 }

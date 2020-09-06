@@ -5,8 +5,8 @@ import { FoldersRoutingModule, folderRoutes } from './folders/folders-routing.mo
 import { homeRoutes, HomeRoutingModule } from './home/home-routing.module';
 import { HomeComponent } from './home/home/home.component';
 
-const emptyRoute: Route = { path: '', component: HomeComponent, pathMatch:'full' };
-const errorRoute: Route = { path:'***', component:HomeComponent, pathMatch:'full' };
+const emptyRoute: Route = { path: '', component: HomeComponent, pathMatch: 'full' };
+const errorRoute: Route = { path: '***', component: HomeComponent, pathMatch: 'full' };
 
 const routes: Routes = []
   .concat(homeRoutes)

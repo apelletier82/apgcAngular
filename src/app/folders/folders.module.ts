@@ -7,13 +7,15 @@ import { AppMaterialModule } from '../app-material.module';
 import { FolderSelectionComponent } from './folder-selection/folder-selection.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FolderListComponent } from './folder-list/folder-list.component';
+import { FolderComponent } from './folder/folder.component';
 
 
 
 @NgModule({
   declarations: [
     FolderSelectionComponent,
-    FolderListComponent
+    FolderListComponent,
+    FolderComponent
   ],
   imports: [
     CommonModule,

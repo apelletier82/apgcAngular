@@ -2,6 +2,7 @@
     <button mat-icon-button name="btnMenu" id="btnMenu" (click)="menuClick()">
         <mat-icon fontSet="fas" fontIcon="fa-bars"></mat-icon>
     </button>        
+    <span></span>
     <button mat-raised-button color="accent"  *ngIf="(!appContext?.folderId || appContext?.folderId ===0)" (click)="onOpenFolderClick()">
         <h2 >
             <mat-icon fontSet="fas" fontIcon="fa-folder-open"></mat-icon>
