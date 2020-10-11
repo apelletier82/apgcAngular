@@ -1,14 +1,14 @@
 <h1 mat-dialog-title>Open folder</h1>
-<form mat-dialog-content #folderSelectForm="ngForm">
+<form mat-dialog-content [formGroup]="selectFolderForm">
     <mat-vertical-stepper #stepper [linear]="true">
         <mat-step label="Select a folder" [stepControl]="folderStepGroup">
             <div #folderStepGroup>
-                <mat-form-field class="full-width">
+                <mat-form-field class="full-width" appearance="outlined">
                     <mat-label>Search</mat-label>
                     <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFolderFilter($event)">
                 </mat-form-field> 
-                <mat-selection-list class="folderList" [multiple]="false" [(ngModel)]="selectedFolderId"
-                    (ngModelChange)="stepper.next()" required min="1" name="folderList" id="folderList">
+                <mat-selection-list class="folderList" [multiple]="false" formControlName="selectedFolderId"
+                    (ngModelChange)="stepper.next()" name="folderList" id="folderList">
                     <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder.folderId">
                         <span>  
                             <img class="small-Logo mat-elevation-z1" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
@@ -22,9 +22,8 @@
             </div>
         </mat-step>
         <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
-            <div #yearStepGroup>
-                <button mat-stroked-button color="warn" (click)="stepper.previous()" *ngIf="!selectedFolderId" >First select a folder</button>
-                <mat-selection-list class="yearList" [multiple]="false" [(ngModel)]="selectedYearId" required min="1" name="folderYearList" id="folderList">
+            <div #yearStepGroup>                
+                <mat-selection-list class="yearList" [multiple]="false" formControlName="selectedYearId" name="folderYearList" id="folderList">
                     <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year.yearId">
                         <span>  
                             {{ year.year }}                            
@@ -35,8 +34,8 @@
             </div>
         </mat-step>
     </mat-vertical-stepper>
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button [mat-dialog-close]="onSelectClick()" type="submit" cdkFocusInitial>Select</button>
+    </div>
 </form>
-<div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="onSelectClick()" [disabled]="!canEnableOk()" cdkFocusInitial>Select</button>    
-</div>

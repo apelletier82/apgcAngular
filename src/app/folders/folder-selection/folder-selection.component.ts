@@ -6,6 +6,7 @@ import { FolderYear } from '../folder-year';
 import { FolderSelectionData } from './folder-selection-data';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'apgc-folder-selection',
@@ -14,32 +15,24 @@ import { map } from 'rxjs/operators';
 })
 export class FolderSelectionComponent implements OnInit {
   private _originalFolders: Folder[] = [];
+  private selectedFolderId: number;
+  private selectedYearId: number;
 
   folders$: BehaviorSubject<Folder[]> = new BehaviorSubject([]);
   selectedFolderYears$: BehaviorSubject<FolderYear[]> = new BehaviorSubject([]);
 
-  private _selectedFolderId: number;
-  get selectedFolderId(): number {
-    return this._selectedFolderId;
-  }
-  set selectedFolderId(value: number) {
-    this._selectedFolderId = value;
-    if (value) {
-      this._folderService.getFolder(+value)
-        .pipe(map(f => f.years))
-        .subscribe(years => this.selectedFolderYears$.next(years));
-    }
-    else {
-      this.selectedFolderYears$.next([]);
-    }
-  }
-
-  selectedYearId: number;
+  selectFolderForm = new FormGroup({
+    selectedFolderId: new FormControl(0, [Validators.required, Validators.min(1)]),
+    selectedYearId: new FormControl(0, [Validators.required, Validators.min(1)])
+  });
 
   constructor(
     private _folderService: FolderService,
     public dialogRef: MatDialogRef<FolderSelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FolderSelectionData) {
+
+    this.selectFolderForm.reset({ selectedFolderId: data.folderId, selectedYearId: data.yearId });
+    this.selectFolderForm.markAsPristine();
   }
 
   ngOnInit(): void {
@@ -47,21 +40,29 @@ export class FolderSelectionComponent implements OnInit {
       this.folders$.next(res);
       this._originalFolders = res;
     });
+
+    this.selectFolderForm.get('selectedFolderId').valueChanges.subscribe(value => {
+      if (value) {
+        this._folderService.getFolder(+value)
+          .pipe(map(f => f.years))
+          .subscribe(years => this.selectedFolderYears$.next(years));
+      }
+      else {
+        this.selectedFolderYears$.next([]);
+      }
+    });
+
+    this.selectFolderForm.valueChanges.subscribe(value => {
+      this.selectedFolderId = value.selectedFolderId;
+      this.selectedYearId = value.selectedYearId;
+    });
   }
 
   onSelectClick(): FolderSelectionData {
     return {
-      folderId: +this._selectedFolderId,
+      folderId: +this.selectedFolderId,
       yearId: +this.selectedYearId
     };
-  }
-
-  canEnableOk(): boolean {
-    if (this.selectedFolderId && this.selectedYearId) {
-      return true;
-    }
-
-    return false;
   }
 
   applyFolderFilter(event: Event): void {
