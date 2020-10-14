@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit, TrackByFunction } from '@angular/core';
 import { FolderService } from '../folder.service';
 import { Folder } from '../folder';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -22,16 +22,31 @@ export class FolderSelectionComponent implements OnInit {
   selectedFolderYears$: BehaviorSubject<FolderYear[]> = new BehaviorSubject([]);
 
   selectFolderForm = new FormGroup({
-    selectedFolderId: new FormControl(0, [Validators.required, Validators.min(1)]),
-    selectedYearId: new FormControl(0, [Validators.required, Validators.min(1)])
+    selectFolderIdForm: new FormGroup({
+      selectedFolderId: new FormControl(0, [Validators.required, Validators.min(1)])
+    }),
+    selectYearIdForm: new FormGroup({
+      selectedYearId: new FormControl(0, [Validators.required, Validators.min(1)])
+    })
   });
+
+  get selectFolderIdForm(): FormGroup {
+    return this.selectFolderForm.get('selectFolderIdForm') as FormGroup;
+  }
+
+  get selectYearIdForm(): FormGroup {
+    return this.selectFolderForm.get('selectYearIdForm') as FormGroup;
+  }
 
   constructor(
     private _folderService: FolderService,
     public dialogRef: MatDialogRef<FolderSelectionComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FolderSelectionData) {
 
-    this.selectFolderForm.reset({ selectedFolderId: data.folderId, selectedYearId: data.yearId });
+    this.selectFolderForm.reset({
+      selectFolderIdForm: { selectedFolderId: [data.folderId] },
+      selectYearIdForm: { selectedYearId: [data.yearId] }
+    });
     this.selectFolderForm.markAsPristine();
   }
 
@@ -41,27 +56,29 @@ export class FolderSelectionComponent implements OnInit {
       this._originalFolders = res;
     });
 
-    this.selectFolderForm.get('selectedFolderId').valueChanges.subscribe(value => {
-      if (value) {
-        this._folderService.getFolder(+value)
-          .pipe(map(f => f.years))
-          .subscribe(years => this.selectedFolderYears$.next(years));
-      }
-      else {
-        this.selectedFolderYears$.next([]);
-      }
+    this.selectFolderForm.valueChanges.subscribe(values => {
+      this.selectedFolderId = values.selectFolderIdForm.selectedFolderId[0];
+      this.selectedYearId = values.selectYearIdForm.selectedYearId[0];
     });
 
-    this.selectFolderForm.valueChanges.subscribe(value => {
-      this.selectedFolderId = value.selectedFolderId;
-      this.selectedYearId = value.selectedYearId;
+    this.selectFolderForm
+      .get('selectFolderIdForm')
+      .get('selectedFolderId').valueChanges.subscribe(value => {
+        if (value) {
+          this._folderService.getFolder(+value)
+            .pipe(map(f => f.years))
+            .subscribe(years => this.selectedFolderYears$.next(years));
+        }
+        else {
+          this.selectedFolderYears$.next([]);
+        }
     });
   }
 
   onSelectClick(): FolderSelectionData {
     return {
-      folderId: +this.selectedFolderId,
-      yearId: +this.selectedYearId
+      folderId: this.selectedFolderId,
+      yearId: this.selectedYearId
     };
   }
 

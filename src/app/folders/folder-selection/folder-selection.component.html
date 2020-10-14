@@ -1,15 +1,15 @@
 <h1 mat-dialog-title>Open folder</h1>
-<form mat-dialog-content [formGroup]="selectFolderForm">
+<form class="select-folder-form" mat-dialog-content [formGroup]="selectFolderForm">
     <mat-vertical-stepper #stepper [linear]="true">
-        <mat-step label="Select a folder" [stepControl]="folderStepGroup">
-            <div #folderStepGroup>
-                <mat-form-field class="full-width" appearance="outlined">
+        <mat-step label="Select a folder" [stepControl] ="selectFolderIdForm">
+            <form [formGroup]="selectFolderIdForm">
+                <mat-form-field appearance="outline">
                     <mat-label>Search</mat-label>
                     <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFolderFilter($event)">
-                </mat-form-field> 
+                </mat-form-field>
                 <mat-selection-list class="folderList" [multiple]="false" formControlName="selectedFolderId"
                     (ngModelChange)="stepper.next()" name="folderList" id="folderList">
-                    <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder.folderId">
+                    <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder?.folderId">
                         <span>  
                             <img class="small-Logo mat-elevation-z1" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
                             <span>                         
@@ -18,11 +18,12 @@
                             </span>
                         </span>
                     </mat-list-option>   
-                </mat-selection-list>                
-            </div>
+                </mat-selection-list>
+                
+            </form>
         </mat-step>
-        <mat-step label="Select a year within the folder" [stepControl]="yearStepGroup">
-            <div #yearStepGroup>                
+        <mat-step label="Select a year within the folder" [stepControl]="selectYearIdForm">
+            <form [formGroup]="selectYearIdForm">                
                 <mat-selection-list class="yearList" [multiple]="false" formControlName="selectedYearId" name="folderYearList" id="folderList">
                     <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year.yearId">
                         <span>  
@@ -31,11 +32,16 @@
                         </span>
                     </mat-list-option>
                 </mat-selection-list>
-            </div>
+            </form>
         </mat-step>
     </mat-vertical-stepper>
-    <div mat-dialog-actions>
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="onSelectClick()" type="submit" cdkFocusInitial>Select</button>
-    </div>
 </form>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close mat-flat-button>Cancel</button>
+    <button mat-button 
+        mat-raised-button 
+        color="primary"
+        [mat-dialog-close]="onSelectClick()" 
+        [disabled]="selectFolderForm.disabled || selectFolderForm.invalid" 
+        cdkFocusInitial>Select</button>
+</mat-dialog-actions>
