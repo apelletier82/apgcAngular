@@ -1,47 +1,41 @@
 <h1 mat-dialog-title>Open folder</h1>
 <form class="select-folder-form" mat-dialog-content [formGroup]="selectFolderForm">
-    <mat-vertical-stepper #stepper [linear]="true">
+    <mat-vertical-stepper [linear]="true">
         <mat-step label="Select a folder" [stepControl] ="selectFolderIdForm">
             <form [formGroup]="selectFolderIdForm">
                 <mat-form-field appearance="outline">
                     <mat-label>Search</mat-label>
                     <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFolderFilter($event)">
                 </mat-form-field>
-                <mat-selection-list class="folderList" [multiple]="false" formControlName="selectedFolderId"
-                    (ngModelChange)="stepper.next()" name="folderList" id="folderList">
+                <mat-selection-list class="folderList" [multiple]="false" formControlName="selectedFolderId">
                     <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder?.folderId">
-                        <span>  
-                            <img class="small-Logo mat-elevation-z1" [src]="folder.logo" alt="logo" *ngIf="folder.logo"> 
-                            <span>                         
-                                {{ folder.folderName }}      
-                                <mat-icon class="currentSelected" *ngIf="isSelectedFolderCurrentFolder(folder.folderId)" fontSet="fas" fontIcon="fa-circle" color="accent"></mat-icon>
-                            </span>
-                        </span>
-                    </mat-list-option>   
-                </mat-selection-list>
-                
-            </form>
-        </mat-step>
-        <mat-step label="Select a year within the folder" [stepControl]="selectYearIdForm">
-            <form [formGroup]="selectYearIdForm">                
-                <mat-selection-list class="yearList" [multiple]="false" formControlName="selectedYearId" name="folderYearList" id="folderList">
-                    <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year.yearId">
-                        <span>  
-                            {{ year.year }}                            
-                            <mat-icon class="currentSelected" *ngIf="isSelectedYearCurrentFolderYear(year.yearId)" fontSet="fas" fontIcon="fa-circle" color="accent"></mat-icon>
+                        <span>
+                            <img class="small-Logo mat-elevation-z1" [src]="folder?.logo" alt="logo" *ngIf="folder?.logo">                             
+                            {{ folder?.folderName || '' }}                                                            
                         </span>
                     </mat-list-option>
                 </mat-selection-list>
+            </form>
+        </mat-step>
+        <mat-step label="Select a year within the folder" [stepControl]="selectYearIdForm">
+            <form [formGroup]="selectYearIdForm">                                
+                <mat-selection-list class="yearList" [multiple]="false" formControlName="selectedYearId">
+                    <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year?.yearId">                        
+                        {{ year?.year || '' }}                                                    
+                    </mat-list-option>
+                </mat-selection-list>                
             </form>
         </mat-step>
     </mat-vertical-stepper>
 </form>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close mat-flat-button>Cancel</button>
-    <button mat-button 
+    <button mat-button         
         mat-raised-button 
         color="primary"
-        [mat-dialog-close]="onSelectClick()" 
-        [disabled]="selectFolderForm.disabled || selectFolderForm.invalid" 
-        cdkFocusInitial>Select</button>
+        [mat-dialog-close]="selectedFolderData"
+        [disabled]="selectFolderForm.disabled || selectFolderForm.invalid"
+        cdkFocusInitial>
+        Select
+    </button>
 </mat-dialog-actions>

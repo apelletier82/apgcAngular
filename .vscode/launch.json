@@ -3,7 +3,7 @@
     // Pointez pour afficher la description des attributs existants.
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [        
         {
             "name": "[firefox] Launch localhost",
             "type": "firefox",
@@ -30,6 +30,20 @@
             "request": "launch",
             "reAttach": true,
             "addonPath": "${workspaceFolder}"
-        }
+        },
+        {
+            "name": "[chrome] Launch localhost",
+            "type": "chrome",
+            "request": "launch",            
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "[chrome] Test",
+            "request": "launch",
+            "type": "chrome",
+            "url": " http://localhost:9876/",
+            "webRoot": "${workspaceFolder}"
+        },
     ]
 }

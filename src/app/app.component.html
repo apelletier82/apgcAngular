@@ -1,16 +1,16 @@
 <div class="apgc-container">  
-  <apgc-app-toolbar class="mat-elevation-z6" style="margin-bottom: 1px;" (menuClicked)="snav.toggle()"></apgc-app-toolbar>
+  <apgc-app-toolbar class="mat-elevation-z6" style="margin-bottom: 1px;" (menuClicked)="sideNav.toggle()"></apgc-app-toolbar>
   <mat-sidenav-container class="apgc-sidenav-container mat-elevation-z0">    
-      <mat-sidenav #snav mode="slide" position="start">
+      <mat-sidenav #sideNav mode="slide" position="start">
         <mat-nav-list>
-          <a mat-list-item [routerLink]="['home']" (click)="snav.close()">            
+          <a mat-list-item [routerLink]="['home']" (click)="sideNav.close()">            
             <span>
               <mat-icon fontSet="fas" fontIcon="fa-home"></mat-icon>
               Home
             </span>
           </a>                  
           <apgc-app-menu-category-item *ngIf="appContext?.folderId > 0" category="Files" expanded="false" fontIcon="fa-file">
-              <a mat-list-item [routerLink]="['contacts']" (click)="snav.close()">Contacts</a>
+              <a mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">Contacts</a>
               <a mat-list-item>Products</a>              
           </apgc-app-menu-category-item>
           
@@ -18,7 +18,7 @@
             <ng-container *ngIf="appContext?.folderId > 0">
               <a mat-list-item>Tables</a>              
             </ng-container>           
-            <a mat-list-item [routerLink]="['folders']" (click)="snav.close()">
+            <a mat-list-item [routerLink]="['folders']" (click)="sideNav.close()">
               <span>
                 <mat-icon fontSet="fas" fontIcon="fa-folder"></mat-icon>
                 Folders
