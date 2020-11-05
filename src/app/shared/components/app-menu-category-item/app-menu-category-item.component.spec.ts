@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { AppMaterialModule } from 'src/app/app-material.module';
+import { TestingModule } from 'src/app/test/testing.module';
 
 import { AppMenuCategoryItemComponent } from './app-menu-category-item.component';
 
@@ -9,7 +11,10 @@ describe('AppMenuCategoryItemComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppMenuCategoryItemComponent ]
+      declarations: [AppMenuCategoryItemComponent],
+      imports: [
+        TestingModule
+      ]
     })
     .compileComponents();
   }));

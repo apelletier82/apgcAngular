@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AppToolbarComponent } from './app-toolbar.component';
-import { FoldersModule } from '../folders/folders.module';
+import { FoldersModule } from '../../../folders/folders.module';
+import { TestingModule } from 'src/app/test/testing.module';
 
 describe('AppToolbarComponent', () => {
   let component: AppToolbarComponent;
@@ -10,7 +11,10 @@ describe('AppToolbarComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [AppToolbarComponent],
-      imports: [FoldersModule]
+      imports: [
+        FoldersModule,
+        TestingModule
+      ]
     })
       .compileComponents();
   }));

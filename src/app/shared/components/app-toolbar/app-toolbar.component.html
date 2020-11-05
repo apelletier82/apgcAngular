@@ -3,17 +3,17 @@
         <mat-icon fontSet="fas" fontIcon="fa-bars"></mat-icon>
     </button>        
     <span></span>
-    <button mat-raised-button color="accent"  *ngIf="(!appContext?.folderId || appContext?.folderId ===0)" (click)="onOpenFolderClick()">
+    <button mat-raised-button color="accent"  *ngIf="(folderId || 0) === 0" (click)="onOpenFolderClick()">
         <h2 >
             <mat-icon fontSet="fas" fontIcon="fa-folder-open"></mat-icon>
             Open folder
         </h2>
     </button>
-    <a mat-flat-button color="primary" *ngIf="appContext?.folderId > 0" (click)="onOpenFolderClick()">        
+    <a mat-flat-button color="primary" *ngIf="(folderId || 0) !== 0" (click)="onOpenFolderClick()">        
         <h2 class="mat-title">
             <img class="small-Logo" [src]="folderLogo" alt="logo" *ngIf="folderLogo">
             <mat-icon fontSet="fas" fontIcon="fa-folder" *ngIf="!folderLogo"></mat-icon>             
-            {{ folderName }} - {{ folderYearName }}
+            {{ folderName }} - {{ yearName }}
         </h2>        
     </a>
     <router-outlet name="toolbar-left"></router-outlet>

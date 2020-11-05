@@ -1,9 +1,9 @@
-import { FolderListDatasource } from './folder-list-datasource';
+import { FolderListDataSource } from './folder-list-dataSource';
 import { of } from 'rxjs';
 import { Folder } from '../folder';
 
-describe('FolderListDatasource', () => {
-    let instance: FolderListDatasource;
+describe('FolderListDataSource', () => {
+    let instance: FolderListDataSource;
     let folderServiceMock: any;
 
     const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
@@ -11,15 +11,20 @@ describe('FolderListDatasource', () => {
     beforeEach(() => {
         folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList']);
         folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
-        instance = new FolderListDatasource(folderServiceMock);
+        instance = new FolderListDataSource(folderServiceMock);
     });
 
     it('should load folders', (done: DoneFn) => {
-        instance.loadFloders();
+        let actualTest = false;
         instance.foldersLoading$.subscribe(res => {
-            // expect(res).toBe(true);
-            done();
+            if (actualTest === true) {
+                actualTest = false;
+                expect(res).toBe(true);
+                done();
+            }
         });
+        actualTest = true;
+        instance.loadFolders();
     });
 
     it('should connect', (done: DoneFn) => {

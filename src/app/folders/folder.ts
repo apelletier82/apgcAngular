@@ -1,5 +1,5 @@
 import { FolderYear } from './folder-year';
-import { Address } from '../shared/interfaces/address';
+import { Address } from '../shared/models/address';
 
 export interface Folder {
     folderId: number;

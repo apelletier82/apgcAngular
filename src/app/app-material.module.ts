@@ -16,44 +16,28 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 
-@NgModule({
-  declarations: [
+const modules = [
+  CommonModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatButtonModule,
+  MatGridListModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatDialogModule,
+  MatStepperModule,
+  MatCardModule,
+  MatTableModule,
+  MatSortModule,
+  MatProgressSpinnerModule,
+  MatRippleModule
+];
 
-  ],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatStepperModule,
-    MatCardModule,
-    MatTableModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatRippleModule
-  ],
-  exports: [
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDialogModule,
-    MatStepperModule,
-    MatCardModule,
-    MatTableModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatRippleModule
-  ]
+@NgModule({
+  declarations: [],
+  imports: [... modules],
+  exports: [... modules]
 })
 export class AppMaterialModule { }

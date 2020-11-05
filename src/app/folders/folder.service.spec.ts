@@ -1,47 +1,40 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { BackendService } from '../shared/services/backend.service';
+import { Folder } from './folder';
 import { FolderService } from './folder.service';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { FOLDER_API_URL } from 'src/api/api-config';
 
 describe('FoldersService', () => {
   let service: FolderService;
-  let testController: HttpTestingController;
+  let backendServiceMock: any;
 
-  const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
+  const FOLDER_MOCK: Folder = require('src/api/mock/folders/_1.json');
 
   beforeEach(() => {
+    backendServiceMock = jasmine.createSpyObj('backendServiceMock', ['get']);
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule]
+
+      ],
+      providers: [
+        { provide: BackendService, useValue: backendServiceMock }
+      ]
     });
 
-    testController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(FolderService);
   });
-
-  afterEach(() => testController.verify());
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get and array of folders', (done: DoneFn) => {
-    service.getFolderList().subscribe(
-      value => {
-        expect(value).toBeDefined();
-        expect(value.length).toBe(FOLDERS_MOCK.length);
-        expect(value[0].folderId).toEqual(1);
-      });
-    const req = testController.expectOne(`${FOLDER_API_URL}/folders`);
-    req.flush(FOLDERS_MOCK);
-    done();
-  });
-
-  it('should get one folder', (done: DoneFn) => {
-    service.getFolder(1).subscribe(
-      value => expect(value).toBeDefined() && expect(value.folderId).toEqual(1));
-    const req = testController.expectOne(`${FOLDER_API_URL}/1`);
-    req.flush(FOLDERS_MOCK);
-    done();
+  it('should get one folderYear', (done) => {
+    const folder$ = of<Folder>(FOLDER_MOCK);
+    backendServiceMock.get.and.returnValue(folder$);
+    service.getFolderYear(1, 1).subscribe(value => {
+      expect(value).toBeTruthy();
+      expect(value.yearId).toBe(1);
+      done();
+    });
   });
 });

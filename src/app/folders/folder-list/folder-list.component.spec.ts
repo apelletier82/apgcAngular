@@ -5,6 +5,7 @@ import { FolderService } from '../folder.service';
 import { Folder } from '../folder';
 import { of } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
+import { TestingModule } from 'src/app/test/testing.module';
 
 describe('FolderListComponent', () => {
   let component: FolderListComponent;
@@ -18,7 +19,10 @@ describe('FolderListComponent', () => {
     matSortMock = jasmine.createSpyObj('matSortMock', [], ['active', 'direction', 'disabled', 'start']);
 
     TestBed.configureTestingModule({
-      declarations: [ FolderListComponent, MatSort ],
+      declarations: [FolderListComponent, MatSort],
+      imports: [
+        TestingModule
+      ],
       providers: [{ provide: FolderService, useValue: folderServiceMock }, ]
     })
     .compileComponents();

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { FolderService } from '../folder.service';
-import { FolderListDatasource } from './folder-list-datasource';
+import { FolderListDataSource } from './folder-list-dataSource';
 
 @Component({
   selector: 'apgc-folder-list',
@@ -10,7 +10,7 @@ import { FolderListDatasource } from './folder-list-datasource';
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
   displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
-  folderDataSource: FolderListDatasource;
+  folderDataSource: FolderListDataSource;
 
   @ViewChild(MatSort)
   sort: MatSort;
@@ -18,8 +18,8 @@ export class FolderListComponent implements OnInit, AfterViewInit {
   constructor(private _folderService: FolderService) { }
 
   ngOnInit(): void {
-    this.folderDataSource = new FolderListDatasource(this._folderService);
-    this.folderDataSource.loadFloders();
+    this.folderDataSource = new FolderListDataSource(this._folderService);
+    this.folderDataSource.loadFolders();
   }
 
   ngAfterViewInit(): void {

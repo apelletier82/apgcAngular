@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppContext } from './app-context';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'apgc-root',
@@ -8,6 +8,5 @@ import { AppContext } from './app-context';
 })
 export class AppComponent {
   title = 'apgc';
-  constructor(public appContext: AppContext) {
-  }
+  constructor(public appService: AppService) { }
 }

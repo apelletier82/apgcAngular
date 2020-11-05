@@ -6,7 +6,7 @@ import { FolderService } from '../folder.service';
 import { finalize, delay, catchError } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 
-export class FolderListDatasource implements DataSource<Folder> {
+export class FolderListDataSource implements DataSource<Folder> {
     private _foldersSubject = new BehaviorSubject<Folder[]>([]);
     private _folderSubjectLoading = new BehaviorSubject<boolean>(false);
     private _sort: MatSort;
@@ -17,7 +17,7 @@ export class FolderListDatasource implements DataSource<Folder> {
     }
     set sort(value: MatSort) {
         this._sort = value;
-        this._sort.sortChange.subscribe(() => this.loadFloders());
+        this._sort.sortChange.subscribe(() => this.loadFolders());
     }
 
     constructor(private _folderService: FolderService) { }
@@ -54,7 +54,7 @@ export class FolderListDatasource implements DataSource<Folder> {
         });
     }
 
-    loadFloders(): void {
+    loadFolders(): void {
         this._folderSubjectLoading.next(true);
         try {
             const fakeObs = of(1);

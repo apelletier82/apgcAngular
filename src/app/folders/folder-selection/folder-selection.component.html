@@ -8,7 +8,7 @@
                     <input matInput placeholder="Ex. my folder" value="" (keyup)="applyFolderFilter($event)">
                 </mat-form-field>
                 <mat-selection-list class="folderList" [multiple]="false" formControlName="selectedFolderId">
-                    <mat-list-option *ngFor="let folder of folders$ | async" [value]="folder?.folderId">
+                    <mat-list-option *ngFor="let folder of foldersSubject| async" [value]="folder?.folderId">
                         <span>
                             <img class="small-Logo mat-elevation-z1" [src]="folder?.logo" alt="logo" *ngIf="folder?.logo">                             
                             {{ folder?.folderName || '' }}                                                            
@@ -20,7 +20,7 @@
         <mat-step label="Select a year within the folder" [stepControl]="selectYearIdForm">
             <form [formGroup]="selectYearIdForm">                                
                 <mat-selection-list class="yearList" [multiple]="false" formControlName="selectedYearId">
-                    <mat-list-option *ngFor="let year of selectedFolderYears$ | async" [value]="year?.yearId">                        
+                    <mat-list-option *ngFor="let year of selectedFolderYearsSubject | async" [value]="year?.yearId">                        
                         {{ year?.year || '' }}                                                    
                     </mat-list-option>
                 </mat-selection-list>                

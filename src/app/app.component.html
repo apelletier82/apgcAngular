@@ -9,13 +9,13 @@
               Home
             </span>
           </a>                  
-          <apgc-app-menu-category-item *ngIf="appContext?.folderId > 0" category="Files" expanded="false" fontIcon="fa-file">
+          <apgc-app-menu-category-item *ngIf="appService?.folderId$ | async" category="Files" expanded="false" fontIcon="fa-file">
               <a mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">Contacts</a>
               <a mat-list-item>Products</a>              
           </apgc-app-menu-category-item>
           
           <apgc-app-menu-category-item category="Settings" expanded="false" fontIcon="fa-sliders-h">
-            <ng-container *ngIf="appContext?.folderId > 0">
+            <ng-container *ngIf="appService?.folderId$ | async">
               <a mat-list-item>Tables</a>              
             </ng-container>           
             <a mat-list-item [routerLink]="['folders']" (click)="sideNav.close()">

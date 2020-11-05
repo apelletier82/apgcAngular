@@ -6,10 +6,8 @@ import { AppMaterialModule } from './app-material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { AppMenuCategoryItemModule } from './app-menu-category-item/app-menu-category-item.module';
-import { AppToolbarModule } from './app-toolbar/app-toolbar.module';
 import { FoldersModule } from './folders/folders.module';
-import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    AppMenuCategoryItemModule,
-    AppToolbarModule,
+    SharedModule,
     FoldersModule
   ],
   providers: [],
