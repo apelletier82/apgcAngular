@@ -1,0 +1,20 @@
+<div [class]="cssClass">
+    <ng-template #defaultTemplate>  
+        <mat-icon *ngIf="data.icon">{{data.icon}}</mat-icon>
+        {{data.message}}
+        <span class="apgc-flex-space"></span>
+        <button *ngIf="data.action"
+            mat-stroked-button
+            color="accent"
+            (click)="onActionClick()">
+            {{data.action}}
+        </button>
+        <button 
+            *ngIf="data.showCloseButton"
+            mat-icon-button            
+            (click)="close()">
+            <mat-icon>close</mat-icon>
+        </button>        
+    </ng-template>
+    <ng-container *ngTemplateOutlet="data.template ? data.template : defaultTemplate"></ng-container>
+</div>

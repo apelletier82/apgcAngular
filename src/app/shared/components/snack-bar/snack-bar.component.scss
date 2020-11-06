@@ -1,0 +1,8 @@
+@import '../../../../styles.scss';
+
+.snack-bar-container {
+    @include flex(row, normal, center);
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}

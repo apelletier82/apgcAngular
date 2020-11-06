@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-row:hover {
+    background-color: mat-color($mat-gray, 100);         
+}
+
+.information {
+    background-color: mat-color($mat-blue, 100);
+    color: mat-color($mat-blue, 800);
+}
+
+.success {
+    background-color: mat-color($mat-green, 100);
+    color: mat-color($mat-green, 800);
+}
+
+.warning {
+    background-color: mat-color($mat-orange, 100);
+    color: mat-color($mat-orange, 800);
+}
+
+.error {
+    background-color: mat-color($mat-red, 100);
+    color: mat-color($mat-red, 800);
+}

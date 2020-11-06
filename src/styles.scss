@@ -1,9 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@fortawesome/fontawesome-free/css/all.css";
-@import "~flag-icon-css/css/flag-icon.css";
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@mixin flex($direction, $justify-content:normal, $align-items: normal){
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
 
 .apgc-flex-space {
     flex: 1 1 auto;
@@ -18,10 +22,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .full-width {
     width: 100%;
-}
-
-.mat-row:hover {
-    background-color: rgba(0,0,0,.04);
 }
 
 .spinner-loading-center {

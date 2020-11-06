@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   CommonModule,
@@ -32,7 +33,8 @@ const modules = [
   MatTableModule,
   MatSortModule,
   MatProgressSpinnerModule,
-  MatRippleModule
+  MatRippleModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
