@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TestingModule } from 'src/app/test/testing.module';
-import { SnackBarConfigType } from '../models/snack-bar-config-type';
+import { NotificationConfigType } from '../models/notification-config-type';
 
-import { SnackBarService } from './snack-bar.service';
+import { NotificationService } from './notification.service';
 
 describe('SnackBarService', () => {
-  let service: SnackBarService;
+  let service: NotificationService;
   let snackBar: MatSnackBar;
 
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('SnackBarService', () => {
       ]
     });
     snackBar = TestBed.inject(MatSnackBar);
-    service = TestBed.inject(SnackBarService);
+    service = TestBed.inject(NotificationService);
   });
 
   it('should be created', () => {
@@ -52,7 +52,7 @@ describe('SnackBarService', () => {
   it('should show information component with close button', () => {
     expect(service.showApgcSnackBar(
       {
-        type: SnackBarConfigType.information,
+        type: NotificationConfigType.information,
         message: 'APGC Information',
         action: 'Ok',
         showCloseButton: true
@@ -62,7 +62,7 @@ describe('SnackBarService', () => {
   it('should show success component with close button', () => {
     expect(service.showApgcSnackBar(
       {
-        type: SnackBarConfigType.success,
+        type: NotificationConfigType.success,
         message: 'APGC Successful test',
         action: 'Ok',
         showCloseButton: true
@@ -72,7 +72,7 @@ describe('SnackBarService', () => {
   it('should show warning component with close button', () => {
     expect(service.showApgcSnackBar(
       {
-        type: SnackBarConfigType.warning,
+        type: NotificationConfigType.warning,
         message: 'APGC Warning test',
         action: 'Ok',
         showCloseButton: true
@@ -82,7 +82,7 @@ describe('SnackBarService', () => {
   it('should show error component with close button', () => {
     expect(service.showApgcSnackBar(
       {
-        type: SnackBarConfigType.error,
+        type: NotificationConfigType.error,
         message: 'APGC Error test',
         action: 'Ok',
         showCloseButton: true

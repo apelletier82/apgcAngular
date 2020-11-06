@@ -1,4 +1,4 @@
-export enum SnackBarConfigType {
+export enum NotificationConfigType {
     information = 1,
     success = 2,
     warning = 3,

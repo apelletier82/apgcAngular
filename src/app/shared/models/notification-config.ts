@@ -1,8 +1,8 @@
 import { TemplateRef } from '@angular/core';
-import { SnackBarConfigType } from './snack-bar-config-type';
+import { NotificationConfigType } from './notification-config-type';
 
-export interface SnackBarConfig {
-    type?: SnackBarConfigType;
+export interface NotificationConfig {
+    type?: NotificationConfigType;
     message?: string;
     template?: TemplateRef<any>;
     action?: string;

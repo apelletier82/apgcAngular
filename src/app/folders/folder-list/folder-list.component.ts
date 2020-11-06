@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { SnackBarConfigType } from 'src/app/shared/models/snack-bar-config-type';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { NotificationConfigType } from 'src/app/shared/models/notification-config-type';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { FolderService } from '../folder.service';
 import { FolderListDataSource } from './folder-list-dataSource';
 
@@ -17,7 +17,7 @@ export class FolderListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort)
   sort: MatSort;
 
-  constructor(private _folderService: FolderService, private snackBarService: SnackBarService) { }
+  constructor(private _folderService: FolderService, private snackBarService: NotificationService) { }
 
   ngOnInit(): void {
     this.folderDataSource = new FolderListDataSource(this._folderService);

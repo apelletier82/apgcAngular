@@ -1,46 +1,46 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig, MatSnackBarRef } from '@angular/material/snack-bar';
-import { SnackBarConfig } from '../models/snack-bar-config';
-import { SnackBarConfigType } from '../models/snack-bar-config-type';
+import { NotificationConfig } from '../models/notification-config';
+import { NotificationConfigType } from '../models/notification-config-type';
 import { SnackBarComponent } from '../components/snack-bar/snack-bar.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SnackBarService {
+export class NotificationService {
 
   constructor(private snackBar: MatSnackBar) { }
 
-  getSnackBarTypeName(snackBarType: SnackBarConfigType): string {
-    const result: string = SnackBarConfigType[snackBarType];
+  getSnackBarTypeName(snackBarType: NotificationConfigType): string {
+    const result: string = NotificationConfigType[snackBarType];
     return result;
   }
 
-  private customShowSnackBar(type: SnackBarConfigType, message: string, action?: string): MatSnackBarRef<any> {
+  private customShowSnackBar(type: NotificationConfigType, message: string, action?: string): MatSnackBarRef<any> {
     return this.snackBar.open(message, action, { panelClass: this.getSnackBarTypeName(type) });
   }
 
   showInformation(message: string, action?: string): MatSnackBarRef<any> {
-    return this.customShowSnackBar(SnackBarConfigType.information, message, action);
+    return this.customShowSnackBar(NotificationConfigType.information, message, action);
   }
 
   showSuccess(message: string, action?: string): MatSnackBarRef<any> {
-    return this.customShowSnackBar(SnackBarConfigType.success, message, action);
+    return this.customShowSnackBar(NotificationConfigType.success, message, action);
   }
 
   showWarning(message: string, action?: string): MatSnackBarRef<any> {
-    return this.customShowSnackBar(SnackBarConfigType.warning, message, action);
+    return this.customShowSnackBar(NotificationConfigType.warning, message, action);
   }
 
   showError(message: string, action?: string): MatSnackBarRef<any> {
-    return this.customShowSnackBar(SnackBarConfigType.error, message, action);
+    return this.customShowSnackBar(NotificationConfigType.error, message, action);
   }
 
   showSnackBar(message: string, action?: string, config?: MatSnackBarConfig<any>): MatSnackBarRef<any> {
     return this.snackBar.open(message, action, config);
   }
 
-  showApgcSnackBar(config: SnackBarConfig): MatSnackBarRef<any> {
+  showApgcSnackBar(config: NotificationConfig): MatSnackBarRef<any> {
     return this.snackBar.openFromComponent(
       SnackBarComponent,
       {

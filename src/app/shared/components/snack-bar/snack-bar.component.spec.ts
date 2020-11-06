@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
-import { exception } from 'console';
 import { TestingModule } from 'src/app/test/testing.module';
-import { SnackBarConfigType } from '../../models/snack-bar-config-type';
+import { NotificationConfigType } from '../../models/notification-config-type';
 
 import { SnackBarComponent } from './snack-bar.component';
 
@@ -12,7 +11,7 @@ describe('SnackBarComponent', () => {
   let snackBarRef;
 
   const snackBarDataValue = {
-    type: SnackBarConfigType.information,
+    type: NotificationConfigType.information,
     description: 'test snackbar',
     action: 'action',
     showCloseButton: true

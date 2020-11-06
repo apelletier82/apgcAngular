@@ -1,8 +1,8 @@
 import { SplitInterpolation } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
-import { SnackBarConfig } from '../../models/snack-bar-config';
-import { SnackBarConfigType } from '../../models/snack-bar-config-type';
+import { NotificationConfig } from '../../models/notification-config';
+import { NotificationConfigType } from '../../models/notification-config-type';
 
 @Component({
   selector: 'apgc-snack-bar',
@@ -17,12 +17,12 @@ export class SnackBarComponent implements OnInit {
     return this.snackBarContainerCssClass.concat(' ').concat(result).trim();
   }
 
-  private getSnackBarModelTypeName(snackBarType: SnackBarConfigType): string {
+  private getSnackBarModelTypeName(snackBarType: NotificationConfigType): string {
     let result = '';
 
     if (snackBarType) {
       try {
-        result = SnackBarConfigType[snackBarType];
+        result = NotificationConfigType[snackBarType];
       }
       catch {
         result = '';
@@ -33,7 +33,7 @@ export class SnackBarComponent implements OnInit {
 
   constructor(
     private snackBarRef: MatSnackBarRef<SnackBarComponent>,
-    @Inject(MAT_SNACK_BAR_DATA) public data: SnackBarConfig)
+    @Inject(MAT_SNACK_BAR_DATA) public data: NotificationConfig)
   { }
 
   ngOnInit(): void {
