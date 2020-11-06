@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TestingModule } from 'src/app/test/testing.module';
-import { SnackBarConfigType } from '../components/snack-bar/snack-bar-config-type';
+import { SnackBarConfigType } from '../models/snack-bar-config-type';
 
 import { SnackBarService } from './snack-bar.service';
 

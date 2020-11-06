@@ -3,6 +3,10 @@
 .snack-bar-container {
     @include flex(row, normal, center);
     padding: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.data-icon {
+    padding-right: 5px;
 }

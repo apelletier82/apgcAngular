@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { exception } from 'console';
 import { TestingModule } from 'src/app/test/testing.module';
-import { SnackBarConfigType } from './snack-bar-config-type';
+import { SnackBarConfigType } from '../../models/snack-bar-config-type';
 
 import { SnackBarComponent } from './snack-bar.component';
 

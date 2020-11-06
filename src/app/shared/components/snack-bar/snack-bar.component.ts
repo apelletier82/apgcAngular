@@ -1,8 +1,8 @@
 import { SplitInterpolation } from '@angular/compiler';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
-import { SnackBarConfig } from './snack-bar-config';
-import { SnackBarConfigType } from './snack-bar-config-type';
+import { SnackBarConfig } from '../../models/snack-bar-config';
+import { SnackBarConfigType } from '../../models/snack-bar-config-type';
 
 @Component({
   selector: 'apgc-snack-bar',

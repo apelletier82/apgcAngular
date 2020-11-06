@@ -7,6 +7,7 @@ export interface SnackBarConfig {
     template?: TemplateRef<any>;
     action?: string;
     icon?: string;
+    iconFas?: boolean;
     showCloseButton?: boolean;
     duration?: number;
 }

@@ -1,7 +1,15 @@
 <div [class]="cssClass">
     <ng-template #defaultTemplate>  
-        <mat-icon *ngIf="data.icon">{{data.icon}}</mat-icon>
-        {{data.message}}
+        <ng-template #iconMat>
+            <mat-icon>{{data.icon}}</mat-icon>
+        </ng-template>        
+        <ng-container *ngIf="data.icon">
+            <ng-container *ngIf="data.iconFas else iconMat">
+                <mat-icon class="data-icon" fontSet="fas" [fontIcon]="data.icon"></mat-icon>
+            </ng-container>
+        </ng-container>
+
+        <span> {{data.message}} </span>
         <span class="apgc-flex-space"></span>
         <button *ngIf="data.action"
             mat-stroked-button
