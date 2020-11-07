@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TestingModule } from 'src/app/test/testing.module';
-import { NotificationConfigType } from '../models/notification-config-type';
+import { NotificationConfigType } from './notification-config-type';
 
 import { NotificationService } from './notification.service';
 
@@ -41,7 +41,7 @@ describe('SnackBarService', () => {
   });
 
   it('should show component with close button', () => {
-    expect(service.showApgcSnackBar(
+    expect(service.showApgcNotification(
       {
         message: 'APGC Message',
         action: 'Action',
@@ -50,7 +50,7 @@ describe('SnackBarService', () => {
   });
 
   it('should show information component with close button', () => {
-    expect(service.showApgcSnackBar(
+    expect(service.showApgcNotification(
       {
         type: NotificationConfigType.information,
         message: 'APGC Information',
@@ -60,7 +60,7 @@ describe('SnackBarService', () => {
   });
 
   it('should show success component with close button', () => {
-    expect(service.showApgcSnackBar(
+    expect(service.showApgcNotification(
       {
         type: NotificationConfigType.success,
         message: 'APGC Successful test',
@@ -70,7 +70,7 @@ describe('SnackBarService', () => {
   });
 
   it('should show warning component with close button', () => {
-    expect(service.showApgcSnackBar(
+    expect(service.showApgcNotification(
       {
         type: NotificationConfigType.warning,
         message: 'APGC Warning test',
@@ -80,7 +80,7 @@ describe('SnackBarService', () => {
   });
 
   it('should show error component with close button', () => {
-    expect(service.showApgcSnackBar(
+    expect(service.showApgcNotification(
       {
         type: NotificationConfigType.error,
         message: 'APGC Error test',

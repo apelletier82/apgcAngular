@@ -6,13 +6,14 @@ import { AppMenuCategoryItemComponent } from './components/app-menu-category-ite
 import { FoldersModule } from 'src/app/folders/folders.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { NotificationComponent } from './notification/notification.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 const components = [
   AppToolbarComponent,
   AppMenuCategoryItemComponent,
-  SnackBarComponent
+  NotificationComponent
 ];
 
 const modules = [
@@ -24,7 +25,7 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [... components],
+  declarations: [... components, DialogComponent],
   imports: [... modules],
   exports: [... components]
 })

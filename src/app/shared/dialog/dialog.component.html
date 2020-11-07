@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>{{data?.title}}</h2>
+<mat-dialog-content>
+    {{data?.description}}
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="data?.actions?.length > 0" align="end">
+    <ng-container *ngFor="let action of data?.actions">
+        <ng-template #nonDefault>
+            <button 
+                mat-button
+                [mat-dialog-close]="action.action">
+                {{action.action}}
+            </button>
+        </ng-template>
+        <button *ngIf="data.actions?.length===1 || action.default else nonDefault"
+            mat-raised-button
+            [mat-dialog-close]="action.action"
+            color="primary"
+            cdkFocusInitial>
+            {{action.action}}
+        </button>
+    </ng-container>
+</mat-dialog-actions>

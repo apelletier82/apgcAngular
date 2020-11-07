@@ -1,0 +1,13 @@
+.notification-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: normal;
+    align-items: center;    
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.data-icon {
+    padding-right: 5px;
+}

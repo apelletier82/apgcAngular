@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { TestingModule } from 'src/app/test/testing.module';
-import { NotificationConfigType } from '../../models/notification-config-type';
+import { NotificationConfigType } from './notification-config-type';
 
-import { SnackBarComponent } from './snack-bar.component';
+import { NotificationComponent } from './notification.component';
 
 describe('SnackBarComponent', () => {
-  let component: SnackBarComponent;
-  let fixture: ComponentFixture<SnackBarComponent>;
+  let component: NotificationComponent;
+  let fixture: ComponentFixture<NotificationComponent>;
   let snackBarRef;
 
   const snackBarDataValue = {
@@ -25,7 +25,7 @@ describe('SnackBarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        SnackBarComponent
+        NotificationComponent
       ],
       imports: [
         TestingModule
@@ -40,7 +40,7 @@ describe('SnackBarComponent', () => {
 
   beforeEach(() => {
     snackBarRef = TestBed.inject(MatSnackBarRef);
-    fixture = TestBed.createComponent(SnackBarComponent);
+    fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
