@@ -8,12 +8,13 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificationComponent } from './notification/notification.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { DialogModule } from './dialog/dialog.module';
+import { NotificationModule } from './notification/notification.module';
 
 
 const components = [
   AppToolbarComponent,
-  AppMenuCategoryItemComponent,
-  NotificationComponent
+  AppMenuCategoryItemComponent
 ];
 
 const modules = [
@@ -21,11 +22,13 @@ const modules = [
   HttpClientModule,
   AppMaterialModule,
   AppRoutingModule,
+  DialogModule,
+  NotificationModule,
   FoldersModule
 ];
 
 @NgModule({
-  declarations: [... components, DialogComponent],
+  declarations: [... components],
   imports: [... modules],
   exports: [... components]
 })

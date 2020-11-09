@@ -16,6 +16,21 @@
   }
 
   .mat-sidenav {
-    width: 200px;
+    width: 20em;
   }
   
+  mat-icon {
+    padding-right: 5px;    
+  }
+
+  mat-panel-title, span {
+    display: flex;
+    direction: row;
+    justify-content: normal;
+    align-items: center;
+  }
+
+  .single-menu {
+    padding-left: 7px;
+    font-size: 15px;
+  }

@@ -1,32 +1,46 @@
 <div class="apgc-container">  
-  <apgc-app-toolbar class="mat-elevation-z6" style="margin-bottom: 1px;" (menuClicked)="sideNav.toggle()"></apgc-app-toolbar>
-  <mat-sidenav-container class="apgc-sidenav-container mat-elevation-z0">    
-      <mat-sidenav #sideNav mode="slide" position="start">
+  <mat-toolbar class="mat-elevation-z6">
+    <apgc-app-toolbar (menuClicked)="sideNav.toggle()"></apgc-app-toolbar>
+  </mat-toolbar>
+  <mat-sidenav-container class="apgc-sidenav-container">    
+      <mat-sidenav #sideNav mode="slide" position="start">                  
         <mat-nav-list>
-          <a mat-list-item [routerLink]="['home']" (click)="sideNav.close()">            
-            <span>
-              <mat-icon fontSet="fas" fontIcon="fa-home"></mat-icon>
+          <mat-list-item [routerLink]="['home']" (click)="sideNav.close()">              
+            <span class="single-menu">
+              <mat-icon>home</mat-icon>
               Home
-            </span>
-          </a>                  
-          <apgc-app-menu-category-item *ngIf="appService?.folderId$ | async" category="Files" expanded="false" fontIcon="fa-file">
-              <a mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">Contacts</a>
-              <a mat-list-item>Products</a>              
-          </apgc-app-menu-category-item>
-          
-          <apgc-app-menu-category-item category="Settings" expanded="false" fontIcon="fa-sliders-h">
-            <ng-container *ngIf="appService?.folderId$ | async">
-              <a mat-list-item>Tables</a>              
-            </ng-container>           
-            <a mat-list-item [routerLink]="['folders']" (click)="sideNav.close()">
-              <span>
-                <mat-icon fontSet="fas" fontIcon="fa-folder"></mat-icon>
-                Folders
-              </span>                           
-            </a>
-          </apgc-app-menu-category-item> 
-
-        </mat-nav-list>                
+            </span>              
+            </mat-list-item>          
+          <mat-accordion>
+            <mat-expansion-panel *ngIf="appService?.folderId$ | async">
+              <mat-expansion-panel-header>            
+                <mat-panel-title>
+                  <mat-icon>file_copy</mat-icon>               
+                  Files                
+                </mat-panel-title>              
+              </mat-expansion-panel-header>
+              <mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">Contacts</mat-list-item>
+              <mat-list-item>Products</mat-list-item>      
+            </mat-expansion-panel> 
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <mat-icon>settings</mat-icon>
+                  Settings
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <ng-container *ngIf="appService?.folderId$ | async">
+                <mat-list-item>Tables</mat-list-item>
+              </ng-container>           
+              <mat-list-item [routerLink]="['folders']" (click)="sideNav.close()">
+                <span>
+                  <mat-icon>folders</mat-icon>
+                  Folders
+                </span>                           
+              </mat-list-item>            
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-nav-list>  
       </mat-sidenav>
       <mat-sidenav-content style="padding: 5px;">              
         <router-outlet #mainRouterOutlet></router-outlet>        

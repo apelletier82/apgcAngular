@@ -9,16 +9,17 @@ import { FolderListDataSource } from './folder-list-dataSource';
   styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
-  displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
+  public readonly displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
   folderDataSource: FolderListDataSource;
 
   @ViewChild(MatSort)
   sort: MatSort;
 
-  constructor(private _folderService: FolderService) { }
+  constructor(private folderService: FolderService) {
+    this.folderDataSource = new FolderListDataSource(this.folderService);
+  }
 
   ngOnInit(): void {
-    this.folderDataSource = new FolderListDataSource(this._folderService);
     this.folderDataSource.loadFolders();
   }
 

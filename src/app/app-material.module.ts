@@ -16,6 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 const modules = [
   CommonModule,
@@ -34,7 +35,8 @@ const modules = [
   MatSortModule,
   MatProgressSpinnerModule,
   MatRippleModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatExpansionModule
 ];
 
 @NgModule({
