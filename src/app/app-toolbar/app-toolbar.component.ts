@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FolderService } from '../../../folders/folder.service';
+import { FolderService } from '../folders/folder.service';
 import { FolderSelectionService } from 'src/app/folders/folder-selection/folder-selection.service';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';

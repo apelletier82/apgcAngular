@@ -8,10 +8,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FoldersModule } from './folders/folders.module';
 import { SharedModule } from './shared/shared.module';
+import { AppToolbarComponent } from './app-toolbar/app-toolbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppToolbarComponent,
   ],
   imports: [
     BrowserModule,
