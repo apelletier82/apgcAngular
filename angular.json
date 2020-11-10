@@ -26,8 +26,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/api/logos",
-              "src/api/dev/folders"              
+              "src/api/logos",              
+              "src/api/dev/folder"              
             ],
             "styles": [                  
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",

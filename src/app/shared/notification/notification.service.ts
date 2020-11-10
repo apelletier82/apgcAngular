@@ -35,7 +35,7 @@ export class NotificationService {
     return this.customShowSnackBar(NotificationConfigType.error, message, action);
   }
 
-  showException(message: string, error: any): MatSnackBarRef<any> {
+  showException(message: string, error: string): MatSnackBarRef<any> {
     const action = 'Details';
     const result = this.customShowSnackBar(NotificationConfigType.error, message, action);
     result.onAction().subscribe(_ => {

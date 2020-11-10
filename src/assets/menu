@@ -1,0 +1,49 @@
+{
+    "home": {
+      "id": 1,
+      "caption": "Home",
+      "icon": "home",
+      "routerLink": "home"
+    },
+    "categories": [
+        {
+            "id": 1,
+            "caption": "Files",
+            "icon": "file_copy",
+            "checkVisibility": true,
+            "items": [
+                {  
+                    "id": 1,
+                    "caption": "Contacts",
+                    "icon": "contacts",
+                    "routerLink": "contacts"
+                },            
+                {
+                    "id": 2,
+                    "caption": "Products",
+                    "routerLink": ""
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "caption": "Settings",
+            "icon": "settings",
+            "items": [
+                {
+                    "id": 1,
+                    "caption": "Tables",
+                    "icon": "table_rows",
+                    "checkVisibility": true,
+                    "routerLink": ""
+                },
+                {
+                    "id": 2,
+                    "caption": "Folders",
+                    "icon": "folder",
+                    "routerLink": "folders"
+                }
+            ]
+        }
+    ]
+}

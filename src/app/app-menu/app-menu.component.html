@@ -1,0 +1,25 @@
+<mat-nav-list>
+    <mat-list-item [routerLink]="[menu?.home.routerLink]" (click)="itemClick()">     
+      <span class="single-menu">
+        <apgc-menu-icon-caption [icon]="menu?.home.icon" [iconFas]="menu?.home.fas" [caption]="menu?.home.caption"></apgc-menu-icon-caption>
+      </span>
+    </mat-list-item>          
+    <mat-accordion>
+        <ng-container *ngFor="let category of menu?.categories" >    
+            <mat-expansion-panel                 
+                *ngIf="(!category.checkVisibility) || (appService?.folderId$ | async)">
+                <mat-expansion-panel-header>            
+                <mat-panel-title>
+                    <apgc-menu-icon-caption [icon]="category.icon" [iconFas]="category.fas" [caption]="category.caption"></apgc-menu-icon-caption>
+                </mat-panel-title>              
+                </mat-expansion-panel-header>
+                <ng-container *ngFor="let item of category.items">
+                    <mat-list-item *ngIf="(!item.checkVisibility) || (appService?.folderId$ | async)" 
+                        [routerLink]="[item.routerLink]" (click)="itemClick()">
+                        <apgc-menu-icon-caption [icon]="item.icon" [iconFas]="item.fas" [caption]="item.caption"></apgc-menu-icon-caption>
+                    </mat-list-item>
+                </ng-container>                
+            </mat-expansion-panel> 
+        </ng-container>
+    </mat-accordion>
+  </mat-nav-list>  

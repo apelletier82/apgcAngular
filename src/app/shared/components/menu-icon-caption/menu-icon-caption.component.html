@@ -1,0 +1,8 @@
+<span>
+    <ng-template #matIcon>
+        <mat-icon matListIcon>{{icon}}</mat-icon>
+    </ng-template>
+    
+    <mat-icon matListIcon *ngIf="iconFas else matIcon" fontSet="fas" [fontIcon]="icon"></mat-icon>
+    {{caption}}
+</span>

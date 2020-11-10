@@ -6,9 +6,11 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DialogModule } from './dialog/dialog.module';
 import { NotificationModule } from './notification/notification.module';
+import { MenuIconCaptionComponent } from './components/menu-icon-caption/menu-icon-caption.component';
 
 
 const components = [
+  MenuIconCaptionComponent
 ];
 
 const modules = [

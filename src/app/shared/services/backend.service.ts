@@ -2,18 +2,24 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private notificationService: NotificationService) { }
+
+  private catchError(error: any) {
+    console.log(error);
+    this.notificationService.showException('Data error', error.message);
+  }
 
   public get<T>(apiUrl: string): Observable<T> {
     return this.httpClient.get<T>(apiUrl).pipe(
       catchError(error => {
-        console.log(error);
+        this.catchError(error);
         return of(null);
       })
     );
@@ -22,7 +28,7 @@ export class BackendService {
   public put<T>(apiUrl: string, model: T): Observable<T> {
     return this.httpClient.put<T>(apiUrl, model).pipe(
       catchError(error => {
-        console.log(error);
+        this.catchError(error);
         return of(null);
       })
     );
@@ -31,7 +37,7 @@ export class BackendService {
   public post<T>(apiUrl: string, model: T): Observable<T> {
     return this.httpClient.post<T>(apiUrl, model).pipe(
       catchError(error => {
-        console.log(error);
+        this.catchError(error);
         return of(null);
       })
     );
@@ -40,7 +46,7 @@ export class BackendService {
   public delete(apiUrl: string, options?: any): Observable<ArrayBuffer> {
     return this.httpClient.delete(apiUrl, options).pipe(
       catchError(error => {
-        console.log(error);
+        this.catchError(error);
         return of(null);
       })
     );

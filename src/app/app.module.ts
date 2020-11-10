@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { FoldersModule } from './folders/folders.module';
 import { SharedModule } from './shared/shared.module';
 import { AppToolbarComponent } from './app-toolbar/app-toolbar.component';
+import { AppMenuComponent } from './app-menu/app-menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppToolbarComponent,
+    AppMenuComponent,
   ],
   imports: [
     BrowserModule,
