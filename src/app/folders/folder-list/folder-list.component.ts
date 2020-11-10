@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { Folder } from '../folder';
 import { FolderService } from '../folder.service';
 import { FolderListDataSource } from './folder-list-dataSource';
 
@@ -27,4 +28,7 @@ export class FolderListComponent implements OnInit, AfterViewInit {
     this.folderDataSource.sort = this.sort;
   }
 
+  trackByFolderId(_: number, folder: Folder): any {
+    return folder.folderId;
+  }
 }

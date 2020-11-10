@@ -5,10 +5,10 @@
         <mat-nav-list>
           <mat-list-item [routerLink]="['home']" (click)="sideNav.close()">              
             <span class="single-menu">
-              <mat-icon>home</mat-icon>
+              <mat-icon matListIcon>home</mat-icon>
               Home
             </span>              
-            </mat-list-item>          
+          </mat-list-item>          
           <mat-accordion>
             <mat-expansion-panel *ngIf="appService?.folderId$ | async">
               <mat-expansion-panel-header>            
@@ -17,8 +17,14 @@
                   Files                
                 </mat-panel-title>              
               </mat-expansion-panel-header>
-              <mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">Contacts</mat-list-item>
-              <mat-list-item>Products</mat-list-item>      
+              <mat-list-item [routerLink]="['contacts']" (click)="sideNav.close()">
+                <mat-icon matListIcon>contacts</mat-icon>
+                Contacts
+              </mat-list-item>
+              <mat-list-item (click)="sideNav.close()">
+                <mat-icon matListIcon>products</mat-icon>
+                Products
+              </mat-list-item>   
             </mat-expansion-panel> 
             <mat-expansion-panel>
               <mat-expansion-panel-header>
@@ -28,13 +34,16 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <ng-container *ngIf="appService?.folderId$ | async">
-                <mat-list-item>Tables</mat-list-item>
+                <mat-list-item (click)="sideNav.close()">
+                  <mat-icon matListIcon>table_rows</mat-icon>
+                  Tables
+                </mat-list-item>
               </ng-container>           
               <mat-list-item [routerLink]="['folders']" (click)="sideNav.close()">
                 <span>
-                  <mat-icon>folders</mat-icon>
+                  <mat-icon matListIcon>folders</mat-icon>
                   Folders
-                </span>                           
+                </span>        
               </mat-list-item>            
             </mat-expansion-panel>
           </mat-accordion>

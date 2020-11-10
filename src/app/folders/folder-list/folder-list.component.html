@@ -3,7 +3,7 @@
         <mat-spinner></mat-spinner>    
     </div>
     
-    <mat-table [dataSource]="folderDataSource" matSort class="mat-elevation-z1"> 
+    <mat-table [dataSource]="folderDataSource" [trackBy]="trackByFolderId" matSort class="mat-elevation-z1"> 
         <ng-container matColumnDef="folderLogo">
             <mat-header-cell *matHeaderCellDef style="max-width:40px"></mat-header-cell>
             <mat-cell *matCellDef="let folder" style="max-width:40px">
