@@ -18,13 +18,17 @@ export class FolderSelectionService {
       data: { folderId: folderSelection?.folderId, yearId: folderSelection?.yearId }
     });
 
-    return dialogRef.afterClosed().pipe(map(res => res as FolderSelection));
+    return dialogRef.afterClosed().pipe(map(res => res ? res as FolderSelection : undefined));
   }
 
   selectApplicationFolder(folderSelection?: FolderSelection): Observable<FolderSelection> {
     return this.openFolderSelectionDialog(folderSelection ?? { folderId: this.appService.folderId, yearId: this.appService.yearId })
       .pipe(
-        tap(result => this.appService.updateAppFolderContext(result.folderId, result.yearId))
+        tap(result => {
+          if (result) {
+            this.appService.updateAppFolderContext(result.folderId, result.yearId);
+          }
+        })
       );
   }
 }
