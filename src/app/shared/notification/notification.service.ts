@@ -13,10 +13,8 @@ export class NotificationService {
   constructor(private snackBar: MatSnackBar, private dialogService: DialogService) { }
 
   private customShowSnackBar(type: NotificationConfigType, message: string, action?: string): MatSnackBarRef<any> {
-    return this.snackBar.open(message, action,
-      {
-        panelClass: NotificationConfigTypeCast.toString(type)
-      });
+    const config = { panelClass: NotificationConfigTypeCast.toString(type) };
+    return this.snackBar.open(message, action, config);
   }
 
   showInformation(message: string, action?: string): MatSnackBarRef<any> {
@@ -36,14 +34,21 @@ export class NotificationService {
   }
 
   showException(message: string, error: string): MatSnackBarRef<any> {
-    const action = 'Details';
-    const result = this.customShowSnackBar(NotificationConfigType.error, message, action);
+    const config = {
+      action: 'Details',
+      duration: Infinity,
+      icon: 'error',
+      message,
+      showCloseButton: true,
+      type: NotificationConfigType.error
+    };
+
+    const result = this.showApgcNotification(config);
     result.onAction().subscribe(_ => {
-      if (action === 'Details') {
         const dialogData = { title: 'Error', description: error, actions: [{ action: 'Ok' }] };
         this.dialogService.showDialog(dialogData);
-      }
     });
+
     return result;
   }
 

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { hasUncaughtExceptionCaptureCallback } from 'process';
 
 import { AppMenuComponent } from './app-menu.component';
 
@@ -21,5 +22,15 @@ describe('AppMenuComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+
+  it('should click on item', (done) => {
+    component.menuItemClick.subscribe(() => {
+      expect(true).toBeTruthy();
+      done();
+    });
+    component.itemClick();
+    expect(component.menuItemClick.emit).toHaveBeenCalled();
   });
 });

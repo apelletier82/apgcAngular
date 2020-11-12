@@ -9,7 +9,7 @@ import { AppMenuService } from './app-menu.service';
   templateUrl: './app-menu.component.html',
   styleUrls: ['./app-menu.component.scss']
 })
-export class AppMenuComponent implements OnInit {
+export class AppMenuComponent {
   private _menu: AppMenu;
   public get menu(): AppMenu {
     return this._menu;
@@ -20,8 +20,6 @@ export class AppMenuComponent implements OnInit {
   constructor(private appMenuService: AppMenuService, public appService: AppService) {
     this.appMenuService.getMenu$().subscribe(appMenu => this._menu = appMenu);
   }
-
-  ngOnInit(): void { }
 
   itemClick() {
     this.menuItemClick.emit();
