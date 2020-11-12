@@ -42,7 +42,7 @@ describe('SnackBarService', () => {
 
   it('should show exception', () => {
     expect(service.showException('Test exception', 'exception message').instance).toBeTruthy();
-  }):
+  });
 
   it('should show component with close button', () => {
     expect(service.showApgcNotification(
