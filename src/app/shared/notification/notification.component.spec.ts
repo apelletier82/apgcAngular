@@ -62,6 +62,6 @@ describe('SnackBarComponent', () => {
   });
 
   it('should have information css', () => {
-    expect(component.cssClass).toEqual('snack-bar-container information');
+    expect(component.cssClass).toEqual('notification-container information');
   });
 });

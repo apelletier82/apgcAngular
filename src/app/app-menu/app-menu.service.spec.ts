@@ -1,4 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { BackendService } from '../shared/services/backend.service';
+import { TestingModule } from '../test/testing.module';
 
 import { AppMenuService } from './app-menu.service';
 
@@ -8,7 +11,14 @@ describe('AppMenuService', () => {
 
   beforeEach(() => {
     backendServiceMock = jasmine.createSpyObj(['get']);
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        TestingModule
+      ],
+      providers: [
+        { provide: BackendService, useValue: backendServiceMock }
+      ]
+    });
     service = TestBed.inject(AppMenuService);
   });
 
@@ -27,7 +37,7 @@ describe('AppMenuService', () => {
       categories: []
     };
 
-    backendServiceMock.get.and.returnValue(menu);
+    backendServiceMock.get.and.returnValue(of(menu));
     service.getMenu$().subscribe(result => {
       expect(result).toBeTruthy();
       done();

@@ -41,7 +41,7 @@ describe('DialogService', () => {
     expect(service).toBeTruthy();
   });
 
-  fit('should show dialog and select ok', (done) => {
+  it('should show dialog and select ok', (done) => {
     service.showDialog(dialogData).subscribe(action => {
       expect(action).toBe('Ok');
       done();

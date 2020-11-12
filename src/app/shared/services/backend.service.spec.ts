@@ -2,20 +2,27 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { Folder } from 'src/app/folders/folder';
 import { environment } from 'src/environments/environment';
+import { NotificationService } from '../notification/notification.service';
 
 import { BackendService } from './backend.service';
 
 describe('BackendService', () => {
   let service: BackendService;
   let testController: HttpTestingController;
+  let notificationServiceMock;
 
   const FOLDER_MOCK = require('src/api/mock/folders/_1.json');
   const FOLDER_API = `${environment.apiUrl}${environment.apiFolderContext}`;
 
   beforeEach(() => {
+    notificationServiceMock = jasmine.createSpyObj(['showException']);
+
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule
+      ],
+      providers: [
+        { provide: NotificationService, useValue: notificationServiceMock }
       ]
     });
 
