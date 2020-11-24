@@ -19,29 +19,29 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 const modules = [
-  CommonModule,
-  MatSidenavModule,
-  MatToolbarModule,
-  MatIconModule,
-  MatListModule,
-  MatButtonModule,
-  MatGridListModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDialogModule,
-  MatStepperModule,
-  MatCardModule,
-  MatTableModule,
-  MatSortModule,
-  MatProgressSpinnerModule,
-  MatRippleModule,
-  MatSnackBarModule,
-  MatExpansionModule
+    CommonModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatCardModule,
+    MatTableModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
+    MatSnackBarModule,
+    MatExpansionModule
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [... modules],
-  exports: [... modules]
+    declarations: [],
+    imports: [... modules],
+    exports: [... modules]
 })
 export class AppMaterialModule { }

@@ -19,6 +19,7 @@ describe('FolderListDataSource', () => {
         instance.foldersLoading$.subscribe(res => {
             if (actualTest === true) {
                 actualTest = false;
+
                 expect(res).toBe(true);
                 done();
             }

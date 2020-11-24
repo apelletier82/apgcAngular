@@ -7,11 +7,11 @@ import { AppMaterialModule } from '../app-material.module';
 
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-    AppMaterialModule
-  ]
+    declarations: [HomeComponent],
+    imports: [
+        CommonModule,
+        HomeRoutingModule,
+        AppMaterialModule
+    ]
 })
 export class HomeModule { }

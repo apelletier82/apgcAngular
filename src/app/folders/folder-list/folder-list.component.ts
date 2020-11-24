@@ -5,30 +5,30 @@ import { FolderService } from '../folder.service';
 import { FolderListDataSource } from './folder-list-dataSource';
 
 @Component({
-  selector: 'apgc-folder-list',
-  templateUrl: './folder-list.component.html',
-  styleUrls: ['./folder-list.component.scss']
+    selector: 'apgc-folder-list',
+    templateUrl: './folder-list.component.html',
+    styleUrls: ['./folder-list.component.scss']
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
-  public readonly displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
-  folderDataSource: FolderListDataSource;
+    public readonly displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
+    folderDataSource: FolderListDataSource;
 
-  @ViewChild(MatSort)
-  sort: MatSort;
+    @ViewChild(MatSort)
+    sort: MatSort;
 
-  constructor(private folderService: FolderService) {
-    this.folderDataSource = new FolderListDataSource(this.folderService);
-  }
+    constructor(private folderService: FolderService) {
+        this.folderDataSource = new FolderListDataSource(this.folderService);
+    }
 
-  ngOnInit(): void {
-    this.folderDataSource.loadFolders();
-  }
+    ngOnInit(): void {
+        this.folderDataSource.loadFolders();
+    }
 
-  ngAfterViewInit(): void {
-    this.folderDataSource.sort = this.sort;
-  }
+    ngAfterViewInit(): void {
+        this.folderDataSource.sort = this.sort;
+    }
 
-  trackByFolderId(_: number, folder: Folder): any {
-    return folder.folderId;
-  }
+    trackByFolderId(_: number, folder: Folder): any {
+        return folder.folderId;
+    }
 }

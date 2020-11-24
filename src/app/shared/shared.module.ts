@@ -10,22 +10,22 @@ import { MenuIconCaptionComponent } from './components/menu-icon-caption/menu-ic
 
 
 const components = [
-  MenuIconCaptionComponent
+    MenuIconCaptionComponent
 ];
 
 const modules = [
-  CommonModule,
-  HttpClientModule,
-  AppMaterialModule,
-  AppRoutingModule,
-  DialogModule,
-  NotificationModule,
-  FoldersModule
+    CommonModule,
+    HttpClientModule,
+    AppMaterialModule,
+    AppRoutingModule,
+    DialogModule,
+    NotificationModule,
+    FoldersModule
 ];
 
 @NgModule({
-  declarations: [... components],
-  imports: [... modules],
-  exports: [... components]
+    declarations: [... components],
+    imports: [... modules],
+    exports: [... components]
 })
 export class SharedModule { }

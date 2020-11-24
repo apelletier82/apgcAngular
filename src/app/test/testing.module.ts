@@ -6,16 +6,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SharedModule } from '../shared/shared.module';
 
 const modules = [
-  CommonModule,
-  AppMaterialModule,
-  BrowserAnimationsModule,
-  RouterTestingModule,
-  SharedModule
+    CommonModule,
+    AppMaterialModule,
+    BrowserAnimationsModule,
+    RouterTestingModule,
+    SharedModule
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [... modules],
-  exports: [... modules]
+    declarations: [],
+    imports: [... modules],
+    exports: [... modules]
 })
 export class TestingModule { }

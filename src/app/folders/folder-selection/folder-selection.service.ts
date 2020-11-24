@@ -7,28 +7,28 @@ import { FolderSelection } from './folder-selection';
 import { FolderSelectionComponent } from './folder-selection.component';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FolderSelectionService {
 
-  constructor(public dialog: MatDialog, private appService: AppService) { }
+    constructor(public dialog: MatDialog, private appService: AppService) { }
 
-  openFolderSelectionDialog(folderSelection: FolderSelection): Observable<FolderSelection> {
-    const dialogRef = this.dialog.open(FolderSelectionComponent, {
-      data: { folderId: folderSelection?.folderId, yearId: folderSelection?.yearId }
-    });
+    openFolderSelectionDialog(folderSelection: FolderSelection): Observable<FolderSelection> {
+        const dialogRef = this.dialog.open(FolderSelectionComponent, {
+            data: { folderId: folderSelection?.folderId, yearId: folderSelection?.yearId }
+        });
 
-    return dialogRef.afterClosed().pipe(map(res => res ? res as FolderSelection : undefined));
-  }
+        return dialogRef.afterClosed().pipe(map(res => res ? res as FolderSelection : undefined));
+    }
 
-  selectApplicationFolder(folderSelection?: FolderSelection): Observable<FolderSelection> {
-    return this.openFolderSelectionDialog(folderSelection ?? { folderId: this.appService.folderId, yearId: this.appService.yearId })
-      .pipe(
-        tap(result => {
-          if (result) {
-            this.appService.updateAppFolderContext(result.folderId, result.yearId);
-          }
-        })
-      );
-  }
+    selectApplicationFolder(folderSelection?: FolderSelection): Observable<FolderSelection> {
+        return this.openFolderSelectionDialog(folderSelection ?? { folderId: this.appService.folderId, yearId: this.appService.yearId })
+            .pipe(
+                tap(result => {
+                    if (result) {
+                        this.appService.updateAppFolderContext(result.folderId, result.yearId);
+                    }
+                })
+            );
+    }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { DataSource } from '@angular/cdk/table';
 import { Folder } from '../folder';
 import { CollectionViewer } from '@angular/cdk/collections';
@@ -7,11 +8,11 @@ import { finalize, delay, catchError } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 
 export class FolderListDataSource implements DataSource<Folder> {
-    private _foldersSubject = new BehaviorSubject<Folder[]>([]);
-    private _folderSubjectLoading = new BehaviorSubject<boolean>(false);
+    private foldersSubject = new BehaviorSubject<Folder[]>([]);
+    private folderSubjectLoading = new BehaviorSubject<boolean>(false);
     private _sort: MatSort;
 
-    foldersLoading$ = this._folderSubjectLoading.asObservable();
+    foldersLoading$ = this.folderSubjectLoading.asObservable();
     get sort(): MatSort {
         return this._sort;
     }
@@ -23,11 +24,11 @@ export class FolderListDataSource implements DataSource<Folder> {
     constructor(private _folderService: FolderService) { }
 
     connect(collectionViewer: CollectionViewer): Observable<Folder[] | readonly Folder[]> {
-        return this._foldersSubject.asObservable();
+        return this.foldersSubject.asObservable();
     }
     disconnect(collectionViewer: CollectionViewer): void {
-        this._foldersSubject.complete();
-        this._folderSubjectLoading.complete();
+        this.foldersSubject.complete();
+        this.folderSubjectLoading.complete();
     }
 
     sortFolders(folders: Folder[]): Folder[] {
@@ -37,25 +38,25 @@ export class FolderListDataSource implements DataSource<Folder> {
             }
             const desc = this._sort.direction.toLocaleLowerCase() === 'desc' ? -1 : 1;
             switch (this._sort.active) {
-                case 'folderName':
-                    if (a && b) {
-                        return a.folderName.localeCompare(b.folderName) * desc;
-                    }
-                    break;
-                case 'folderLocation':
-                    if (a && a.address && b && b.address) {
-                        return a.address.city.localeCompare(b.address.city) * desc;
-                    }
-                    break;
-                default:
-                    return 0;
+            case 'folderName':
+                if (a && b) {
+                    return a.folderName.localeCompare(b.folderName) * desc;
+                }
+                break;
+            case 'folderLocation':
+                if (a && a.address && b && b.address) {
+                    return a.address.city.localeCompare(b.address.city) * desc;
+                }
+                break;
+            default:
+                return 0;
             }
             return 0;
         });
     }
 
     loadFolders(): void {
-        this._folderSubjectLoading.next(true);
+        this.folderSubjectLoading.next(true);
         try {
             const fakeObs = of(1);
 
@@ -63,16 +64,16 @@ export class FolderListDataSource implements DataSource<Folder> {
                 fakeObs.pipe(delay(250)),
                 this._folderService.getFolderList().pipe(catchError(() => of([])))
             ])
-            .pipe(finalize(() => this._folderSubjectLoading.next(false)))
-            .subscribe(([intv, flds]) => {
-                if (this._sort) {
-                    flds = this.sortFolders(flds);
-                }
-                this._foldersSubject.next(flds);
-            });
+                .pipe(finalize(() => this.folderSubjectLoading.next(false)))
+                .subscribe(([_, folders]) => {
+                    if (this._sort) {
+                        folders = this.sortFolders(folders);
+                    }
+                    this.foldersSubject.next(folders);
+                });
         }
         catch (error) {
-            this._folderSubjectLoading.next(false);
+            this.folderSubjectLoading.next(false);
             console.log(error);
         }
     }

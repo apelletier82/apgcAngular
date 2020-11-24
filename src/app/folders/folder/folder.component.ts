@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'apgc-folder',
-  templateUrl: './folder.component.html',
-  styleUrls: ['./folder.component.scss']
+    selector: 'apgc-folder',
+    templateUrl: './folder.component.html',
+    styleUrls: ['./folder.component.scss']
 })
-export class FolderComponent implements OnInit {
+export class FolderComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    constructor() { }
 }
