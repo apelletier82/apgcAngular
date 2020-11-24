@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
+import {
+    MatSnackBarRef,
+    MAT_SNACK_BAR_DATA,
+} from '@angular/material/snack-bar';
 import { TestingModule } from 'src/app/test/testing.module';
 import { NotificationConfigType } from './notification-config-type';
 
@@ -59,6 +62,8 @@ describe('SnackBarComponent', () => {
     });
 
     it('should have information css', () => {
-        expect(component.cssClass).toEqual('notification-container information');
+        expect(component.cssClass).toEqual(
+            'notification-container information'
+        );
     });
 });

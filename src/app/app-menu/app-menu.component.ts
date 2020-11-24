@@ -1,5 +1,11 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
+    ViewChild,
+} from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { AppService } from '../app.service';
 import { AppMenu } from './app-menu';
@@ -19,7 +25,10 @@ export class AppMenuComponent {
         return this._menu;
     }
 
-    constructor(private appMenuService: AppMenuService, public appService: AppService) {
+    constructor(
+        private appMenuService: AppMenuService,
+        public appService: AppService
+    ) {
         appMenuService.getMenu$().subscribe((result) => (this._menu = result));
     }
 

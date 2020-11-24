@@ -10,7 +10,13 @@ import { FolderListDataSource } from './folder-list-dataSource';
     styleUrls: ['./folder-list.component.scss'],
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
-    public readonly displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];
+    public readonly displayColumns = [
+        'folderLogo',
+        'folderName',
+        'folderCountry',
+        'folderLocation',
+        'actions',
+    ];
     folderDataSource: FolderListDataSource;
 
     @ViewChild(MatSort)

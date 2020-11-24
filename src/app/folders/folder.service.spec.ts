@@ -11,10 +11,14 @@ describe('FoldersService', () => {
     const FOLDER_MOCK: Folder = require('src/api/mock/folders/_1.json');
 
     beforeEach(() => {
-        backendServiceMock = jasmine.createSpyObj('backendServiceMock', ['get']);
+        backendServiceMock = jasmine.createSpyObj('backendServiceMock', [
+            'get',
+        ]);
         TestBed.configureTestingModule({
             imports: [],
-            providers: [{ provide: BackendService, useValue: backendServiceMock }],
+            providers: [
+                { provide: BackendService, useValue: backendServiceMock },
+            ],
         });
 
         service = TestBed.inject(FolderService);

@@ -8,7 +8,10 @@ import { NotificationService } from '../notification/notification.service';
     providedIn: 'root',
 })
 export class BackendService {
-    constructor(private httpClient: HttpClient, private notificationService: NotificationService) {}
+    constructor(
+        private httpClient: HttpClient,
+        private notificationService: NotificationService
+    ) {}
 
     public get<T>(apiUrl: string): Observable<T> {
         return this.httpClient.get<T>(apiUrl).pipe(
@@ -48,6 +51,9 @@ export class BackendService {
 
     private catchError(error: any) {
         console.log(error);
-        this.notificationService.showException('Data error', error?.message || '');
+        this.notificationService.showException(
+            'Data error',
+            error?.message || ''
+        );
     }
 }

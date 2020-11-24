@@ -8,7 +8,13 @@ import { DialogModule } from '../dialog/dialog.module';
 
 @NgModule({
     declarations: [NotificationComponent],
-    imports: [CommonModule, MatSnackBarModule, MatButtonModule, MatIconModule, DialogModule],
+    imports: [
+        CommonModule,
+        MatSnackBarModule,
+        MatButtonModule,
+        MatIconModule,
+        DialogModule,
+    ],
     exports: [NotificationComponent],
 })
 export class NotificationModule {}

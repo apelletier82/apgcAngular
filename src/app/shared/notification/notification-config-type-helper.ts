@@ -1,7 +1,9 @@
 import { NotificationConfigType } from './notification-config-type';
 
 export class NotificationConfigTypeCast {
-    public static toString(notificationConfigType: NotificationConfigType): string {
+    public static toString(
+        notificationConfigType: NotificationConfigType
+    ): string {
         let result = '';
 
         if (notificationConfigType) {

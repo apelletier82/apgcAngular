@@ -22,11 +22,16 @@ describe('SnackBarService', () => {
     });
 
     it('should show information', () => {
-        expect(service.showInformation('Test message', 'action').instance).toBeTruthy();
+        expect(
+            service.showInformation('Test message', 'action').instance
+        ).toBeTruthy();
     });
 
     it('should show success', () => {
-        expect(service.showSuccess('Test success', 'action').instance).toBeTruthy();
+        expect(
+            service.showSuccess('Test success', 'action').instance
+        ).toBeTruthy();
+
         expect(service.showSuccess('Test success').instance).toBeTruthy();
     });
 
@@ -39,7 +44,10 @@ describe('SnackBarService', () => {
     });
 
     it('should show exception', () => {
-        expect(service.showException('Test exception', 'exception message').instance).toBeTruthy();
+        expect(
+            service.showException('Test exception', 'exception message')
+                .instance
+        ).toBeTruthy();
     });
 
     it('should show component with close button', () => {

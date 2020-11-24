@@ -9,8 +9,12 @@ describe('FolderListDataSource', () => {
     const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
 
     beforeEach(() => {
-        folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList']);
-        folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
+        folderServiceMock = jasmine.createSpyObj('folderServiceMock', [
+            'getFolderList',
+        ]);
+        folderServiceMock.getFolderList.and.returnValue(
+            of<Folder[]>(FOLDERS_MOCK)
+        );
         instance = new FolderListDataSource(folderServiceMock);
     });
 

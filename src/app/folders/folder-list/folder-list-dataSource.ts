@@ -23,7 +23,9 @@ export class FolderListDataSource implements DataSource<Folder> {
 
     constructor(private _folderService: FolderService) {}
 
-    connect(collectionViewer: CollectionViewer): Observable<Folder[] | readonly Folder[]> {
+    connect(
+        collectionViewer: CollectionViewer
+    ): Observable<Folder[] | readonly Folder[]> {
         return this.foldersSubject.asObservable();
     }
     disconnect(collectionViewer: CollectionViewer): void {
@@ -36,7 +38,8 @@ export class FolderListDataSource implements DataSource<Folder> {
             if (!this._sort || this._sort?.direction === '') {
                 return 0;
             }
-            const desc = this._sort.direction.toLocaleLowerCase() === 'desc' ? -1 : 1;
+            const desc =
+                this._sort.direction.toLocaleLowerCase() === 'desc' ? -1 : 1;
             switch (this._sort.active) {
                 case 'folderName':
                     if (a && b) {
@@ -45,7 +48,9 @@ export class FolderListDataSource implements DataSource<Folder> {
                     break;
                 case 'folderLocation':
                     if (a && a.address && b && b.address) {
-                        return a.address.city.localeCompare(b.address.city) * desc;
+                        return (
+                            a.address.city.localeCompare(b.address.city) * desc
+                        );
                     }
                     break;
                 default:
@@ -60,7 +65,12 @@ export class FolderListDataSource implements DataSource<Folder> {
         try {
             const fakeObs = of(1);
 
-            forkJoin([fakeObs.pipe(delay(250)), this._folderService.getFolderList().pipe(catchError(() => of([])))])
+            forkJoin([
+                fakeObs.pipe(delay(250)),
+                this._folderService
+                    .getFolderList()
+                    .pipe(catchError(() => of([]))),
+            ])
                 .pipe(finalize(() => this.folderSubjectLoading.next(false)))
                 .subscribe(([_, folders]) => {
                     if (this._sort) {

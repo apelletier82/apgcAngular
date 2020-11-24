@@ -16,19 +16,30 @@ describe('FolderListComponent', () => {
 
     beforeEach(
         waitForAsync(() => {
-            folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList', 'getFolder']);
-            matSortMock = jasmine.createSpyObj('matSortMock', [], ['active', 'direction', 'disabled', 'start']);
+            folderServiceMock = jasmine.createSpyObj('folderServiceMock', [
+                'getFolderList',
+                'getFolder',
+            ]);
+            matSortMock = jasmine.createSpyObj(
+                'matSortMock',
+                [],
+                ['active', 'direction', 'disabled', 'start']
+            );
 
             TestBed.configureTestingModule({
                 declarations: [FolderListComponent, MatSort],
                 imports: [TestingModule],
-                providers: [{ provide: FolderService, useValue: folderServiceMock }],
+                providers: [
+                    { provide: FolderService, useValue: folderServiceMock },
+                ],
             }).compileComponents();
         })
     );
 
     beforeEach(() => {
-        folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
+        folderServiceMock.getFolderList.and.returnValue(
+            of<Folder[]>(FOLDERS_MOCK)
+        );
         fixture = TestBed.createComponent(FolderListComponent);
         component = fixture.componentInstance;
         // component.sort = matSortMock;

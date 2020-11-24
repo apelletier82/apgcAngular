@@ -11,6 +11,8 @@ export class DialogService {
     constructor(private matDialog: MatDialog) {}
 
     showDialog(dialogData: DialogData): Observable<any> {
-        return this.matDialog.open(DialogComponent, { data: dialogData }).afterClosed();
+        return this.matDialog
+            .open(DialogComponent, { data: dialogData })
+            .afterClosed();
     }
 }

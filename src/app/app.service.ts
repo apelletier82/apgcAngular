@@ -7,9 +7,15 @@ import * as localStorageConstant from './shared/constants/localStorage.constant'
 })
 export class AppService {
     private folderIdSubject = new BehaviorSubject<number>(
-        +localStorage?.getItem(localStorageConstant.storageAppContextFolderIdKeyName) ?? 0
+        +localStorage?.getItem(
+            localStorageConstant.storageAppContextFolderIdKeyName
+        ) ?? 0
     );
-    private yearIdSubject = new BehaviorSubject<number>(+localStorage?.getItem(localStorageConstant.storageAppContextYearIdKeyName) ?? 0);
+    private yearIdSubject = new BehaviorSubject<number>(
+        +localStorage?.getItem(
+            localStorageConstant.storageAppContextYearIdKeyName
+        ) ?? 0
+    );
 
     public get folderId$(): Observable<number> {
         return this.folderIdSubject.asObservable();
@@ -33,7 +39,13 @@ export class AppService {
         this.folderIdSubject.next(folderId);
         this.yearIdSubject.next(yearId);
 
-        localStorage.setItem(localStorageConstant.storageAppContextFolderIdKeyName, folderId.toString());
-        localStorage.setItem(localStorageConstant.storageAppContextYearIdKeyName, yearId.toString());
+        localStorage.setItem(
+            localStorageConstant.storageAppContextFolderIdKeyName,
+            folderId.toString()
+        );
+        localStorage.setItem(
+            localStorageConstant.storageAppContextYearIdKeyName,
+            yearId.toString()
+        );
     }
 }

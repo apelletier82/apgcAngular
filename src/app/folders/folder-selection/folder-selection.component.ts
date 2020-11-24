@@ -22,7 +22,9 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     private selectFolderIdFormValueChangeSubscription: Subscription;
 
     foldersSubject: BehaviorSubject<Folder[]> = new BehaviorSubject([]);
-    selectedFolderYearsSubject: BehaviorSubject<FolderYear[]> = new BehaviorSubject([]);
+    selectedFolderYearsSubject: BehaviorSubject<
+        FolderYear[]
+    > = new BehaviorSubject([]);
 
     // #region selectFolderForm
     selectFolderForm = new FormGroup({
@@ -58,7 +60,8 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
         };
     }
 
-    @ViewChild(MatVerticalStepper, { static: true }) stepper: MatVerticalStepper;
+    @ViewChild(MatVerticalStepper, { static: true })
+    stepper: MatVerticalStepper;
 
     constructor(
         private folderService: FolderService, // public dialogRef: MatDialogRef<FolderSelectionComponent>,
@@ -75,30 +78,46 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.getFolderListSubscription = this.folderService.getFolderList().subscribe((res) => {
-            this.foldersSubject.next(res);
-            this.originalFolders = res;
-        });
+        this.getFolderListSubscription = this.folderService
+            .getFolderList()
+            .subscribe((res) => {
+                this.foldersSubject.next(res);
+                this.originalFolders = res;
+            });
 
-        this.selectFolderIdFormValueChangeSubscription = this.selectFolderIdForm.get('selectedFolderId').valueChanges.subscribe((value) => {
-            this.selectYearIdForm.setValue({ selectedYearId: [] });
-            if (value?.length > 0 && +value !== 0) {
-                this.folderService.getFolderYears(+value).subscribe((years) => this.selectedFolderYearsSubject.next(years || []));
-            } else {
-                this.selectedFolderYearsSubject.next([]);
-            }
-        });
+        this.selectFolderIdFormValueChangeSubscription = this.selectFolderIdForm
+            .get('selectedFolderId')
+            .valueChanges.subscribe((value) => {
+                this.selectYearIdForm.setValue({ selectedYearId: [] });
+                if (value?.length > 0 && +value !== 0) {
+                    this.folderService
+                        .getFolderYears(+value)
+                        .subscribe((years) =>
+                            this.selectedFolderYearsSubject.next(years || [])
+                        );
+                } else {
+                    this.selectedFolderYearsSubject.next([]);
+                }
+            });
 
-        this.selectedFolderYearsSubscription = this.selectedFolderYearsSubject.asObservable().subscribe((years) => {
-            if (years?.length > 0 && this.initializing === false) {
-                this.stepper?.next();
-            }
-        });
+        this.selectedFolderYearsSubscription = this.selectedFolderYearsSubject
+            .asObservable()
+            .subscribe((years) => {
+                if (years?.length > 0 && this.initializing === false) {
+                    this.stepper?.next();
+                }
+            });
 
         // Has to be initialized as array
         this.selectFolderForm.setValue({
-            selectFolderIdForm: { selectedFolderId: this.data?.folderId ? [this.data.folderId] : [] },
-            selectYearIdForm: { selectedYearId: this.data?.yearId ? [this.data.yearId] : [] },
+            selectFolderIdForm: {
+                selectedFolderId: this.data?.folderId
+                    ? [this.data.folderId]
+                    : [],
+            },
+            selectYearIdForm: {
+                selectedYearId: this.data?.yearId ? [this.data.yearId] : [],
+            },
         });
 
         setTimeout((_) => (this.initializing = false), 250);
@@ -106,6 +125,13 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
 
     applyFolderFilter(event: Event): void {
         const filterValueLowercase = (event.target as HTMLInputElement).value.toLocaleLowerCase();
-        this.foldersSubject.next(this.originalFolders.filter((f) => f.folderName.toLocaleLowerCase().indexOf(filterValueLowercase) > -1));
+        this.foldersSubject.next(
+            this.originalFolders.filter(
+                (f) =>
+                    f.folderName
+                        .toLocaleLowerCase()
+                        .indexOf(filterValueLowercase) > -1
+            )
+        );
     }
 }

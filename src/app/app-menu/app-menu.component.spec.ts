@@ -16,7 +16,9 @@ describe('AppMenuComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [AppMenuComponent],
             imports: [TestingModule],
-            providers: [{ provide: BackendService, useValue: backendServiceMock }],
+            providers: [
+                { provide: BackendService, useValue: backendServiceMock },
+            ],
         }).compileComponents();
     });
 

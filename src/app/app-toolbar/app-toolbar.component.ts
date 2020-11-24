@@ -1,5 +1,12 @@
 /* eslint-disable no-underscore-dangle */
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    Input,
+    Output,
+    EventEmitter,
+    OnDestroy,
+} from '@angular/core';
 import { FolderService } from '../folders/folder.service';
 import { FolderSelectionService } from 'src/app/folders/folder-selection/folder-selection.service';
 import { Subscription } from 'rxjs';
@@ -64,15 +71,23 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.folderSubscription = this.appService.folderId$.subscribe((folderId) => {
-            if (folderId || 0 !== 0) {
-                this.folderService.getFolder(folderId).subscribe((folder) => this.updateFolderInformation(folder));
+        this.folderSubscription = this.appService.folderId$.subscribe(
+            (folderId) => {
+                if (folderId || 0 !== 0) {
+                    this.folderService
+                        .getFolder(folderId)
+                        .subscribe((folder) =>
+                            this.updateFolderInformation(folder)
+                        );
+                }
             }
-        });
+        );
 
         this.yearSubscription = this.appService.yearId$.subscribe((yearId) => {
             if (this.appService.folderId || (0 !== 0 && yearId) || 0 !== 0) {
-                this.folderService.getFolderYear(this.appService.folderId, yearId).subscribe((year) => this.updateYearInformation(year));
+                this.folderService
+                    .getFolderYear(this.appService.folderId, yearId)
+                    .subscribe((year) => this.updateYearInformation(year));
             }
         });
     }

@@ -13,11 +13,15 @@ export class FolderService {
     constructor(private backendService: BackendService) {}
 
     getFolderList(): Observable<Folder[]> {
-        return this.backendService.get<Folder[]>(`${environment.apiUrl}${environment.apiFolderContext}/list`);
+        return this.backendService.get<Folder[]>(
+            `${environment.apiUrl}${environment.apiFolderContext}/list`
+        );
     }
 
     getFolder(folderId: number): Observable<Folder> {
-        return this.backendService.get<Folder>(`${environment.apiUrl}${environment.apiFolderContext}/${folderId}`);
+        return this.backendService.get<Folder>(
+            `${environment.apiUrl}${environment.apiFolderContext}/${folderId}`
+        );
     }
 
     getFolderYears(folderId: number): Observable<FolderYear[]> {
@@ -25,6 +29,8 @@ export class FolderService {
     }
 
     getFolderYear(folderId: number, yearId: number): Observable<FolderYear> {
-        return this.getFolderYears(folderId).pipe(map((years) => years.find((item) => item.yearId === yearId)));
+        return this.getFolderYears(folderId).pipe(
+            map((years) => years.find((item) => item.yearId === yearId))
+        );
     }
 }

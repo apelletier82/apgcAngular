@@ -1,4 +1,7 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+    HttpClientTestingModule,
+    HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Folder } from 'src/app/folders/folder';
 import { environment } from 'src/environments/environment';
@@ -19,7 +22,12 @@ describe('BackendService', () => {
 
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
-            providers: [{ provide: NotificationService, useValue: notificationServiceMock }],
+            providers: [
+                {
+                    provide: NotificationService,
+                    useValue: notificationServiceMock,
+                },
+            ],
         });
 
         testController = TestBed.inject(HttpTestingController);
@@ -81,7 +89,10 @@ describe('BackendService', () => {
             expect(result).toBeTruthy();
             done();
         });
-        const req = testController.expectOne({ method: 'DELETE', url: `${FOLDER_API}/1` });
+        const req = testController.expectOne({
+            method: 'DELETE',
+            url: `${FOLDER_API}/1`,
+        });
         req.flush([true]);
     });
 });

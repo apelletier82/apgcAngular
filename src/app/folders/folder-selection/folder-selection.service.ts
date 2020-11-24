@@ -12,21 +12,36 @@ import { FolderSelectionComponent } from './folder-selection.component';
 export class FolderSelectionService {
     constructor(public dialog: MatDialog, private appService: AppService) {}
 
-    openFolderSelectionDialog(folderSelection: FolderSelection): Observable<FolderSelection> {
+    openFolderSelectionDialog(
+        folderSelection: FolderSelection
+    ): Observable<FolderSelection> {
         const dialogRef = this.dialog.open(FolderSelectionComponent, {
-            data: { folderId: folderSelection?.folderId, yearId: folderSelection?.yearId },
+            data: {
+                folderId: folderSelection?.folderId,
+                yearId: folderSelection?.yearId,
+            },
         });
 
-        return dialogRef.afterClosed().pipe(map((res) => (res ? (res as FolderSelection) : undefined)));
+        return dialogRef
+            .afterClosed()
+            .pipe(map((res) => (res ? (res as FolderSelection) : undefined)));
     }
 
-    selectApplicationFolder(folderSelection?: FolderSelection): Observable<FolderSelection> {
+    selectApplicationFolder(
+        folderSelection?: FolderSelection
+    ): Observable<FolderSelection> {
         return this.openFolderSelectionDialog(
-            folderSelection ?? { folderId: this.appService.folderId, yearId: this.appService.yearId }
+            folderSelection ?? {
+                folderId: this.appService.folderId,
+                yearId: this.appService.yearId,
+            }
         ).pipe(
             tap((result) => {
                 if (result) {
-                    this.appService.updateAppFolderContext(result.folderId, result.yearId);
+                    this.appService.updateAppFolderContext(
+                        result.folderId,
+                        result.yearId
+                    );
                 }
             })
         );

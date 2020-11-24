@@ -13,7 +13,9 @@ describe('AppMenuService', () => {
         backendServiceMock = jasmine.createSpyObj(['get']);
         TestBed.configureTestingModule({
             imports: [TestingModule],
-            providers: [{ provide: BackendService, useValue: backendServiceMock }],
+            providers: [
+                { provide: BackendService, useValue: backendServiceMock },
+            ],
         });
         service = TestBed.inject(AppMenuService);
     });

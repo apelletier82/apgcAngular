@@ -29,9 +29,11 @@ export class AppMenuService implements OnDestroy {
     getMenu$(): Observable<AppMenu> {
         return this.menuSubject?.value
             ? this.menuSubject.asObservable()
-            : this.backendService.get<AppMenu>(`${environment.assets}${environment.menu}`).pipe(
-                  tap((result) => this.menuSubject.next(result)),
-                  map((result) => result ?? this.emptyMenu)
-              );
+            : this.backendService
+                  .get<AppMenu>(`${environment.assets}${environment.menu}`)
+                  .pipe(
+                      tap((result) => this.menuSubject.next(result)),
+                      map((result) => result ?? this.emptyMenu)
+                  );
     }
 }

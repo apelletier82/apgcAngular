@@ -20,7 +20,11 @@ describe('FolderSelectionComponent', () => {
     beforeEach(
         waitForAsync(() => {
             mockDialogRef = { close: jasmine.createSpy('close') };
-            folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList', 'getFolder', 'getFolderYears']);
+            folderServiceMock = jasmine.createSpyObj('folderServiceMock', [
+                'getFolderList',
+                'getFolder',
+                'getFolderYears',
+            ]);
             TestBed.configureTestingModule({
                 declarations: [FolderSelectionComponent],
                 imports: [FoldersModule, TestingModule],
@@ -40,9 +44,15 @@ describe('FolderSelectionComponent', () => {
         folderData.folderId = undefined;
         folderData.yearId = undefined;
 
-        folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
-        folderServiceMock.getFolder.and.returnValue(of<Folder>(FOLDERS_MOCK[0]));
-        folderServiceMock.getFolderYears.and.returnValue(of(FOLDERS_MOCK[0]).pipe(map((result) => (result as Folder).years)));
+        folderServiceMock.getFolderList.and.returnValue(
+            of<Folder[]>(FOLDERS_MOCK)
+        );
+        folderServiceMock.getFolder.and.returnValue(
+            of<Folder>(FOLDERS_MOCK[0])
+        );
+        folderServiceMock.getFolderYears.and.returnValue(
+            of(FOLDERS_MOCK[0]).pipe(map((result) => (result as Folder).years))
+        );
 
         fixture.detectChanges();
     });
