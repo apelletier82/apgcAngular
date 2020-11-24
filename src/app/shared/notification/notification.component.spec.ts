@@ -14,28 +14,23 @@ describe('SnackBarComponent', () => {
         type: NotificationConfigType.information,
         description: 'test snackbar',
         action: 'action',
-        showCloseButton: true
+        showCloseButton: true,
     };
 
     const snackBarRefValue = {
-        dismiss: () => { },
-        dismissWithAction: () => { }
+        dismiss: () => {},
+        dismissWithAction: () => {},
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                NotificationComponent
-            ],
-            imports: [
-                TestingModule
-            ],
+            declarations: [NotificationComponent],
+            imports: [TestingModule],
             providers: [
                 { provide: MatSnackBarRef, useValue: snackBarRefValue },
-                { provide: MAT_SNACK_BAR_DATA, useValue: snackBarDataValue }
-            ]
-        })
-            .compileComponents();
+                { provide: MAT_SNACK_BAR_DATA, useValue: snackBarDataValue },
+            ],
+        }).compileComponents();
     });
 
     beforeEach(() => {

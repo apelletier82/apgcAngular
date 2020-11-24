@@ -16,7 +16,7 @@ describe('FolderListDataSource', () => {
 
     it('should load folders', (done: DoneFn) => {
         let actualTest = false;
-        instance.foldersLoading$.subscribe(res => {
+        instance.foldersLoading$.subscribe((res) => {
             if (actualTest === true) {
                 actualTest = false;
 
@@ -29,7 +29,7 @@ describe('FolderListDataSource', () => {
     });
 
     it('should connect', (done: DoneFn) => {
-        instance.connect(null).subscribe(res => {
+        instance.connect(null).subscribe((res) => {
             expect(res).toBeDefined();
             expect(res.length).toBe(0);
             done();
@@ -37,7 +37,7 @@ describe('FolderListDataSource', () => {
     });
 
     it('should disconnect', (done: DoneFn) => {
-        instance.foldersLoading$.subscribe(res => {
+        instance.foldersLoading$.subscribe((res) => {
             expect(res).toBe(false);
             done();
         });

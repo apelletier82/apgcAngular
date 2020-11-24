@@ -6,7 +6,7 @@ import { NotificationConfigTypeCast } from './notification-config-type-helper';
 @Component({
     selector: 'apgc-notification',
     templateUrl: './notification.component.html',
-    styleUrls: ['./notification.component.scss']
+    styleUrls: ['./notification.component.scss'],
 })
 export class NotificationComponent {
     private readonly notificationContainerCssClass = 'notification-container';
@@ -16,10 +16,7 @@ export class NotificationComponent {
         return this.notificationContainerCssClass.concat(' ').concat(result).trim();
     }
 
-    constructor(
-        private snackBarRef: MatSnackBarRef<NotificationComponent>,
-        @Inject(MAT_SNACK_BAR_DATA) public data: NotificationConfig)
-    { }
+    constructor(private snackBarRef: MatSnackBarRef<NotificationComponent>, @Inject(MAT_SNACK_BAR_DATA) public data: NotificationConfig) {}
 
     close(): void {
         this.snackBarRef.dismiss();

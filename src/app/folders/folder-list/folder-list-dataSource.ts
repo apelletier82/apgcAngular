@@ -21,7 +21,7 @@ export class FolderListDataSource implements DataSource<Folder> {
         this._sort.sortChange.subscribe(() => this.loadFolders());
     }
 
-    constructor(private _folderService: FolderService) { }
+    constructor(private _folderService: FolderService) {}
 
     connect(collectionViewer: CollectionViewer): Observable<Folder[] | readonly Folder[]> {
         return this.foldersSubject.asObservable();
@@ -38,18 +38,18 @@ export class FolderListDataSource implements DataSource<Folder> {
             }
             const desc = this._sort.direction.toLocaleLowerCase() === 'desc' ? -1 : 1;
             switch (this._sort.active) {
-            case 'folderName':
-                if (a && b) {
-                    return a.folderName.localeCompare(b.folderName) * desc;
-                }
-                break;
-            case 'folderLocation':
-                if (a && a.address && b && b.address) {
-                    return a.address.city.localeCompare(b.address.city) * desc;
-                }
-                break;
-            default:
-                return 0;
+                case 'folderName':
+                    if (a && b) {
+                        return a.folderName.localeCompare(b.folderName) * desc;
+                    }
+                    break;
+                case 'folderLocation':
+                    if (a && a.address && b && b.address) {
+                        return a.address.city.localeCompare(b.address.city) * desc;
+                    }
+                    break;
+                default:
+                    return 0;
             }
             return 0;
         });
@@ -60,10 +60,7 @@ export class FolderListDataSource implements DataSource<Folder> {
         try {
             const fakeObs = of(1);
 
-            forkJoin([
-                fakeObs.pipe(delay(250)),
-                this._folderService.getFolderList().pipe(catchError(() => of([])))
-            ])
+            forkJoin([fakeObs.pipe(delay(250)), this._folderService.getFolderList().pipe(catchError(() => of([])))])
                 .pipe(finalize(() => this.folderSubjectLoading.next(false)))
                 .subscribe(([_, folders]) => {
                     if (this._sort) {
@@ -71,11 +68,9 @@ export class FolderListDataSource implements DataSource<Folder> {
                     }
                     this.foldersSubject.next(folders);
                 });
-        }
-        catch (error) {
+        } catch (error) {
             this.folderSubjectLoading.next(false);
             console.log(error);
         }
     }
-
 }

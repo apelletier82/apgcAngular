@@ -14,28 +14,23 @@ describe('AppMenuComponent', () => {
     beforeEach(async () => {
         backendServiceMock = jasmine.createSpyObj(['get']);
         await TestBed.configureTestingModule({
-            declarations: [
-                AppMenuComponent
-            ],
-            imports: [
-                TestingModule
-            ],
-            providers: [
-                { provide: BackendService, useValue: backendServiceMock }
-            ]
-        })
-            .compileComponents();
+            declarations: [AppMenuComponent],
+            imports: [TestingModule],
+            providers: [{ provide: BackendService, useValue: backendServiceMock }],
+        }).compileComponents();
     });
 
     beforeEach(() => {
-        backendServiceMock.get.and.returnValue(of({
-            home: {
-                id: 1,
-                caption: '',
-                routerLink: 'home'
-            },
-            categories: []
-        }));
+        backendServiceMock.get.and.returnValue(
+            of({
+                home: {
+                    id: 1,
+                    caption: '',
+                    routerLink: 'home',
+                },
+                categories: [],
+            })
+        );
 
         fixture = TestBed.createComponent(AppMenuComponent);
         component = fixture.componentInstance;
@@ -45,7 +40,6 @@ describe('AppMenuComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
 
     it('should click on item', (done) => {
         component.menuItemClick.subscribe(() => {

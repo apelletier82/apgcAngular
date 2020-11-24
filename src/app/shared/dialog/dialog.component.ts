@@ -5,8 +5,8 @@ import { DialogData } from './dialog-data';
 @Component({
     selector: 'apgc-dialog',
     templateUrl: './dialog.component.html',
-    styleUrls: ['./dialog.component.scss']
+    styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
-    constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

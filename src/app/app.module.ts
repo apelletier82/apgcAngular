@@ -12,20 +12,9 @@ import { AppToolbarComponent } from './app-toolbar/app-toolbar.component';
 import { AppMenuComponent } from './app-menu/app-menu.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        AppToolbarComponent,
-        AppMenuComponent,
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AppMaterialModule,
-        SharedModule,
-        FoldersModule
-    ],
+    declarations: [AppComponent, AppToolbarComponent, AppMenuComponent],
+    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, AppMaterialModule, SharedModule, FoldersModule],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

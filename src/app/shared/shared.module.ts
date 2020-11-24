@@ -8,24 +8,13 @@ import { DialogModule } from './dialog/dialog.module';
 import { NotificationModule } from './notification/notification.module';
 import { MenuIconCaptionComponent } from './components/menu-icon-caption/menu-icon-caption.component';
 
+const components = [MenuIconCaptionComponent];
 
-const components = [
-    MenuIconCaptionComponent
-];
-
-const modules = [
-    CommonModule,
-    HttpClientModule,
-    AppMaterialModule,
-    AppRoutingModule,
-    DialogModule,
-    NotificationModule,
-    FoldersModule
-];
+const modules = [CommonModule, HttpClientModule, AppMaterialModule, AppRoutingModule, DialogModule, NotificationModule, FoldersModule];
 
 @NgModule({
-    declarations: [... components],
-    imports: [... modules],
-    exports: [... components]
+    declarations: [...components],
+    imports: [...modules],
+    exports: [...components],
 })
-export class SharedModule { }
+export class SharedModule {}

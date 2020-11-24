@@ -8,19 +8,10 @@ import { HomeComponent } from './home/home/home.component';
 const emptyRoute: Route = { path: '', component: HomeComponent, pathMatch: 'full' };
 const errorRoute: Route = { path: '***', component: HomeComponent, pathMatch: 'full' };
 
-const routes: Routes = []
-    .concat(homeRoutes)
-    .concat(contactRoutes)
-    .concat(folderRoutes)
-    .concat([emptyRoute, errorRoute]);
+const routes: Routes = [].concat(homeRoutes).concat(contactRoutes).concat(folderRoutes).concat([emptyRoute, errorRoute]);
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes),
-        HomeRoutingModule,
-        ContactsRoutingModule,
-        FoldersRoutingModule
-    ],
-    exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes), HomeRoutingModule, ContactsRoutingModule, FoldersRoutingModule],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -13,12 +13,8 @@ describe('FoldersService', () => {
     beforeEach(() => {
         backendServiceMock = jasmine.createSpyObj('backendServiceMock', ['get']);
         TestBed.configureTestingModule({
-            imports: [
-
-            ],
-            providers: [
-                { provide: BackendService, useValue: backendServiceMock }
-            ]
+            imports: [],
+            providers: [{ provide: BackendService, useValue: backendServiceMock }],
         });
 
         service = TestBed.inject(FolderService);
@@ -31,7 +27,7 @@ describe('FoldersService', () => {
     it('should get one folderYear', (done) => {
         const folder$ = of<Folder>(FOLDER_MOCK);
         backendServiceMock.get.and.returnValue(folder$);
-        service.getFolderYear(1, 1).subscribe(value => {
+        service.getFolderYear(1, 1).subscribe((value) => {
             expect(value).toBeTruthy();
             expect(value.yearId).toBe(1);
             done();

@@ -32,7 +32,7 @@ module.exports = {
         "@angular-eslint/eslint-plugin-template",
         "eslint-plugin-prefer-arrow",
         "@typescript-eslint",
-        "@typescript-eslint/tslint",
+        "@typescript-eslint/tslint",        
         "jasmine"
     ],
     "overrides": [
@@ -50,7 +50,21 @@ module.exports = {
             rules: {
               '@typescript-eslint/no-unused-vars': 'off'
             }
-          }
+        },
+        {
+            files: ["*.ts"],
+            parserOptions: {
+                project: [
+                    "tsconfig.*?.json",
+                    "e2e/tsconfig.json"
+                ]
+            },
+            extends: [
+                "plugin:@angular-eslint/recommended",
+                "prettier/@typescript-eslint",
+                "plugin:prettier/recommended"                
+            ]
+        }
     ],
     "rules": {
         "@angular-eslint/component-class-suffix": "error",

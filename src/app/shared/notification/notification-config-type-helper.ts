@@ -7,8 +7,7 @@ export class NotificationConfigTypeCast {
         if (notificationConfigType) {
             try {
                 result = NotificationConfigType[notificationConfigType];
-            }
-            catch {
+            } catch {
                 result = '';
             }
         }

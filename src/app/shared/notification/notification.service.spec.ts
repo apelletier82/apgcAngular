@@ -11,9 +11,7 @@ describe('SnackBarService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                TestingModule
-            ]
+            imports: [TestingModule],
         });
         snackBar = TestBed.inject(MatSnackBar);
         service = TestBed.inject(NotificationService);
@@ -45,51 +43,56 @@ describe('SnackBarService', () => {
     });
 
     it('should show component with close button', () => {
-        expect(service.showApgcNotification(
-            {
+        expect(
+            service.showApgcNotification({
                 message: 'APGC Message',
                 action: 'Action',
-                showCloseButton: true
-            }).instance).toBeTruthy();
+                showCloseButton: true,
+            }).instance
+        ).toBeTruthy();
     });
 
     it('should show information component with close button', () => {
-        expect(service.showApgcNotification(
-            {
+        expect(
+            service.showApgcNotification({
                 type: NotificationConfigType.information,
                 message: 'APGC Information',
                 action: 'Ok',
-                showCloseButton: true
-            }).instance).toBeTruthy();
+                showCloseButton: true,
+            }).instance
+        ).toBeTruthy();
     });
 
     it('should show success component with close button', () => {
-        expect(service.showApgcNotification(
-            {
+        expect(
+            service.showApgcNotification({
                 type: NotificationConfigType.success,
                 message: 'APGC Successful test',
                 action: 'Ok',
-                showCloseButton: true
-            }).instance).toBeTruthy();
+                showCloseButton: true,
+            }).instance
+        ).toBeTruthy();
     });
 
     it('should show warning component with close button', () => {
-        expect(service.showApgcNotification(
-            {
+        expect(
+            service.showApgcNotification({
                 type: NotificationConfigType.warning,
                 message: 'APGC Warning test',
                 action: 'Ok',
-                showCloseButton: true
-            }).instance).toBeTruthy();
+                showCloseButton: true,
+            }).instance
+        ).toBeTruthy();
     });
 
     it('should show error component with close button', () => {
-        expect(service.showApgcNotification(
-            {
+        expect(
+            service.showApgcNotification({
                 type: NotificationConfigType.error,
                 message: 'APGC Error test',
                 action: 'Ok',
-                showCloseButton: true
-            }).instance).toBeTruthy();
+                showCloseButton: true,
+            }).instance
+        ).toBeTruthy();
     });
 });

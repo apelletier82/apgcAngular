@@ -12,22 +12,15 @@ describe('DialogComponent', () => {
     const dialogData: DialogData = {
         title: 'Dialog title',
         description: 'Dialog description',
-        actions: [{ action: 'Cancel' }, { action: 'Ok', default: true }]
+        actions: [{ action: 'Cancel' }, { action: 'Ok', default: true }],
     };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                TestingModule
-            ],
-            declarations: [
-                DialogComponent
-            ],
-            providers: [
-                { provide: MAT_DIALOG_DATA, useValue: dialogData }
-            ]
-        })
-            .compileComponents();
+            imports: [TestingModule],
+            declarations: [DialogComponent],
+            providers: [{ provide: MAT_DIALOG_DATA, useValue: dialogData }],
+        }).compileComponents();
     });
 
     beforeEach(() => {

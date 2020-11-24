@@ -10,7 +10,7 @@ import { FolderYear } from 'src/app/folders/folder-year';
 @Component({
     selector: 'apgc-app-toolbar',
     templateUrl: './app-toolbar.component.html',
-    styleUrls: ['./app-toolbar.component.scss']
+    styleUrls: ['./app-toolbar.component.scss'],
 })
 export class AppToolbarComponent implements OnInit, OnDestroy {
     private _folderId: number;
@@ -44,8 +44,8 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
     constructor(
         private folderService: FolderService,
         private folderSelectionService: FolderSelectionService,
-        private appService: AppService) {
-    }
+        private appService: AppService
+    ) {}
 
     private updateFolderInformation(folder: Folder) {
         this._folderId = folder.folderId;
@@ -64,17 +64,15 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.folderSubscription = this.appService.folderId$.subscribe(folderId => {
+        this.folderSubscription = this.appService.folderId$.subscribe((folderId) => {
             if (folderId || 0 !== 0) {
-                this.folderService.getFolder(folderId).subscribe(folder =>
-                    this.updateFolderInformation(folder));
+                this.folderService.getFolder(folderId).subscribe((folder) => this.updateFolderInformation(folder));
             }
         });
 
-        this.yearSubscription = this.appService.yearId$.subscribe(yearId => {
-            if (this.appService.folderId || 0 !== 0 && yearId || 0 !== 0) {
-                this.folderService.getFolderYear(this.appService.folderId, yearId).subscribe(year =>
-                    this.updateYearInformation(year));
+        this.yearSubscription = this.appService.yearId$.subscribe((yearId) => {
+            if (this.appService.folderId || (0 !== 0 && yearId) || 0 !== 0) {
+                this.folderService.getFolderYear(this.appService.folderId, yearId).subscribe((year) => this.updateYearInformation(year));
             }
         });
     }

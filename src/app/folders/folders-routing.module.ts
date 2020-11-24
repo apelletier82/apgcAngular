@@ -5,11 +5,11 @@ import { FolderComponent } from './folder/folder.component';
 
 export const folderRoutes: Routes = [
     { path: 'folders', component: FolderListComponent },
-    { path: 'folders/:id', component: FolderComponent }
+    { path: 'folders/:id', component: FolderComponent },
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(folderRoutes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class FoldersRoutingModule { }
+export class FoldersRoutingModule {}

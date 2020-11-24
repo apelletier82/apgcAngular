@@ -14,19 +14,18 @@ describe('FolderListComponent', () => {
     let matSortMock;
     const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
 
-    beforeEach(waitForAsync(() => {
-        folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList', 'getFolder']);
-        matSortMock = jasmine.createSpyObj('matSortMock', [], ['active', 'direction', 'disabled', 'start']);
+    beforeEach(
+        waitForAsync(() => {
+            folderServiceMock = jasmine.createSpyObj('folderServiceMock', ['getFolderList', 'getFolder']);
+            matSortMock = jasmine.createSpyObj('matSortMock', [], ['active', 'direction', 'disabled', 'start']);
 
-        TestBed.configureTestingModule({
-            declarations: [FolderListComponent, MatSort],
-            imports: [
-                TestingModule
-            ],
-            providers: [{ provide: FolderService, useValue: folderServiceMock }, ]
+            TestBed.configureTestingModule({
+                declarations: [FolderListComponent, MatSort],
+                imports: [TestingModule],
+                providers: [{ provide: FolderService, useValue: folderServiceMock }],
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
@@ -48,7 +47,7 @@ describe('FolderListComponent', () => {
     });
 
     it('should init', (done: DoneFn) => {
-        component.folderDataSource.foldersLoading$.subscribe(res => {
+        component.folderDataSource.foldersLoading$.subscribe((res) => {
             expect(res).toBe(true);
             done();
         });

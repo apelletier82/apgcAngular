@@ -4,9 +4,9 @@ import { AppService } from './app.service';
 @Component({
     selector: 'apgc-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss']
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
     title = 'apgc';
-    constructor(public appService: AppService) { }
+    constructor(public appService: AppService) {}
 }

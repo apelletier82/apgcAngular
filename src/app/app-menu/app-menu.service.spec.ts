@@ -12,12 +12,8 @@ describe('AppMenuService', () => {
     beforeEach(() => {
         backendServiceMock = jasmine.createSpyObj(['get']);
         TestBed.configureTestingModule({
-            imports: [
-                TestingModule
-            ],
-            providers: [
-                { provide: BackendService, useValue: backendServiceMock }
-            ]
+            imports: [TestingModule],
+            providers: [{ provide: BackendService, useValue: backendServiceMock }],
         });
         service = TestBed.inject(AppMenuService);
     });
@@ -32,13 +28,13 @@ describe('AppMenuService', () => {
                 id: 1,
                 caption: 'Home',
                 icon: 'home',
-                routerLink: 'home'
+                routerLink: 'home',
             },
-            categories: []
+            categories: [],
         };
 
         backendServiceMock.get.and.returnValue(of(menu));
-        service.getMenu$().subscribe(result => {
+        service.getMenu$().subscribe((result) => {
             expect(result).toBeTruthy();
             done();
         });

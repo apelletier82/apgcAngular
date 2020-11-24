@@ -8,16 +8,14 @@ describe('AppToolbarComponent', () => {
     let component: AppToolbarComponent;
     let fixture: ComponentFixture<AppToolbarComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [AppToolbarComponent],
-            imports: [
-                FoldersModule,
-                TestingModule
-            ]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [AppToolbarComponent],
+                imports: [FoldersModule, TestingModule],
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AppToolbarComponent);

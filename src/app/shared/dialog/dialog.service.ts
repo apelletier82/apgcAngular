@@ -5,11 +5,10 @@ import { DialogData } from './dialog-data';
 import { DialogComponent } from './dialog.component';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DialogService {
-
-    constructor(private matDialog: MatDialog) { }
+    constructor(private matDialog: MatDialog) {}
 
     showDialog(dialogData: DialogData): Observable<any> {
         return this.matDialog.open(DialogComponent, { data: dialogData }).afterClosed();

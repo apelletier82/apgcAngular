@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule, } from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -16,7 +16,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const modules = [
     CommonModule,
@@ -36,12 +36,12 @@ const modules = [
     MatProgressSpinnerModule,
     MatRippleModule,
     MatSnackBarModule,
-    MatExpansionModule
+    MatExpansionModule,
 ];
 
 @NgModule({
     declarations: [],
-    imports: [... modules],
-    exports: [... modules]
+    imports: [...modules],
+    exports: [...modules],
 })
-export class AppMaterialModule { }
+export class AppMaterialModule {}

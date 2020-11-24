@@ -7,7 +7,7 @@ import { FolderListDataSource } from './folder-list-dataSource';
 @Component({
     selector: 'apgc-folder-list',
     templateUrl: './folder-list.component.html',
-    styleUrls: ['./folder-list.component.scss']
+    styleUrls: ['./folder-list.component.scss'],
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
     public readonly displayColumns = ['folderLogo', 'folderName', 'folderCountry', 'folderLocation', 'actions'];

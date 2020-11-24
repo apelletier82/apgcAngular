@@ -18,12 +18,8 @@ describe('BackendService', () => {
         notificationServiceMock = jasmine.createSpyObj(['showException']);
 
         TestBed.configureTestingModule({
-            imports: [
-                HttpClientTestingModule
-            ],
-            providers: [
-                { provide: NotificationService, useValue: notificationServiceMock }
-            ]
+            imports: [HttpClientTestingModule],
+            providers: [{ provide: NotificationService, useValue: notificationServiceMock }],
         });
 
         testController = TestBed.inject(HttpTestingController);
@@ -38,30 +34,28 @@ describe('BackendService', () => {
 
     it('should get an array of folders', (done: DoneFn) => {
         const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
-        service.get<Folder[]>(`${FOLDER_API}/list`).subscribe(
-            value => {
-                expect(value).toBeDefined();
-                expect(value.length).toBe(FOLDERS_MOCK.length);
-                done();
-            });
+        service.get<Folder[]>(`${FOLDER_API}/list`).subscribe((value) => {
+            expect(value).toBeDefined();
+            expect(value.length).toBe(FOLDERS_MOCK.length);
+            done();
+        });
         const req = testController.expectOne(`${FOLDER_API}/list`);
         req.flush(FOLDERS_MOCK);
     });
 
     it('should get one folder', (done: DoneFn) => {
-        service.get<Folder>(`${FOLDER_API}/1`).subscribe(
-            value => {
-                expect(value).toBeDefined();
-                done();
-            });
+        service.get<Folder>(`${FOLDER_API}/1`).subscribe((value) => {
+            expect(value).toBeDefined();
+            done();
+        });
         const req = testController.expectOne(`${FOLDER_API}/1`);
         req.flush(FOLDER_MOCK);
     });
 
     it('should post one folder', (done) => {
-        const folder: Folder = {... FOLDER_MOCK};
+        const folder: Folder = { ...FOLDER_MOCK };
         folder.folderId = 3;
-        service.post<Folder>(`${FOLDER_API}`, folder).subscribe(value => {
+        service.post<Folder>(`${FOLDER_API}`, folder).subscribe((value) => {
             expect(value).toBeTruthy();
             expect(value.folderId).toBe(3);
             done();
@@ -73,7 +67,7 @@ describe('BackendService', () => {
     it('should put one folder', (done) => {
         const folder: Folder = { ...FOLDER_MOCK };
         folder.folderName = 'Test edit folder name';
-        service.put<Folder>(`${FOLDER_API}`, folder).subscribe(value => {
+        service.put<Folder>(`${FOLDER_API}`, folder).subscribe((value) => {
             expect(value).toBeTruthy();
             expect(value.folderName).toBe('Test edit folder name');
             done();
@@ -83,7 +77,7 @@ describe('BackendService', () => {
     });
 
     it('should delete one folder', (done) => {
-        service.delete(`${FOLDER_API}/1`).subscribe(result => {
+        service.delete(`${FOLDER_API}/1`).subscribe((result) => {
             expect(result).toBeTruthy();
             done();
         });

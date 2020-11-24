@@ -8,9 +8,8 @@ describe('MenuIconCaptionComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ MenuIconCaptionComponent ]
-        })
-            .compileComponents();
+            declarations: [MenuIconCaptionComponent],
+        }).compileComponents();
     });
 
     beforeEach(() => {

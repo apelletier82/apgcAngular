@@ -7,11 +7,10 @@ import { NotificationConfigTypeCast } from './notification-config-type-helper';
 import { NotificationComponent } from './notification.component';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class NotificationService {
-
-    constructor(private snackBar: MatSnackBar, private dialogService: DialogService) { }
+    constructor(private snackBar: MatSnackBar, private dialogService: DialogService) {}
 
     showInformation(message: string, action?: string): MatSnackBarRef<any> {
         return this.customShowSnackBar(NotificationConfigType.information, message, action);
@@ -36,7 +35,7 @@ export class NotificationService {
             icon: 'error',
             message,
             showCloseButton: true,
-            type: NotificationConfigType.error
+            type: NotificationConfigType.error,
         };
 
         const result = this.showApgcNotification(config);
@@ -53,13 +52,11 @@ export class NotificationService {
     }
 
     showApgcNotification(config: NotificationConfig): MatSnackBarRef<any> {
-        return this.snackBar.openFromComponent(
-            NotificationComponent,
-            {
-                panelClass: config?.type ? NotificationConfigTypeCast.toString(config.type) : null,
-                data: config,
-                duration: config?.showCloseButton ? Infinity : config?.duration ?? 2000
-            });
+        return this.snackBar.openFromComponent(NotificationComponent, {
+            panelClass: config?.type ? NotificationConfigTypeCast.toString(config.type) : null,
+            data: config,
+            duration: config?.showCloseButton ? Infinity : config?.duration ?? 2000,
+        });
     }
 
     private customShowSnackBar(type: NotificationConfigType, message: string, action?: string): MatSnackBarRef<any> {
