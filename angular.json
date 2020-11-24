@@ -26,8 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/api/logos",              
-              "src/api/dev/folder"              
+              "src/api/logos"                         
             ],
             "styles": [                  
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",
@@ -71,7 +70,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "apgc:build"
+            "browserTarget": "apgc:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -96,8 +96,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/api/logos",
-              "src/api/mock/folders",
-              "src/api/dev/folders"            
+              "src/tests/mock/folders"                    
             ],
             "styles": [              
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",

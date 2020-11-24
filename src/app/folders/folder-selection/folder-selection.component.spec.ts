@@ -15,7 +15,7 @@ describe('FolderSelectionComponent', () => {
     let mockDialogRef;
 
     const folderData = { folderId: undefined, yearId: undefined };
-    const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
+    const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
     beforeEach(
         waitForAsync(() => {

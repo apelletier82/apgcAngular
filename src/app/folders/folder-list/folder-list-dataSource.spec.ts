@@ -6,7 +6,7 @@ describe('FolderListDataSource', () => {
     let instance: FolderListDataSource;
     let folderServiceMock: any;
 
-    const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
+    const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
     beforeEach(() => {
         folderServiceMock = jasmine.createSpyObj('folderServiceMock', [

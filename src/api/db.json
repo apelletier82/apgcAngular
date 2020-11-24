@@ -1,0 +1,71 @@
+{
+    "folders": [
+        {
+            "id": 1,
+            "folderId": 1,
+            "folderName": "ImmoElec",
+            "logo": "api/logos/immoElec.png",
+            "address": {
+                "name":"Default",
+                "line1": "13 rue des Fleurs",
+                "line2": "",
+                "line3": "",
+                "zipCode": "67000",
+                "city":"Strasbourg",
+                "state":"Bas-Rhin",
+                "country":"France",
+                "countryISO":"FR"            
+            },
+            "years": [
+                {
+                    "id":1,
+                    "yearId": 1,
+                    "year": 2019,
+                    "DateFrom": "2019-01-01",
+                    "DateTo": "2019-12-31",
+                    "closingDate": "2019-12-31",
+                    "deleted": false
+                },
+                {
+                    "id": 2,
+                    "yearId": 2,
+                    "year": 2020,
+                    "DateFrom": "2020-01-01",
+                    "DateTo": "2020-12-31",
+                    "closingDate": "2020-12-31",
+                    "deleted": false
+                }
+            ],
+            "folders": []    
+        },
+        {
+            "id": 2,
+            "folderId": 2,
+            "folderName": "Alexandre Pelletier",
+            "logo": "api/logos/avataaars.png",
+            "address": {
+                "name":"Default",
+                "line1": "52D rue des Crêts",
+                "line2": "Mesinges",
+                "line3": "",
+                "zipCode": "74200",
+                "city":"Allinges",
+                "state":"Haute-Savoie",
+                "country":"France",
+                "countryISO":"FR"
+            },
+            "years": [
+                {
+                    "id": "3",
+                    "yearId": 1,
+                    "year": 2020,
+                    "DateFrom": "2020-01-01",
+                    "DateTo": "2020-12-31",
+                    "closingDate": "2020-12-31",
+                    "deleted": false
+                }
+            ],
+            "folders": []    
+        } 
+    ]
+}

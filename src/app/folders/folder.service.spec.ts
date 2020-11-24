@@ -8,7 +8,7 @@ describe('FoldersService', () => {
     let service: FolderService;
     let backendServiceMock: any;
 
-    const FOLDER_MOCK: Folder = require('src/api/mock/folders/_1.json');
+    const FOLDER_MOCK: Folder = require('src/tests/mock/folders/_1.json');
 
     beforeEach(() => {
         backendServiceMock = jasmine.createSpyObj('backendServiceMock', [

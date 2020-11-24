@@ -14,7 +14,7 @@ export class FolderService {
 
     getFolderList(): Observable<Folder[]> {
         return this.backendService.get<Folder[]>(
-            `${environment.apiUrl}${environment.apiFolderContext}/list`
+            `${environment.apiUrl}${environment.apiFolderContext}`
         );
     }
 

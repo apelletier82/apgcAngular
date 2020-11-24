@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: '/api/dev',
-    apiFolderContext: '/folder',
+    apiUrl: '',
+    apiFolderContext: '/folders',
     assets: '/assets',
     menu: '/menu',
 };

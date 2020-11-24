@@ -12,7 +12,7 @@ describe('FolderListComponent', () => {
     let fixture: ComponentFixture<FolderListComponent>;
     let folderServiceMock;
     let matSortMock;
-    const FOLDERS_MOCK = require('src/api/mock/folders/folders.json');
+    const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
     beforeEach(
         waitForAsync(() => {
