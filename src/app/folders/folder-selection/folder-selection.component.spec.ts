@@ -78,11 +78,11 @@ describe('FolderSelectionComponent', () => {
     });
 
     it('should apply folder filter', (done: DoneFn) => {
-        const event = { target: { value: 'immo' } };
+        const event = { target: { value: 'Test 1' } };
         component.applyFolderFilter((event as unknown) as Event);
         component.foldersSubject.subscribe((res) => {
             expect(res.length).toBe(1);
-            expect(res[0].folderName).toBe('ImmoElec');
+            expect(res[0].folderName).toBe('Folder Test 1');
             done();
         });
     });

@@ -8,7 +8,7 @@ import { NotificationConfigType } from './notification-config-type';
 
 import { NotificationComponent } from './notification.component';
 
-describe('SnackBarComponent', () => {
+describe('NotificationComponent', () => {
     let component: NotificationComponent;
     let fixture: ComponentFixture<NotificationComponent>;
     let snackBarRef;
@@ -51,14 +51,16 @@ describe('SnackBarComponent', () => {
         spyOn(snackBarRef, 'dismiss').and.callThrough();
         component.close();
 
-        expect(snackBarRef.dismiss).toHaveBeenCalledWith([]);
+        // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
+        expect(snackBarRef.dismiss).toHaveBeenCalled();
     });
 
     it('should close with action', () => {
         spyOn(snackBarRef, 'dismissWithAction').and.callThrough();
         component.onActionClick();
 
-        expect(snackBarRef.dismissWithAction).toHaveBeenCalledWith([]);
+        // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
+        expect(snackBarRef.dismissWithAction).toHaveBeenCalled();
     });
 
     it('should have information css', () => {
