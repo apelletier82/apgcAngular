@@ -22,3 +22,9 @@
   apgc-app-toolbar {
     position: sticky;
   }
+
+  .main-router-outlet {
+    display: flex;
+    justify-content: center;
+    height: 95%;
+  }

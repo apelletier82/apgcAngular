@@ -7,6 +7,7 @@ import { FolderSelection } from './folder-selection';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material/stepper';
+import { delay, finalize, map } from 'rxjs/operators';
 
 @Component({
     selector: 'apgc-folder-selection',
@@ -24,6 +25,8 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     selectedFolderYearsSubject: BehaviorSubject<
         FolderYear[]
     > = new BehaviorSubject([]);
+
+    loadingYears: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     // #region selectFolderForm
     selectFolderForm = new FormGroup({
@@ -63,34 +66,33 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     stepper: MatVerticalStepper;
 
     constructor(
-        private folderService: FolderService, // public dialogRef: MatDialogRef<FolderSelectionComponent>,
+        private folderService: FolderService,
         @Inject(MAT_DIALOG_DATA) public data: FolderSelection
     ) {}
 
-    ngOnDestroy(): void {
-        this.getFolderListSubscription?.unsubscribe();
-        this.selectFolderIdFormValueChangeSubscription?.unsubscribe();
-        this.selectedFolderYearsSubscription?.unsubscribe();
-
-        this.selectedFolderYearsSubject.complete();
-        this.foldersSubject.complete();
+    private createFolderListSubscription(): Subscription {
+        return this.folderService.folderList$.subscribe((folders) => {
+            this.foldersSubject.next(folders);
+            this.originalFolders = folders;
+        });
     }
 
-    ngOnInit(): void {
-        this.getFolderListSubscription = this.folderService.folderList$.subscribe(
-            (folders) => {
-                this.foldersSubject.next(folders);
-                this.originalFolders = folders;
-            }
-        );
-
-        this.selectFolderIdFormValueChangeSubscription = this.selectFolderIdForm
+    private createFolderIdFormValueChangeSubscription(): Subscription {
+        return this.selectFolderIdForm
             .get('selectedFolderId')
             .valueChanges.subscribe((value) => {
                 this.selectYearIdForm.setValue({ selectedYearId: [] });
                 if (value?.length > 0 && +value !== 0) {
+                    this.loadingYears.next(true);
                     this.folderService
                         .getFolderYears(+value)
+                        .pipe(
+                            map((years: FolderYear[]) =>
+                                [...years].sort((a, b) => b.year - a.year)
+                            ),
+                            delay(750),
+                            finalize(() => this.loadingYears.next(false))
+                        )
                         .subscribe((years) =>
                             this.selectedFolderYearsSubject.next(years || [])
                         );
@@ -98,15 +100,19 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
                     this.selectedFolderYearsSubject.next([]);
                 }
             });
+    }
 
-        this.selectedFolderYearsSubscription = this.selectedFolderYearsSubject
+    private createFolderYearsSubscription(): Subscription {
+        return this.selectedFolderYearsSubject
             .asObservable()
             .subscribe((years) => {
                 if (years?.length > 0 && this.initializing === false) {
                     this.stepper?.next();
                 }
             });
+    }
 
+    private initializeFolderForm() {
         // Has to be initialized as array
         this.selectFolderForm.setValue({
             selectFolderIdForm: {
@@ -118,8 +124,23 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
                 selectedYearId: this.data?.yearId ? [this.data.yearId] : [],
             },
         });
+    }
 
+    ngOnInit(): void {
+        this.getFolderListSubscription = this.createFolderListSubscription();
+        this.selectFolderIdFormValueChangeSubscription = this.createFolderIdFormValueChangeSubscription();
+        this.selectedFolderYearsSubscription = this.createFolderYearsSubscription();
+        this.initializeFolderForm();
         setTimeout((_) => (this.initializing = false), 250);
+    }
+
+    ngOnDestroy(): void {
+        this.getFolderListSubscription?.unsubscribe();
+        this.selectFolderIdFormValueChangeSubscription?.unsubscribe();
+        this.selectedFolderYearsSubscription?.unsubscribe();
+
+        this.selectedFolderYearsSubject.complete();
+        this.foldersSubject.complete();
     }
 
     applyFolderFilter(event: Event): void {

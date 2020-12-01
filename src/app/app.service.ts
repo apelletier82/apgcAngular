@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import * as localStorageConstant from './shared/constants/localStorage.constant';
 
 @Injectable({
@@ -17,6 +18,8 @@ export class AppService {
         ) ?? 0
     );
 
+    private loadingSubject = new BehaviorSubject<number>(0);
+
     public get folderId$(): Observable<number> {
         return this.folderIdSubject.asObservable();
     }
@@ -33,6 +36,12 @@ export class AppService {
         return this.yearIdSubject.value;
     }
 
+    public get loading$(): Observable<boolean> {
+        return this.loadingSubject
+            .asObservable()
+            .pipe(map((value) => (value ?? 0) > 0));
+    }
+
     constructor() {}
 
     updateAppFolderContext(folderId: number, yearId: number) {
@@ -47,5 +56,23 @@ export class AppService {
             localStorageConstant.storageAppContextYearIdKeyName,
             yearId.toString()
         );
+    }
+
+    beginLoading() {
+        let loading =
+            (this.loadingSubject.value ?? 0) < 0
+                ? 0
+                : this.loadingSubject.value;
+        loading++;
+        this.loadingSubject.next(loading);
+    }
+
+    endLoading() {
+        let loading =
+            (this.loadingSubject.value ?? 0) < 1
+                ? 1
+                : this.loadingSubject.value;
+        loading--;
+        this.loadingSubject.next(loading);
     }
 }

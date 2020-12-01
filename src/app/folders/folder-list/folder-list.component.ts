@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { AppService } from 'src/app/app.service';
 import { Folder } from '../folder';
 import { FolderService } from '../folder.service';
 import { FolderListDataSource } from './folder-list-dataSource';
@@ -20,11 +21,19 @@ export class FolderListComponent implements OnInit, AfterViewInit {
     @ViewChild(MatSort)
     sort: MatSort;
 
-    constructor(private folderService: FolderService) {
+    constructor(
+        private folderService: FolderService,
+        private appService: AppService
+    ) {
         this.folderDataSource = new FolderListDataSource(this.folderService);
     }
 
     ngOnInit(): void {
+        this.folderDataSource.foldersLoading$.subscribe((loading) =>
+            loading
+                ? this.appService.beginLoading()
+                : this.appService.endLoading()
+        );
         this.folderDataSource.loadFolders();
     }
 

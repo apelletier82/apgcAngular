@@ -16,27 +16,13 @@
                 "country":"France",
                 "countryISO":"FR"            
             },
-            "years": [
-                {
-                    "id":1,
-                    "yearId": 1,
-                    "year": 2019,
-                    "DateFrom": "2019-01-01",
-                    "DateTo": "2019-12-31",
-                    "closingDate": "2019-12-31",
-                    "deleted": false
-                },
-                {
-                    "id": 2,
-                    "yearId": 2,
-                    "year": 2020,
-                    "DateFrom": "2020-01-01",
-                    "DateTo": "2020-12-31",
-                    "closingDate": "2020-12-31",
-                    "deleted": false
-                }
-            ],
-            "folders": []    
+            "phones": [],
+            "emails": [],
+            "identificationNumbers":[],
+            "creation": {
+                "date": "2019-01-01T10:00:00Z",
+                "user": "testUser"
+            }            
         },
         {
             "id": 2,
@@ -54,18 +40,54 @@
                 "country":"France",
                 "countryISO":"FR"
             },
-            "years": [
-                {
-                    "id": "3",
-                    "yearId": 1,
-                    "year": 2020,
-                    "DateFrom": "2020-01-01",
-                    "DateTo": "2020-12-31",
-                    "closingDate": "2020-12-31",
-                    "deleted": false
-                }
-            ],
-            "folders": []    
+            "phones": [],
+            "emails": [],
+            "identificationNumbers":[],
+            "creation": {
+                "date": "2020-01-01T10:00:00Z",
+                "user": "testUser"
+            }
         } 
-    ]
+    ],
+    "folderYears": [
+        {
+            "folderId":1,
+            "id":1,
+            "yearId": 1,
+            "year": 2019,
+            "DateFrom": "2019-01-01",
+            "DateTo": "2019-12-31",
+            "closingDate": "2019-12-31",
+            "creation": {
+                "date": "2019-01-01T10:00:00Z",
+                "user": "testUser"
+            }  
+        },
+        {
+            "folderId":1,
+            "id": 2,
+            "yearId": 2,
+            "year": 2020,
+            "DateFrom": "2020-01-01",
+            "DateTo": "2020-12-31",
+            "closingDate": "2020-12-31",
+            "creation": {
+                "date": "2020-01-01T10:00:00Z",
+                "user": "testUser"
+            }  
+        },
+        {
+            "folderId":2,
+            "id": 3,
+            "yearId": 3,
+            "year": 2020,
+            "DateFrom": "2020-01-01",
+            "DateTo": "2020-12-31",
+            "closingDate": "2020-12-31",
+            "creation": {
+                "date": "2020-01-01T10:00:00Z",
+                "user": "testUser"
+            }  
+        }
+    ]    
 }

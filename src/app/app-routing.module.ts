@@ -35,6 +35,6 @@ const routes: Routes = []
         ContactsRoutingModule,
         FoldersRoutingModule,
     ],
-    exports: [RouterModule],
+    exports: [RouterModule], // exporting RouterModule will give access to it outside from this module
 })
 export class AppRoutingModule {}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Folder } from './folder';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FolderYear } from './folder-year';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BackendService } from '../shared/services/backend.service';
 
@@ -27,17 +27,19 @@ export class FolderService {
 
     getFolder(folderId: number): Observable<Folder> {
         return this.backendService.get<Folder>(
-            `${environment.apiUrl}${environment.apiFolderContext}/${folderId}`
+            `${environment.apiUrl}${environment.apiFolderContext}${folderId}`
         );
     }
 
     getFolderYears(folderId: number): Observable<FolderYear[]> {
-        return this.getFolder(folderId).pipe(map((result) => result.years));
+        return this.backendService.get<FolderYear[]>(
+            `${environment.apiUrl}${environment.apiFolderYearContext}${folderId}`
+        );
     }
 
-    getFolderYear(folderId: number, yearId: number): Observable<FolderYear> {
-        return this.getFolderYears(folderId).pipe(
-            map((years) => years.find((item) => item.yearId === yearId))
+    getFolderYear(yearId: number): Observable<FolderYear> {
+        return this.backendService.get<FolderYear>(
+            `${environment.apiUrl}${environment.apiYearContext}${yearId}`
         );
     }
 }

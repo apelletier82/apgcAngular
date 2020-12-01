@@ -5,7 +5,9 @@
 export const environment = {
     production: false,
     apiUrl: '',
-    apiFolderContext: '/folders',
+    apiFolderContext: '/folders/',
+    apiFolderYearContext: '/folderYears?folderId=',
+    apiYearContext: '/folderYears/',
     assets: '/assets',
     menu: '/menu',
 };

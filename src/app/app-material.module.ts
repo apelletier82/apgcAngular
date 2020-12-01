@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const modules = [
     CommonModule,
@@ -37,6 +38,7 @@ const modules = [
     MatRippleModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatProgressBarModule,
 ];
 
 @NgModule({

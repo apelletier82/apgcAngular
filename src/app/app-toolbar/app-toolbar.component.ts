@@ -73,7 +73,7 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.folderSubscription = this.appService.folderId$.subscribe(
             (folderId) => {
-                if (folderId || 0 !== 0) {
+                if ((folderId || 0) !== 0) {
                     this.folderService
                         .getFolder(folderId)
                         .subscribe((folder) =>
@@ -84,9 +84,9 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
         );
 
         this.yearSubscription = this.appService.yearId$.subscribe((yearId) => {
-            if (this.appService.folderId || (0 !== 0 && yearId) || 0 !== 0) {
+            if ((yearId ?? 0) !== 0) {
                 this.folderService
-                    .getFolderYear(this.appService.folderId, yearId)
+                    .getFolderYear(yearId)
                     .subscribe((year) => this.updateYearInformation(year));
             }
         });

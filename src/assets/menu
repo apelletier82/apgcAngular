@@ -16,7 +16,7 @@
                     "id": 1,
                     "caption": "Contacts",
                     "icon": "contacts",
-                    "routerLink": "contacts"
+                    "routerLink": "/contacts"
                 },            
                 {
                     "id": 2,
@@ -41,7 +41,7 @@
                     "id": 2,
                     "caption": "Folders",
                     "icon": "folder",
-                    "routerLink": "folders"
+                    "routerLink": "/folders"
                 }
             ]
         }
