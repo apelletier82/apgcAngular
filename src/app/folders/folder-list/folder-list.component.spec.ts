@@ -11,7 +11,6 @@ describe('FolderListComponent', () => {
     let component: FolderListComponent;
     let fixture: ComponentFixture<FolderListComponent>;
     let folderServiceMock;
-    let matSortMock;
     const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
     beforeEach(
@@ -20,11 +19,6 @@ describe('FolderListComponent', () => {
                 'getFolderList',
                 'getFolder',
             ]);
-            matSortMock = jasmine.createSpyObj(
-                'matSortMock',
-                [],
-                ['active', 'direction', 'disabled', 'start']
-            );
 
             TestBed.configureTestingModule({
                 declarations: [FolderListComponent, MatSort],
@@ -42,7 +36,6 @@ describe('FolderListComponent', () => {
         );
         fixture = TestBed.createComponent(FolderListComponent);
         component = fixture.componentInstance;
-        // component.sort = matSortMock;
         fixture.detectChanges();
     });
 

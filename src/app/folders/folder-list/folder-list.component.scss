@@ -1,0 +1,24 @@
+span {
+    margin-left: 10px;
+}
+
+.actions {
+    display: flex;
+    max-width: 20px;    
+}
+
+.location, .folder {
+    display: flex;    
+    align-items: center;
+}
+
+mat-table {
+    width: 80vw;
+    height: 90%;   
+}
+
+.folderListContainer {
+    display: flex;
+    justify-content: space-around;
+    height: 99%;
+}

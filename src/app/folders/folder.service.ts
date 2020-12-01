@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Folder } from './folder';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { FolderYear } from './folder-year';
-import { map } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { BackendService } from '../shared/services/backend.service';
 
@@ -10,12 +10,19 @@ import { BackendService } from '../shared/services/backend.service';
     providedIn: 'root',
 })
 export class FolderService {
+    private folderListSubject = new BehaviorSubject<Folder[]>([]);
+    get folderList$(): Observable<Folder[]> {
+        return this.folderListSubject.asObservable().pipe(shareReplay());
+    }
+
     constructor(private backendService: BackendService) {}
 
     getFolderList(): Observable<Folder[]> {
-        return this.backendService.get<Folder[]>(
-            `${environment.apiUrl}${environment.apiFolderContext}`
-        );
+        return this.backendService
+            .get<Folder[]>(
+                `${environment.apiUrl}${environment.apiFolderContext}`
+            )
+            .pipe(tap((folders) => this.folderListSubject.next(folders)));
     }
 
     getFolder(folderId: number): Observable<Folder> {

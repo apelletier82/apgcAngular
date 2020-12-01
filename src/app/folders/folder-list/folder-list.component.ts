@@ -11,9 +11,7 @@ import { FolderListDataSource } from './folder-list-dataSource';
 })
 export class FolderListComponent implements OnInit, AfterViewInit {
     public readonly displayColumns = [
-        'folderLogo',
         'folderName',
-        'folderCountry',
         'folderLocation',
         'actions',
     ];

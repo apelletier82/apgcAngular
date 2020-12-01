@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject, ViewChild, OnDestroy } from '@angular/core';
 import { FolderService } from '../folder.service';
 import { Folder } from '../folder';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelection } from './folder-selection';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material/stepper';
 
@@ -78,12 +77,12 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.getFolderListSubscription = this.folderService
-            .getFolderList()
-            .subscribe((res) => {
-                this.foldersSubject.next(res);
-                this.originalFolders = res;
-            });
+        this.getFolderListSubscription = this.folderService.folderList$.subscribe(
+            (folders) => {
+                this.foldersSubject.next(folders);
+                this.originalFolders = folders;
+            }
+        );
 
         this.selectFolderIdFormValueChangeSubscription = this.selectFolderIdForm
             .get('selectedFolderId')

@@ -18,7 +18,11 @@ export class FolderListDataSource implements DataSource<Folder> {
     }
     set sort(value: MatSort) {
         this._sort = value;
-        this._sort.sortChange.subscribe(() => this.loadFolders());
+        this._sort.sortChange.subscribe(() =>
+            this.foldersSubject.next(
+                this.sortFolders(this.foldersSubject.value)
+            )
+        );
     }
 
     constructor(private _folderService: FolderService) {}
@@ -47,7 +51,7 @@ export class FolderListDataSource implements DataSource<Folder> {
                     }
                     break;
                 case 'folderLocation':
-                    if (a && a.address && b && b.address) {
+                    if (a?.address && b?.address) {
                         return (
                             a.address.city.localeCompare(b.address.city) * desc
                         );
@@ -63,16 +67,14 @@ export class FolderListDataSource implements DataSource<Folder> {
     loadFolders(): void {
         this.folderSubjectLoading.next(true);
         try {
-            const fakeObs = of(1);
-
-            forkJoin([
-                fakeObs.pipe(delay(250)),
-                this._folderService
-                    .getFolderList()
-                    .pipe(catchError(() => of([]))),
-            ])
-                .pipe(finalize(() => this.folderSubjectLoading.next(false)))
-                .subscribe(([_, folders]) => {
+            this._folderService
+                .getFolderList()
+                .pipe(
+                    delay(500),
+                    catchError(() => of([])),
+                    finalize(() => this.folderSubjectLoading.next(false))
+                )
+                .subscribe((folders: Folder[]) => {
                     if (this._sort) {
                         folders = this.sortFolders(folders);
                     }

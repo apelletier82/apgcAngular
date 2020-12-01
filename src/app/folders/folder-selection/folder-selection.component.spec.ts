@@ -20,11 +20,11 @@ describe('FolderSelectionComponent', () => {
     beforeEach(
         waitForAsync(() => {
             mockDialogRef = { close: jasmine.createSpy('close') };
-            folderServiceMock = jasmine.createSpyObj('folderServiceMock', [
-                'getFolderList',
-                'getFolder',
-                'getFolderYears',
-            ]);
+            folderServiceMock = jasmine.createSpyObj(
+                'folderServiceMock',
+                ['getFolderList', 'getFolder', 'getFolderYears'],
+                { folderList$: of<Folder[]>(FOLDERS_MOCK) }
+            );
             TestBed.configureTestingModule({
                 declarations: [FolderSelectionComponent],
                 imports: [FoldersModule, TestingModule],
