@@ -2,7 +2,7 @@
 import { DataSource } from '@angular/cdk/table';
 import { Folder } from '../folder';
 import { CollectionViewer } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, forkJoin, of } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { FolderService } from '../folder.service';
 import { finalize, delay, catchError } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
@@ -17,6 +17,7 @@ export class FolderListDataSource implements DataSource<Folder> {
         return this._sort;
     }
     set sort(value: MatSort) {
+        this._sort?.sortChange?.unsubscribe();
         this._sort = value;
         this._sort.sortChange.subscribe(() =>
             this.foldersSubject.next(
@@ -25,14 +26,13 @@ export class FolderListDataSource implements DataSource<Folder> {
         );
     }
 
-    constructor(private _folderService: FolderService) {}
+    constructor(private folderService: FolderService) {}
 
-    connect(
-        collectionViewer: CollectionViewer
-    ): Observable<Folder[] | readonly Folder[]> {
+    connect(_: CollectionViewer): Observable<Folder[] | readonly Folder[]> {
         return this.foldersSubject.asObservable();
     }
-    disconnect(collectionViewer: CollectionViewer): void {
+
+    disconnect(_: CollectionViewer): void {
         this.foldersSubject.complete();
         this.folderSubjectLoading.complete();
     }
@@ -64,25 +64,26 @@ export class FolderListDataSource implements DataSource<Folder> {
         });
     }
 
-    loadFolders(): void {
-        this.folderSubjectLoading.next(true);
-        try {
-            this._folderService
-                .getFolderList()
-                .pipe(
-                    delay(500),
-                    catchError(() => of([])),
-                    finalize(() => this.folderSubjectLoading.next(false))
-                )
-                .subscribe((folders: Folder[]) => {
-                    if (this._sort) {
-                        folders = this.sortFolders(folders);
-                    }
-                    this.foldersSubject.next(folders);
-                });
-        } catch (error) {
-            this.folderSubjectLoading.next(false);
-            console.log(error);
+    private updateFolderLoadingSubject(loading: boolean) {
+        if (loading !== this.folderSubjectLoading.value) {
+            this.folderSubjectLoading.next(loading);
         }
+    }
+
+    loadFolders(): void {
+        this.updateFolderLoadingSubject(true);
+        this.folderService
+            .getFolderList()
+            .pipe(
+                catchError(() => of([])),
+                delay(250),
+                finalize(() => this.updateFolderLoadingSubject(false))
+            )
+            .subscribe((folders: Folder[]) => {
+                if (this._sort) {
+                    folders = this.sortFolders(folders);
+                }
+                this.foldersSubject.next(folders);
+            });
     }
 }

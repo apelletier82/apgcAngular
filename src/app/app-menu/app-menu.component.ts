@@ -1,11 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import {
-    Component,
-    EventEmitter,
-    OnInit,
-    Output,
-    ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { AppService } from '../app.service';
 import { AppMenu } from './app-menu';
@@ -16,9 +10,8 @@ import { AppMenuService } from './app-menu.service';
     templateUrl: './app-menu.component.html',
     styleUrls: ['./app-menu.component.scss'],
 })
-export class AppMenuComponent {
+export class AppMenuComponent implements OnInit {
     @ViewChild(MatAccordion) accordionMenu: MatAccordion;
-    @Output() menuItemClick = new EventEmitter();
 
     private _menu: AppMenu;
     get menu(): AppMenu {
@@ -28,8 +21,12 @@ export class AppMenuComponent {
     constructor(
         private appMenuService: AppMenuService,
         public appService: AppService
-    ) {
-        appMenuService.getMenu$().subscribe((result) => (this._menu = result));
+    ) {}
+
+    ngOnInit(): void {
+        this.appMenuService
+            .getMenu$()
+            .subscribe((result) => (this._menu = result));
     }
 
     private accordionMenuCloseAll() {
@@ -43,9 +40,5 @@ export class AppMenuComponent {
 
     homeClick() {
         this.accordionMenuCloseAll();
-        this.itemClick();
-    }
-    itemClick() {
-        this.menuItemClick.emit();
     }
 }

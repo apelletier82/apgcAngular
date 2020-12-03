@@ -15,7 +15,7 @@
                 </mat-expansion-panel-header>
                 <ng-container *ngFor="let item of category.items">
                     <mat-list-item *ngIf="(!item.checkVisibility) || (appService?.folderId$ | async)" 
-                        [routerLink]="[item.routerLink]" (click)="itemClick()">
+                        [routerLink]="[item.routerLink]">
                         <apgc-menu-icon-caption [icon]="item.icon" [iconFas]="item.fas" [caption]="item.caption"></apgc-menu-icon-caption>
                     </mat-list-item>
                 </ng-container>                

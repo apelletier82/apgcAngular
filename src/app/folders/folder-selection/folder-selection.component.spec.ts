@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { Folder } from '../folder';
 import { map } from 'rxjs/operators';
 import { TestingModule } from 'src/app/test/testing.module';
+import { FolderYear } from '../folder-year';
 
 describe('FolderSelectionComponent', () => {
     let component: FolderSelectionComponent;
@@ -16,6 +17,7 @@ describe('FolderSelectionComponent', () => {
 
     const folderData = { folderId: undefined, yearId: undefined };
     const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
+    const FOLDER_YEARS_MOCK = require('src/tests/mock/folders/folderYears.json');
 
     beforeEach(
         waitForAsync(() => {
@@ -51,7 +53,7 @@ describe('FolderSelectionComponent', () => {
             of<Folder>(FOLDERS_MOCK[0])
         );
         folderServiceMock.getFolderYears.and.returnValue(
-            of(FOLDERS_MOCK[0]).pipe(map((result) => (result as Folder).years))
+            of<FolderYear[]>(FOLDER_YEARS_MOCK)
         );
 
         fixture.detectChanges();

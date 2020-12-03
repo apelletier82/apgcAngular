@@ -8,12 +8,10 @@ describe('FoldersService', () => {
     let service: FolderService;
     let backendServiceMock: any;
 
-    const FOLDER_MOCK: Folder = require('src/tests/mock/folders/_1.json');
+    const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
     beforeEach(() => {
-        backendServiceMock = jasmine.createSpyObj('backendServiceMock', [
-            'get',
-        ]);
+        backendServiceMock = jasmine.createSpyObj('backendService', ['get']);
         TestBed.configureTestingModule({
             imports: [],
             providers: [
@@ -28,13 +26,21 @@ describe('FoldersService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should get one folderYear', (done) => {
-        const folder$ = of<Folder>(FOLDER_MOCK);
-        backendServiceMock.get.and.returnValue(folder$);
-        service.getFolderYear(1, 1).subscribe((value) => {
-            expect(value).toBeTruthy();
-            expect(value.yearId).toBe(1);
-            done();
+    it('should get folder list and store it', (done) => {
+        const folders$ = of<Folder[]>(FOLDERS_MOCK);
+        backendServiceMock.get.and.returnValue(folders$);
+        service.getFolderList().subscribe((folders) => {
+            expect(folders).toBeTruthy('Folders mock is not empty');
+            expect(folders.length).toBeGreaterThan(
+                0,
+                'Folders mock contains at least 2 folders'
+            );
+            service.folderList$.subscribe((storedFolders) => {
+                expect(storedFolders).toBeTruthy();
+                expect(storedFolders.length).toBe(folders.length);
+
+                done();
+            });
         });
     });
 });

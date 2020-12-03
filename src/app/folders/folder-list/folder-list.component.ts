@@ -1,5 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewChild,
+    AfterViewInit,
+    OnDestroy,
+} from '@angular/core';
 import { MatSort } from '@angular/material/sort';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Folder } from '../folder';
 import { FolderService } from '../folder.service';
@@ -10,7 +17,9 @@ import { FolderListDataSource } from './folder-list-dataSource';
     templateUrl: './folder-list.component.html',
     styleUrls: ['./folder-list.component.scss'],
 })
-export class FolderListComponent implements OnInit, AfterViewInit {
+export class FolderListComponent implements OnInit, OnDestroy, AfterViewInit {
+    private folderLoadingSubscription: Subscription;
+
     public readonly displayColumns = [
         'folderName',
         'folderLocation',
@@ -18,8 +27,7 @@ export class FolderListComponent implements OnInit, AfterViewInit {
     ];
     folderDataSource: FolderListDataSource;
 
-    @ViewChild(MatSort)
-    sort: MatSort;
+    @ViewChild(MatSort) sort: MatSort;
 
     constructor(
         private folderService: FolderService,
@@ -28,12 +36,26 @@ export class FolderListComponent implements OnInit, AfterViewInit {
         this.folderDataSource = new FolderListDataSource(this.folderService);
     }
 
+    private subscribeToFolderLoading() {
+        setTimeout(() => {
+            this.folderLoadingSubscription = this.folderDataSource.foldersLoading$.subscribe(
+                (loading: boolean) => {
+                    if (loading) {
+                        this.appService.beginLoading();
+                    } else {
+                        this.appService.endLoading();
+                    }
+                }
+            );
+        }, 1);
+    }
+
+    ngOnDestroy(): void {
+        this.folderLoadingSubscription?.unsubscribe();
+    }
+
     ngOnInit(): void {
-        this.folderDataSource.foldersLoading$.subscribe((loading) =>
-            loading
-                ? this.appService.beginLoading()
-                : this.appService.endLoading()
-        );
+        this.subscribeToFolderLoading();
         this.folderDataSource.loadFolders();
     }
 

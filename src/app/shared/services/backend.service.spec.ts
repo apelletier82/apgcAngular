@@ -14,8 +14,9 @@ describe('BackendService', () => {
     let testController: HttpTestingController;
     let notificationServiceMock;
 
-    const FOLDER_MOCK = require('src/tests/mock/folders/_1.json');
     const FOLDER_API = `${environment.apiUrl}${environment.apiFolderContext}`;
+    const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
+    const FOLDER_MOCK = FOLDERS_MOCK.find((folder) => folder.folderId === 1);
 
     beforeEach(() => {
         notificationServiceMock = jasmine.createSpyObj(['showException']);
@@ -41,7 +42,6 @@ describe('BackendService', () => {
     });
 
     it('should get an array of folders', (done: DoneFn) => {
-        const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
         service.get<Folder[]>(`${FOLDER_API}/list`).subscribe((value) => {
             expect(value).toBeDefined();
             expect(value.length).toBe(FOLDERS_MOCK.length);

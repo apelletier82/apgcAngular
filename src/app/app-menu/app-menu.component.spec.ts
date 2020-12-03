@@ -42,12 +42,4 @@ describe('AppMenuComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should click on item', (done) => {
-        component.menuItemClick.subscribe(() => {
-            expect(true).toBeTruthy();
-            done();
-        });
-        component.itemClick();
-    });
 });

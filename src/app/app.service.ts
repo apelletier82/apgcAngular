@@ -68,10 +68,10 @@ export class AppService {
     }
 
     endLoading() {
-        let loading =
-            (this.loadingSubject.value ?? 0) < 1
-                ? 1
-                : this.loadingSubject.value;
+        let loading = this.loadingSubject.value;
+        if (loading <= 0) {
+            return;
+        }
         loading--;
         this.loadingSubject.next(loading);
     }

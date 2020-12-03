@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import {
     Router,
     Event,
@@ -17,15 +18,23 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
     private routerSubscription: Subscription;
+    private sideNavClosing = false;
 
     title = 'apgc';
+    @ViewChild(MatSidenav) sideNav: MatSidenav;
 
     get isLoading$(): Observable<boolean> {
         return this.appService.loading$;
     }
 
+    private closeSideNav() {
+        if (this.sideNav?.opened) {
+            this.sideNav?.close();
+        }
+    }
     private checkRouterEvent(event: Event) {
         if (event instanceof NavigationStart) {
+            this.closeSideNav();
             this.appService.beginLoading();
         } else if (
             event instanceof NavigationEnd ||

@@ -11,7 +11,7 @@ describe('FolderListComponent', () => {
     let component: FolderListComponent;
     let fixture: ComponentFixture<FolderListComponent>;
     let folderServiceMock;
-    const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
+    const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
     beforeEach(
         waitForAsync(() => {
@@ -43,17 +43,20 @@ describe('FolderListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should view init', async () => {
-        component.ngAfterViewInit();
-
-        expect(component.folderDataSource).toBeDefined();
-        expect(component.folderDataSource.sort).toBeDefined();
-    });
-
     it('should init', (done: DoneFn) => {
+        component.ngOnInit();
         component.folderDataSource.foldersLoading$.subscribe((res) => {
             expect(res).toBe(true);
             done();
         });
+    });
+
+    it('should return folderId on trackByFolder', () => {
+        const folderId = 1;
+        const folder = FOLDERS_MOCK.find(
+            (searchFolder) => searchFolder.folderId === folderId
+        );
+
+        expect(component.trackByFolderId(1, folder)).toBe(folderId);
     });
 });

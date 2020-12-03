@@ -2,10 +2,10 @@
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async" color="accent"></mat-progress-bar>
   <apgc-app-toolbar (menuClicked)="sideNav.toggle()"></apgc-app-toolbar>   
   <mat-sidenav-container>    
-      <mat-sidenav #sideNav mode="slide" position="start">                  
-        <apgc-app-menu (menuItemClick)="sideNav.close()"></apgc-app-menu>
+      <mat-sidenav #sideNav mode="slide" position="start">
+        <apgc-app-menu></apgc-app-menu>
       </mat-sidenav>      
-      <mat-sidenav-content class="main-router-outlet">
+      <mat-sidenav-content class="main-router-outlet">        
         <router-outlet #mainRouterOutlet></router-outlet>        
       </mat-sidenav-content>
   </mat-sidenav-container>

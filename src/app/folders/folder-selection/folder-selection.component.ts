@@ -90,7 +90,7 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
                             map((years: FolderYear[]) =>
                                 [...years].sort((a, b) => b.year - a.year)
                             ),
-                            delay(750),
+                            delay(250),
                             finalize(() => this.loadingYears.next(false))
                         )
                         .subscribe((years) =>
