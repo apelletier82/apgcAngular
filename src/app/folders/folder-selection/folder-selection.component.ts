@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FolderYear } from '../folder-year';
 import { FolderSelection } from './folder-selection';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatVerticalStepper } from '@angular/material/stepper';
 import { delay, finalize, map } from 'rxjs/operators';
 
@@ -29,14 +29,7 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     loadingYears: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     // #region selectFolderForm
-    selectFolderForm = new FormGroup({
-        selectFolderIdForm: new FormGroup({
-            selectedFolderId: new FormControl([], [Validators.required]),
-        }),
-        selectYearIdForm: new FormGroup({
-            selectedYearId: new FormControl([], [Validators.required]),
-        }),
-    });
+    selectFolderForm: FormGroup;
 
     get selectFolderIdForm(): FormGroup {
         return this.selectFolderForm.get('selectFolderIdForm') as FormGroup;
@@ -66,6 +59,7 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
     stepper: MatVerticalStepper;
 
     constructor(
+        private formBuilder: FormBuilder,
         private folderService: FolderService,
         @Inject(MAT_DIALOG_DATA) public data: FolderSelection
     ) {}
@@ -126,7 +120,18 @@ export class FolderSelectionComponent implements OnInit, OnDestroy {
         });
     }
 
+    private createSelectFolderForm() {
+        this.selectFolderForm = this.formBuilder.group({
+            selectFolderIdForm: this.formBuilder.group({
+                selectedFolderId: [[], [Validators.required]],
+            }),
+            selectYearIdForm: this.formBuilder.group({
+                selectedYearId: [[], [Validators.required]],
+            }),
+        });
+    }
     ngOnInit(): void {
+        this.createSelectFolderForm();
         this.getFolderListSubscription = this.createFolderListSubscription();
         this.selectFolderIdFormValueChangeSubscription = this.createFolderIdFormValueChangeSubscription();
         this.selectedFolderYearsSubscription = this.createFolderYearsSubscription();
