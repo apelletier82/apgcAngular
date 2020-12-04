@@ -6,15 +6,12 @@ import { Folder } from './folder';
 
 import { FolderResolverService } from './folder-resolver.service';
 import { FolderService } from './folder.service';
+import * as testingConstants from '../test/testing.constants';
 
 describe('FolderResolverService', () => {
   let service: FolderResolverService;
   let folderService;
   const FOLDER_ID = 1;
-  const FOLDERS_MOCK: Folder[] = require('../../tests/mock/folders/folders.json');
-  const FOLDER_MOCK = FOLDERS_MOCK.find(
-    (folder) => folder.folderId === FOLDER_ID
-  );
 
   beforeEach(() => {
     folderService = jasmine.createSpyObj('folderService', ['getFolder']);
@@ -23,7 +20,9 @@ describe('FolderResolverService', () => {
       providers: [{ provide: FolderService, useValue: folderService }],
     });
     service = TestBed.inject(FolderResolverService);
-    folderService.getFolder.and.returnValue(of<Folder>(FOLDER_MOCK));
+    folderService.getFolder.and.returnValue(
+      of<Folder>(testingConstants.FOLDER_1_MOCK)
+    );
   });
 
   it('should be created', () => {
