@@ -8,81 +8,79 @@ import { TestingModule } from 'src/app/test/testing.module';
 import { FolderSelectionService } from './folder-selection.service';
 
 class FolderDialogMock {
-    open() {
-        return {
-            afterClosed() {
-                return of({ folderId: 1, yearId: 1 });
-            },
-        };
-    }
+  open() {
+    return {
+      afterClosed() {
+        return of({ folderId: 1, yearId: 1 });
+      },
+    };
+  }
 }
 
 class FolderDialogCancelMock {
-    open() {
-        return {
-            afterClosed() {
-                return of(undefined);
-            },
-        };
-    }
+  open() {
+    return {
+      afterClosed() {
+        return of(undefined);
+      },
+    };
+  }
 }
 
 describe('FolderSelectionService', () => {
-    let service: FolderSelectionService;
-    let appServiceMock: AppService;
+  let service: FolderSelectionService;
+  let appServiceMock: AppService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [TestingModule],
-            providers: [{ provide: MatDialog, useClass: FolderDialogMock }],
-        });
-        appServiceMock = TestBed.inject(AppService);
-        service = TestBed.inject(FolderSelectionService);
-        spyOn(appServiceMock, 'updateAppFolderContext');
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [TestingModule],
+      providers: [{ provide: MatDialog, useClass: FolderDialogMock }],
     });
+    appServiceMock = TestBed.inject(AppService);
+    service = TestBed.inject(FolderSelectionService);
+    spyOn(appServiceMock, 'updateAppFolderContext');
+  });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-    it('should open folder selection dialog', (done) => {
-        service
-            .openFolderSelectionDialog({ folderId: 1, yearId: 1 })
-            .subscribe((result) => {
-                expect(result).toBeTruthy();
-                done();
-            });
-    });
+  it('should open folder selection dialog', (done) => {
+    service
+      .openFolderSelectionDialog({ folderId: 1, yearId: 1 })
+      .subscribe((result) => {
+        expect(result).toBeTruthy();
+        done();
+      });
+  });
 
-    it('should select application folder context', (done) => {
-        service
-            .selectApplicationFolder({ folderId: 1, yearId: 1 })
-            .subscribe((result) => {
-                expect(result).toBeTruthy();
-                done();
-            });
-    });
+  it('should select application folder context', (done) => {
+    service
+      .selectApplicationFolder({ folderId: 1, yearId: 1 })
+      .subscribe((result) => {
+        expect(result).toBeTruthy();
+        done();
+      });
+  });
 });
 
 describe('FolderSelectionService cancel selection', () => {
-    let service: FolderSelectionService;
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [TestingModule],
-            providers: [
-                { provide: MatDialog, useClass: FolderDialogCancelMock },
-            ],
-        });
-
-        service = TestBed.inject(FolderSelectionService);
+  let service: FolderSelectionService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [TestingModule],
+      providers: [{ provide: MatDialog, useClass: FolderDialogCancelMock }],
     });
 
-    it('should cancel dialog', (done) => {
-        service
-            .openFolderSelectionDialog({ folderId: 1, yearId: 1 })
-            .subscribe((result) => {
-                expect(result).toBeFalsy();
-                done();
-            });
-    });
+    service = TestBed.inject(FolderSelectionService);
+  });
+
+  it('should cancel dialog', (done) => {
+    service
+      .openFolderSelectionDialog({ folderId: 1, yearId: 1 })
+      .subscribe((result) => {
+        expect(result).toBeFalsy();
+        done();
+      });
+  });
 });

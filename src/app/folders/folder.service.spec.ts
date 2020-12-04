@@ -5,42 +5,40 @@ import { Folder } from './folder';
 import { FolderService } from './folder.service';
 
 describe('FoldersService', () => {
-    let service: FolderService;
-    let backendServiceMock: any;
+  let service: FolderService;
+  let backendServiceMock: any;
 
-    const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
+  const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
-    beforeEach(() => {
-        backendServiceMock = jasmine.createSpyObj('backendService', ['get']);
-        TestBed.configureTestingModule({
-            imports: [],
-            providers: [
-                { provide: BackendService, useValue: backendServiceMock },
-            ],
-        });
-
-        service = TestBed.inject(FolderService);
+  beforeEach(() => {
+    backendServiceMock = jasmine.createSpyObj('backendService', ['get']);
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [{ provide: BackendService, useValue: backendServiceMock }],
     });
 
-    it('should be created', () => {
-        expect(service).toBeTruthy();
-    });
+    service = TestBed.inject(FolderService);
+  });
 
-    it('should get folder list and store it', (done) => {
-        const folders$ = of<Folder[]>(FOLDERS_MOCK);
-        backendServiceMock.get.and.returnValue(folders$);
-        service.getFolderList().subscribe((folders) => {
-            expect(folders).toBeTruthy('Folders mock is not empty');
-            expect(folders.length).toBeGreaterThan(
-                0,
-                'Folders mock contains at least 2 folders'
-            );
-            service.folderList$.subscribe((storedFolders) => {
-                expect(storedFolders).toBeTruthy();
-                expect(storedFolders.length).toBe(folders.length);
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-                done();
-            });
-        });
+  it('should get folder list and store it', (done) => {
+    const folders$ = of<Folder[]>(FOLDERS_MOCK);
+    backendServiceMock.get.and.returnValue(folders$);
+    service.getFolderList().subscribe((folders) => {
+      expect(folders).toBeTruthy('Folders mock is not empty');
+      expect(folders.length).toBeGreaterThan(
+        0,
+        'Folders mock contains at least 2 folders'
+      );
+      service.folderList$.subscribe((storedFolders) => {
+        expect(storedFolders).toBeTruthy();
+        expect(storedFolders.length).toBe(folders.length);
+
+        done();
+      });
     });
+  });
 });

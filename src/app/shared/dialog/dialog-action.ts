@@ -1,4 +1,4 @@
 export interface DialogAction {
-    action: string;
-    default?: boolean;
+  action: string;
+  default?: boolean;
 }

@@ -6,39 +6,37 @@ import { AppMenu } from './app-menu';
 import { AppMenuService } from './app-menu.service';
 
 @Component({
-    selector: 'apgc-app-menu',
-    templateUrl: './app-menu.component.html',
-    styleUrls: ['./app-menu.component.scss'],
+  selector: 'apgc-app-menu',
+  templateUrl: './app-menu.component.html',
+  styleUrls: ['./app-menu.component.scss'],
 })
 export class AppMenuComponent implements OnInit {
-    @ViewChild(MatAccordion) accordionMenu: MatAccordion;
+  @ViewChild(MatAccordion) accordionMenu: MatAccordion;
 
-    private _menu: AppMenu;
-    get menu(): AppMenu {
-        return this._menu;
+  private _menu: AppMenu;
+  get menu(): AppMenu {
+    return this._menu;
+  }
+
+  constructor(
+    private appMenuService: AppMenuService,
+    public appService: AppService
+  ) {}
+
+  ngOnInit(): void {
+    this.appMenuService.getMenu$().subscribe((result) => (this._menu = result));
+  }
+
+  private accordionMenuCloseAll() {
+    this.accordionMenu.multi = true;
+    try {
+      this.accordionMenu.closeAll();
+    } finally {
+      this.accordionMenu.multi = false;
     }
+  }
 
-    constructor(
-        private appMenuService: AppMenuService,
-        public appService: AppService
-    ) {}
-
-    ngOnInit(): void {
-        this.appMenuService
-            .getMenu$()
-            .subscribe((result) => (this._menu = result));
-    }
-
-    private accordionMenuCloseAll() {
-        this.accordionMenu.multi = true;
-        try {
-            this.accordionMenu.closeAll();
-        } finally {
-            this.accordionMenu.multi = false;
-        }
-    }
-
-    homeClick() {
-        this.accordionMenuCloseAll();
-    }
+  homeClick() {
+    this.accordionMenuCloseAll();
+  }
 }

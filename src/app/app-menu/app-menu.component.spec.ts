@@ -7,39 +7,37 @@ import { TestingModule } from '../test/testing.module';
 import { AppMenuComponent } from './app-menu.component';
 
 describe('AppMenuComponent', () => {
-    let component: AppMenuComponent;
-    let fixture: ComponentFixture<AppMenuComponent>;
-    let backendServiceMock;
+  let component: AppMenuComponent;
+  let fixture: ComponentFixture<AppMenuComponent>;
+  let backendServiceMock;
 
-    beforeEach(async () => {
-        backendServiceMock = jasmine.createSpyObj(['get']);
-        await TestBed.configureTestingModule({
-            declarations: [AppMenuComponent],
-            imports: [TestingModule],
-            providers: [
-                { provide: BackendService, useValue: backendServiceMock },
-            ],
-        }).compileComponents();
-    });
+  beforeEach(async () => {
+    backendServiceMock = jasmine.createSpyObj(['get']);
+    await TestBed.configureTestingModule({
+      declarations: [AppMenuComponent],
+      imports: [TestingModule],
+      providers: [{ provide: BackendService, useValue: backendServiceMock }],
+    }).compileComponents();
+  });
 
-    beforeEach(() => {
-        backendServiceMock.get.and.returnValue(
-            of({
-                home: {
-                    id: 1,
-                    caption: '',
-                    routerLink: 'home',
-                },
-                categories: [],
-            })
-        );
+  beforeEach(() => {
+    backendServiceMock.get.and.returnValue(
+      of({
+        home: {
+          id: 1,
+          caption: '',
+          routerLink: 'home',
+        },
+        categories: [],
+      })
+    );
 
-        fixture = TestBed.createComponent(AppMenuComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+    fixture = TestBed.createComponent(AppMenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

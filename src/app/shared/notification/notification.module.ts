@@ -7,14 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { DialogModule } from '../dialog/dialog.module';
 
 @NgModule({
-    declarations: [NotificationComponent],
-    imports: [
-        CommonModule,
-        MatSnackBarModule,
-        MatButtonModule,
-        MatIconModule,
-        DialogModule,
-    ],
-    exports: [NotificationComponent],
+  declarations: [NotificationComponent],
+  imports: [
+    CommonModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+    DialogModule,
+  ],
+  exports: [NotificationComponent],
 })
 export class NotificationModule {}

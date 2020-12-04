@@ -10,18 +10,19 @@ import { FolderListComponent } from './folder-list/folder-list.component';
 import { FolderComponent } from './folder/folder.component';
 
 @NgModule({
-    declarations: [
-        FolderSelectionComponent,
-        FolderListComponent,
-        FolderComponent,
-    ],
-    imports: [
-        CommonModule,
-        HttpClientModule,
-        ReactiveFormsModule,
-        FoldersRoutingModule,
-        AppMaterialModule,
-    ],
-    entryComponents: [FolderSelectionComponent],
+  declarations: [
+    FolderSelectionComponent,
+    FolderListComponent,
+    FolderComponent,
+  ],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FoldersRoutingModule,
+    AppMaterialModule,
+  ],
+  exports: [],
+  entryComponents: [FolderSelectionComponent],
 })
 export class FoldersModule {}

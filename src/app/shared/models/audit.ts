@@ -1,4 +1,4 @@
 export interface Audit {
-    date: Date;
-    user: string;
+  date: Date;
+  user: string;
 }

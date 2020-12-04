@@ -1,4 +1,4 @@
 export interface FolderSelection {
-    folderId: number;
-    yearId: number;
+  folderId: number;
+  yearId: number;
 }
