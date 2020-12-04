@@ -12,8 +12,8 @@ export class FolderComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      (folderData: Folder) => (this.folder = folderData)
-    );
+    this.route.data.subscribe((folderData: Folder) => {
+      this.folder = folderData['0'];
+    });
   }
 }

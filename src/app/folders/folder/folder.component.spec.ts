@@ -5,7 +5,7 @@ import {
   tick,
   fakeAsync,
 } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { TestingModule } from 'src/app/test/testing.module';
 
 import { FolderComponent } from './folder.component';
@@ -23,7 +23,7 @@ describe('FolderComponent', () => {
       activatedRoute = jasmine.createSpyObj(
         'activatedRoute',
         {},
-        { data: of<Folder>(testingConstants.FOLDER_1_MOCK) }
+        { data: of<Data>({ '0': testingConstants.FOLDER_1_MOCK }) }
       );
       TestBed.configureTestingModule({
         declarations: [FolderComponent],
