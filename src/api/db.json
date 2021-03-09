@@ -42,7 +42,16 @@
             },
             "phones": [],
             "emails": [],
-            "identificationNumbers":[],
+            "identificationNumbers":[
+                {
+                    "name": "SIRET",
+                    "identificationNumber": "000-000-000-000-abecde"
+                },
+                {
+                    "name": "APE",
+                    "identificationNumber": "APE-8c"
+                }
+            ],
             "creation": {
                 "date": "2020-01-01T10:00:00Z",
                 "user": "testUser"

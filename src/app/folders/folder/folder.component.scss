@@ -28,3 +28,12 @@ h2 {
 .mat-divider-container {
     padding: 15px;
 }
+
+ul {
+    list-style-type: none;
+  }
+  
+ul li span {
+    float: left;
+    width: 80px;
+}

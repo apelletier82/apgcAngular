@@ -21,7 +21,9 @@
     <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef class="actions" ></mat-header-cell>
         <mat-cell *matCellDef="let folder" class="actions">                
-            <button mat-icon-button [routerLink]="['/folders', folder.folderId, 'edit']">
+            <button mat-icon-button 
+                [routerLink]="['/folders', folder.folderId, 'edit']"
+                matTooltip="Edit">
                 <mat-icon>edit</mat-icon>
             </button>
         </mat-cell>

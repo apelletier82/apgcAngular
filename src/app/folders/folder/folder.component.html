@@ -20,14 +20,12 @@
                 <mat-divider></mat-divider>
             </div>
             <h4>Identification numbers</h4>
-            <div>
-                <span *ngFor="let identificationNumber of folder.identificationNumbers">
-                    <div class="col">
-                        <span>{{identificationNumber.name}}</span>
-                        <span>{{identificationNumber.identificationNumber}}</span>
-                    </div>
-                </span>
-            </div>            
+            <ul>
+                <li *ngFor="let identificationNumber of folder.identificationNumbers">                    
+                    <span class="label-field">{{identificationNumber.name}}</span>
+                    {{identificationNumber.identificationNumber}}                
+                </li>
+            </ul>            
         </div>        
         <div class="mat-card-content-container" *ngIf="folder.address">
             <div class="mat-divider-container">

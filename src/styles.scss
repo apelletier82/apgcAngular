@@ -45,3 +45,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .row-default {
     @include flex(row);
 }
+
+.mat-row button {
+    display: none;
+}
+
+.mat-row:hover button {
+    display: block;
+}
