@@ -1,0 +1,15 @@
+@import "../../../../styles.scss";
+
+.list {
+    @include flex(column);
+    padding-left: 10px;
+}
+
+.address-line {
+    @include flex(row, space-between);
+    margin-bottom: 4px;
+}
+
+span {
+    margin-right: 5px;
+}

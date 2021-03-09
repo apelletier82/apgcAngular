@@ -8,6 +8,7 @@ import { FolderSelectionComponent } from './folder-selection/folder-selection.co
 import { HttpClientModule } from '@angular/common/http';
 import { FolderListComponent } from './folder-list/folder-list.component';
 import { FolderComponent } from './folder/folder.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FolderComponent } from './folder/folder.component';
     ReactiveFormsModule,
     FoldersRoutingModule,
     AppMaterialModule,
+    SharedModule,
   ],
   exports: [],
   entryComponents: [FolderSelectionComponent],

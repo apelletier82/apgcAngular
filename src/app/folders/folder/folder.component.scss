@@ -1,0 +1,30 @@
+@import '../../../styles.scss';
+
+mat-card, mat-divider {
+    width: 80vw;
+}
+
+h2 {
+    margin-left: 10px;
+}
+
+.header-card {
+    @include flex(row, space-between);
+}
+
+.header-card-title {
+    @include flex();
+    padding-right: 10vw;
+}
+
+.col {
+    @include flex(column, space-between);
+}
+
+.mat-card-content-container {
+    margin-top: 15px;
+}
+
+.mat-divider-container {
+    padding: 15px;
+}

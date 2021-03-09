@@ -1,1 +1,39 @@
-<p>folder works!</p>
+<mat-card>
+    <mat-card-header>
+        <div class="header-card">  
+            <div class="header-card-title">
+                <img class="small-Logo mat-elevation-z1" [src]="folder.logo" alt="\[logo\]" *ngIf="folder.logo">
+                <h2> {{folder.folderName}} </h2>
+            </div>
+            <span class="apgc-flex-space"></span>             
+                <button mat-icon-button matTooltip="Edit">                
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <a mat-icon-button routerLink="/folders" matTooltip="Close">
+                    <mat-icon>close</mat-icon>
+                </a>
+        </div>                
+    </mat-card-header>              
+    <mat-card-content>        
+        <div class="mat-card-content-container" *ngIf="folder.identificationNumbers?.length > 0">            
+            <div class="mat-divider-container">
+                <mat-divider></mat-divider>
+            </div>
+            <h4>Identification numbers</h4>
+            <div>
+                <span *ngFor="let identificationNumber of folder.identificationNumbers">
+                    <div class="col">
+                        <span>{{identificationNumber.name}}</span>
+                        <span>{{identificationNumber.identificationNumber}}</span>
+                    </div>
+                </span>
+            </div>            
+        </div>        
+        <div class="mat-card-content-container" *ngIf="folder.address">
+            <div class="mat-divider-container">
+                <mat-divider></mat-divider>
+            </div>
+            <apgc-address-display [address]="folder.address"></apgc-address-display>        
+        </div>
+    </mat-card-content>
+</mat-card>

@@ -14,12 +14,7 @@
     <ng-container matColumnDef="folderLocation">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Location</mat-header-cell>
         <mat-cell *matCellDef="let folder">
-            <div class="location">
-                <mat-icon class="countryFlag $`flag-icon flag-icon-{{folder.address.countryISO | lowercase}} flag-icon-squared`"></mat-icon>
-                <span>
-                    {{folder.address.city}}
-                </span>
-            </div>
+            <apgc-flag-location [countryIsoCode]="folder.address.countryISO" [location]="folder.address.city"></apgc-flag-location>
         </mat-cell>
         <mat-footer-cell *matFooterCellDef></mat-footer-cell>
     </ng-container>    

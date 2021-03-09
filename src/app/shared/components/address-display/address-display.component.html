@@ -1,0 +1,23 @@
+<div class="row-default">
+    <mat-icon>place</mat-icon>
+    <div class="list">
+        <span class="address-line" *ngIf="address.line1">{{address.line1}}</span>
+        <span class="address-line" *ngIf="address.line2">{{address.line2}}</span>
+        <span class="address-line" *ngIf="address.line3">{{address.line3}}</span>
+        <span >
+            <div class="address-line">
+                <span>{{address.city}}</span>
+                <span>{{address.state}}</span>
+                <span>{{address.zipCode}}</span>
+            </div>
+        </span>
+        <span>
+            <apgc-flag-location 
+                [countryIsoCode]="address.countryISO" 
+                [location]="address.country"
+                flagSize="20"
+            >
+            </apgc-flag-location>
+        </span>            
+    </div>
+</div>

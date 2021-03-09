@@ -18,6 +18,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const modules = [
   CommonModule,
@@ -39,6 +40,7 @@ const modules = [
   MatSnackBarModule,
   MatExpansionModule,
   MatProgressBarModule,
+  MatTooltipModule,
 ];
 
 @NgModule({
