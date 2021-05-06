@@ -16,7 +16,9 @@ export class FolderComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute) {}
 
   ngOnDestroy(): void {
-    this.routeDataSubscription?.unsubscribe();
+    if (this.routeDataSubscription) {
+      this.routeDataSubscription.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
