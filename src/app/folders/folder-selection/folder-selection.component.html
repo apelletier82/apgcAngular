@@ -14,7 +14,7 @@
                     <mat-list-option *ngFor="let folder of foldersSubject| async" [value]="folder?.folderId">
                         <div class="flex-space-between-center">
                             <span>
-                                <img class="small-Logo mat-elevation-z1" [src]="folder?.logo" alt="logo" *ngIf="folder?.logo">                             
+                                <img class="small-logo mat-elevation-z1" [src]="folder?.logo" alt="logo" *ngIf="folder?.logo">                             
                                 {{ folder?.folderName || '' }}                            
                             </span>
                             <mat-spinner diameter="30" *ngIf="selectedFolderId===folder.folderId && loadingYears | async"></mat-spinner>

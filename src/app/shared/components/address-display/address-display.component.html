@@ -1,6 +1,7 @@
 <div class="row-default">
     <mat-icon class="icon-field">place</mat-icon>
     <div class="list">
+        <h4 *ngIf="address.name">{{address.name}}</h4>
         <span class="address-line" *ngIf="address.line1">{{address.line1}}</span>
         <span class="address-line" *ngIf="address.line2">{{address.line2}}</span>
         <span class="address-line" *ngIf="address.line3">{{address.line3}}</span>

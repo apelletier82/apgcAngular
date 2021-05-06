@@ -1,7 +1,7 @@
 @import '../../../styles.scss';
 
-mat-card, mat-divider {
-    width: 80vw;
+mat-card {
+    width: 70vw;
 }
 
 h2 {
@@ -21,12 +21,12 @@ h2 {
     @include flex(column, space-between);
 }
 
-.mat-card-content-container {
-    margin-top: 15px;
+.row {
+    @include flex(row, space-between);
 }
 
-.mat-divider-container {
-    padding: 15px;
+.mat-card-content-container {
+    margin-top: 15px;
 }
 
 ul {
