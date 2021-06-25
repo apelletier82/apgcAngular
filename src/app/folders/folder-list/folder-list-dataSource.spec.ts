@@ -1,12 +1,12 @@
-import { FolderListDataSource } from './folder-list-dataSource';
 import { of } from 'rxjs';
-import { Folder } from '../folder';
+import FolderListDataSource from './folder-list-dataSource';
+import Folder from '../folder';
+
+const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
 describe('FolderListDataSource', () => {
   let instance: FolderListDataSource;
   let folderServiceMock: any;
-
-  const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
 
   beforeEach(() => {
     folderServiceMock = jasmine.createSpyObj('folderServiceMock', [

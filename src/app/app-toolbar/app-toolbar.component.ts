@@ -7,43 +7,53 @@ import {
   EventEmitter,
   OnDestroy,
 } from '@angular/core';
-import { FolderService } from '../folders/folder.service';
-import { FolderSelectionService } from 'src/app/folders/folder-selection/folder-selection.service';
+import FolderSelectionService from 'src/app/folders/folder-selection/folder-selection.service';
 import { Subscription } from 'rxjs';
-import { AppService } from 'src/app/app.service';
-import { Folder } from 'src/app/folders/folder';
-import { FolderYear } from 'src/app/folders/folder-year';
+import AppService from 'src/app/app.service';
+import Folder from 'src/app/folders/folder';
+import FolderYear from 'src/app/folders/folder-year';
+import FolderService from '../folders/folder.service';
 
 @Component({
   selector: 'apgc-app-toolbar',
   templateUrl: './app-toolbar.component.html',
   styleUrls: ['./app-toolbar.component.scss'],
 })
-export class AppToolbarComponent implements OnInit, OnDestroy {
+export default class AppToolbarComponent implements OnInit, OnDestroy {
   private _folderId: number;
+
   private _folderName: string;
+
   private _folderLogo: string;
+
   private _yearId: number;
+
   private _yearName: string;
 
   private folderSubscription: Subscription;
+
   private yearSubscription: Subscription;
 
   @Input() title: string;
+
   @Output() menuClicked: EventEmitter<any> = new EventEmitter();
 
   public get folderId(): number {
     return this._folderId;
   }
+
   public get folderName(): string {
     return this._folderName;
   }
+
   public get folderLogo(): string {
     return this._folderLogo;
   }
+
   public get yearId(): number {
     return this._yearId;
   }
+
   public get yearName(): string {
     return this._yearName;
   }
@@ -51,7 +61,7 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
   constructor(
     private folderService: FolderService,
     private folderSelectionService: FolderSelectionService,
-    private appService: AppService
+    private appService: AppService,
   ) {}
 
   private updateFolderInformation(folder: Folder) {
@@ -78,7 +88,7 @@ export class AppToolbarComponent implements OnInit, OnDestroy {
             .getFolder(folderId)
             .subscribe((folder) => this.updateFolderInformation(folder));
         }
-      }
+      },
     );
 
     this.yearSubscription = this.appService.yearId$.subscribe((yearId) => {

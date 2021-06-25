@@ -2,23 +2,23 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { AppService } from 'src/app/app.service';
-import { FolderService } from '../folder.service';
-import { FolderSelection } from './folder-selection';
-import { FolderSelectionComponent } from './folder-selection.component';
+import AppService from 'src/app/app.service';
+import FolderService from '../folder.service';
+import FolderSelection from './folder-selection';
+import FolderSelectionComponent from './folder-selection.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FolderSelectionService {
+export default class FolderSelectionService {
   constructor(
     public dialog: MatDialog,
     private appService: AppService,
-    private folderService: FolderService
+    private folderService: FolderService,
   ) {}
 
   openFolderSelectionDialog(
-    folderSelection: FolderSelection
+    folderSelection: FolderSelection,
   ): Observable<FolderSelection> {
     return this.folderService.getFolderList().pipe(
       switchMap(() => {
@@ -30,27 +30,27 @@ export class FolderSelectionService {
         });
 
         return dialogRef.afterClosed().pipe(map((res: FolderSelection) => res));
-      })
+      }),
     );
   }
 
   selectApplicationFolder(
-    folderSelection?: FolderSelection
+    folderSelection?: FolderSelection,
   ): Observable<FolderSelection> {
     return this.openFolderSelectionDialog(
       folderSelection ?? {
         folderId: this.appService.folderId,
         yearId: this.appService.yearId,
-      }
+      },
     ).pipe(
       tap((result) => {
         if (result) {
           this.appService.updateAppFolderContext(
             result.folderId,
-            result.yearId
+            result.yearId,
           );
         }
-      })
+      }),
     );
   }
 }

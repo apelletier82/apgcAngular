@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NotificationComponent } from './notification.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { DialogModule } from '../dialog/dialog.module';
+import NotificationComponent from './notification.component';
+import DialogModule from '../dialog/dialog.module';
 
 @NgModule({
   declarations: [NotificationComponent],
@@ -17,4 +17,4 @@ import { DialogModule } from '../dialog/dialog.module';
   ],
   exports: [NotificationComponent],
 })
-export class NotificationModule {}
+export default class NotificationModule {}

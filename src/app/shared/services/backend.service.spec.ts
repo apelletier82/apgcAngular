@@ -3,11 +3,13 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { Folder } from 'src/app/folders/folder';
-import { environment } from 'src/environments/environment';
-import { NotificationService } from '../notification/notification.service';
+import Folder from 'src/app/folders/folder';
+import environment from 'src/environments/environment';
+import NotificationService from '../notification/notification.service';
 
-import { BackendService } from './backend.service';
+import BackendService from './backend.service';
+
+const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
 describe('BackendService', () => {
   let service: BackendService;
@@ -15,7 +17,6 @@ describe('BackendService', () => {
   let notificationServiceMock;
 
   const FOLDER_API = `${environment.apiUrl}${environment.apiFolderContext}`;
-  const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
   const FOLDER_MOCK = FOLDERS_MOCK.find((folder) => folder.folderId === 1);
 
   beforeEach(() => {

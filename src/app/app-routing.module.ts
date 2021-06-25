@@ -8,8 +8,11 @@ import {
   FoldersRoutingModule,
   folderRoutes,
 } from './folders/folders-routing.module';
-import { homeRoutes, HomeRoutingModule } from './home/home-routing.module';
-import { HomeComponent } from './home/home/home.component';
+import {
+  HomeRoutingModule,
+  homeRoutes,
+} from './home/home-routing.module';
+import HomeComponent from './home/home/home.component';
 
 const emptyRoute: Route = {
   path: '',
@@ -35,6 +38,10 @@ export const routes: Routes = []
     ContactsRoutingModule,
     FoldersRoutingModule,
   ],
-  exports: [RouterModule], // exporting RouterModule will give access to it outside from this module
+  exports: [
+    RouterModule,
+    HomeRoutingModule,
+    ContactsRoutingModule,
+    FoldersRoutingModule], // exporting RouterModule will give access to it outside from this module
 })
-export class AppRoutingModule {}
+export default class AppRoutingModule {}

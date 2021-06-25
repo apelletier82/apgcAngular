@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
-import { NotificationConfigType } from './notification-config-type';
+import NotificationConfigType from './notification-config-type';
 
-export interface NotificationConfig {
+export default interface NotificationConfig {
   type?: NotificationConfigType;
   message?: string;
   template?: TemplateRef<any>;

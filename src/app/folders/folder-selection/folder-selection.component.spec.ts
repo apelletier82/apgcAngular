@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FolderSelectionComponent } from './folder-selection.component';
-import { FoldersModule } from '../folders.module';
-import { FolderService } from '../folder.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { Folder } from '../folder';
-import { map } from 'rxjs/operators';
-import { TestingModule } from 'src/app/test/testing.module';
-import { FolderYear } from '../folder-year';
+import TestingModule from 'src/app/test/testing.module';
+import FolderSelectionComponent from './folder-selection.component';
+import FoldersModule from '../folders.module';
+import FolderService from '../folder.service';
+import Folder from '../folder';
+import FolderYear from '../folder-year';
+
+const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
+const FOLDER_YEARS_MOCK = require('src/tests/mock/folders/folderYears.json');
 
 describe('FolderSelectionComponent', () => {
   let component: FolderSelectionComponent;
@@ -16,8 +18,6 @@ describe('FolderSelectionComponent', () => {
   let mockDialogRef;
 
   const folderData = { folderId: undefined, yearId: undefined };
-  const FOLDERS_MOCK = require('src/tests/mock/folders/folders.json');
-  const FOLDER_YEARS_MOCK = require('src/tests/mock/folders/folderYears.json');
 
   beforeEach(
     waitForAsync(() => {
@@ -25,7 +25,7 @@ describe('FolderSelectionComponent', () => {
       folderServiceMock = jasmine.createSpyObj(
         'folderServiceMock',
         ['getFolderList', 'getFolder', 'getFolderYears'],
-        { folderList$: of<Folder[]>(FOLDERS_MOCK) }
+        { folderList$: of<Folder[]>(FOLDERS_MOCK) },
       );
       TestBed.configureTestingModule({
         declarations: [FolderSelectionComponent],
@@ -36,7 +36,7 @@ describe('FolderSelectionComponent', () => {
           { provide: MAT_DIALOG_DATA, useValue: folderData },
         ],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('FolderSelectionComponent', () => {
     folderServiceMock.getFolderList.and.returnValue(of<Folder[]>(FOLDERS_MOCK));
     folderServiceMock.getFolder.and.returnValue(of<Folder>(FOLDERS_MOCK[0]));
     folderServiceMock.getFolderYears.and.returnValue(
-      of<FolderYear[]>(FOLDER_YEARS_MOCK)
+      of<FolderYear[]>(FOLDER_YEARS_MOCK),
     );
 
     fixture.detectChanges();

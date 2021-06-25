@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { emit, hasUncaughtExceptionCaptureCallback } from 'process';
 import { of } from 'rxjs';
-import { BackendService } from '../shared/services/backend.service';
-import { TestingModule } from '../test/testing.module';
+import BackendService from '../shared/services/backend.service';
+import TestingModule from '../test/testing.module';
 
-import { AppMenuComponent } from './app-menu.component';
+import AppMenuComponent from './app-menu.component';
 
 describe('AppMenuComponent', () => {
   let component: AppMenuComponent;
@@ -29,7 +28,7 @@ describe('AppMenuComponent', () => {
           routerLink: 'home',
         },
         categories: [],
-      })
+      }),
     );
 
     fixture = TestBed.createComponent(AppMenuComponent);

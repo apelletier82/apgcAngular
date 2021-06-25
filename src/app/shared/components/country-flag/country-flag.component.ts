@@ -7,8 +7,9 @@ export const defaultCountryFlagSize = 24;
   templateUrl: './country-flag.component.html',
   styleUrls: ['./country-flag.component.scss'],
 })
-export class CountryFlagComponent {
+export default class CountryFlagComponent {
   @Input() countryIsoCode: string;
+
   @Input() size = defaultCountryFlagSize;
 
   private getSize(): number {
@@ -17,8 +18,8 @@ export class CountryFlagComponent {
 
   public getStyleSizeInPixel() {
     return {
-      height: this.getSize().toString() + 'px',
-      width: this.getSize().toString() + 'px',
+      height: `${this.getSize().toString()}px`,
+      width: `${this.getSize().toString()}px`,
     };
   }
 }

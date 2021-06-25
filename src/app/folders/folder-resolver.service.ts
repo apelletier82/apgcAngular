@@ -5,17 +5,19 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Folder } from './folder';
-import { FolderService } from './folder.service';
+import Folder from './folder';
+import FolderService from './folder.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FolderResolverService implements Resolve<Folder> {
+export default class FolderResolverService implements Resolve<Folder> {
   constructor(private folderService: FolderService) {}
+
   resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    state: RouterStateSnapshot,
   ): Observable<Folder> {
     return this.folderService.getFolder(+route?.paramMap?.get('id'));
   }

@@ -8,9 +8,9 @@ describe('LabelFieldDisplayComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LabelFieldDisplayComponent ]
+      declarations: [LabelFieldDisplayComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

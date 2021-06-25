@@ -1,4 +1,4 @@
-export interface FolderSelection {
+export default interface FolderSelection {
   folderId: number;
   yearId: number;
 }

@@ -1,36 +1,39 @@
 /* eslint-disable no-underscore-dangle */
 import { DataSource } from '@angular/cdk/table';
-import { Folder } from '../folder';
-import { CollectionViewer } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, of } from 'rxjs';
-import { FolderService } from '../folder.service';
 import { finalize, delay, catchError } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
+import FolderService from '../folder.service';
+import Folder from '../folder';
 
-export class FolderListDataSource implements DataSource<Folder> {
+export default class FolderListDataSource implements DataSource<Folder> {
   private foldersSubject = new BehaviorSubject<Folder[]>([]);
+
   private folderSubjectLoading = new BehaviorSubject<boolean>(false);
+
   private _sort: MatSort;
 
   foldersLoading$ = this.folderSubjectLoading.asObservable();
+
   get sort(): MatSort {
     return this._sort;
   }
+
   set sort(value: MatSort) {
     this._sort?.sortChange?.unsubscribe();
     this._sort = value;
-    this._sort.sortChange.subscribe(() =>
-      this.foldersSubject.next(this.sortFolders(this.foldersSubject.value))
-    );
+    this._sort.sortChange.subscribe(() => this.foldersSubject.next(
+      this.sortFolders(this.foldersSubject.value),
+    ));
   }
 
   constructor(private folderService: FolderService) {}
 
-  connect(_: CollectionViewer): Observable<Folder[] | readonly Folder[]> {
+  connect(): Observable<Folder[] | readonly Folder[]> {
     return this.foldersSubject.asObservable();
   }
 
-  disconnect(_: CollectionViewer): void {
+  disconnect(): void {
     this.foldersSubject.complete();
     this.folderSubjectLoading.complete();
   }
@@ -72,13 +75,14 @@ export class FolderListDataSource implements DataSource<Folder> {
       .pipe(
         catchError(() => of([])),
         delay(250),
-        finalize(() => this.updateFolderLoadingSubject(false))
+        finalize(() => this.updateFolderLoadingSubject(false)),
       )
       .subscribe((folders: Folder[]) => {
         if (this._sort) {
-          folders = this.sortFolders(folders);
+          this.foldersSubject.next(this.sortFolders(folders));
+        } else {
+          this.foldersSubject.next(folders);
         }
-        this.foldersSubject.next(folders);
       });
   }
 }

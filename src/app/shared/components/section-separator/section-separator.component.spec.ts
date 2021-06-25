@@ -8,9 +8,9 @@ describe('SectionSeparatorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SectionSeparatorComponent ]
+      declarations: [SectionSeparatorComponent],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

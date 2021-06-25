@@ -5,8 +5,10 @@ import { Component, Input } from '@angular/core';
   templateUrl: './flag-location.component.html',
   styleUrls: ['./flag-location.component.scss'],
 })
-export class FlagLocationComponent {
+export default class FlagLocationComponent {
   @Input() countryIsoCode: string;
+
   @Input() location: string;
+
   @Input() flagSize: number;
 }

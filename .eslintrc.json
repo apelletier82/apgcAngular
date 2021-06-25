@@ -21,6 +21,7 @@
         "airbnb-typescript/base"
       ],
       "rules": {
+        "no-plusplus":"warn",
         "@angular-eslint/directive-selector": [
           "error",
           {

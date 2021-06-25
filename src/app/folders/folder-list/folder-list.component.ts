@@ -6,29 +6,29 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AppService } from 'src/app/app.service';
-import { Folder } from '../folder';
-import { FolderService } from '../folder.service';
-import { FolderListDataSource } from './folder-list-dataSource';
+import AppService from 'src/app/app.service';
+import Folder from '../folder';
+import FolderService from '../folder.service';
+import FolderListDataSource from './folder-list-dataSource';
 
 @Component({
   selector: 'apgc-folder-list',
   templateUrl: './folder-list.component.html',
   styleUrls: ['./folder-list.component.scss'],
 })
-export class FolderListComponent implements OnInit, OnDestroy, AfterViewInit {
+export default class FolderListComponent implements OnInit, OnDestroy, AfterViewInit {
   private folderLoadingSubscription: Subscription;
 
   public readonly displayColumns = ['folderName', 'folderLocation', 'actions'];
+
   folderDataSource: FolderListDataSource;
 
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private folderService: FolderService,
-    private appService: AppService
+    private appService: AppService,
   ) {
     this.folderDataSource = new FolderListDataSource(this.folderService);
   }
@@ -42,7 +42,7 @@ export class FolderListComponent implements OnInit, OnDestroy, AfterViewInit {
           } else {
             this.appService.endLoading();
           }
-        }
+        },
       );
     }, 1);
   }
@@ -60,6 +60,7 @@ export class FolderListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.folderDataSource.sort = this.sort;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   trackByFolderId(_: number, folder: Folder): any {
     return folder.folderId;
   }

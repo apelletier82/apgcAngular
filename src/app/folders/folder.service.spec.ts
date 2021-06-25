@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BackendService } from '../shared/services/backend.service';
+import BackendService from '../shared/services/backend.service';
 import { Folder } from './folder';
-import { FolderService } from './folder.service';
+import FolderService from './folder.service';
+
+const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
 describe('FoldersService', () => {
   let service: FolderService;
   let backendServiceMock: any;
-
-  const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
   beforeEach(() => {
     backendServiceMock = jasmine.createSpyObj('backendService', ['get']);
@@ -31,7 +31,7 @@ describe('FoldersService', () => {
       expect(folders).toBeTruthy('Folders mock is not empty');
       expect(folders.length).toBeGreaterThan(
         0,
-        'Folders mock contains at least 2 folders'
+        'Folders mock contains at least 2 folders',
       );
       service.folderList$.subscribe((storedFolders) => {
         expect(storedFolders).toBeTruthy();

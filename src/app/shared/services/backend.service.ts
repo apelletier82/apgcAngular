@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { NotificationService } from '../notification/notification.service';
+import NotificationService from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BackendService {
+export default class BackendService {
   constructor(
     private httpClient: HttpClient,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   public get<T>(apiUrl: string): Observable<T> {
@@ -18,7 +18,7 @@ export class BackendService {
       catchError((error) => {
         this.catchError(error);
         return of(null);
-      })
+      }),
     );
   }
 
@@ -27,7 +27,7 @@ export class BackendService {
       catchError((error) => {
         this.catchError(error);
         return of(null);
-      })
+      }),
     );
   }
 
@@ -36,7 +36,7 @@ export class BackendService {
       catchError((error) => {
         this.catchError(error);
         return of(null);
-      })
+      }),
     );
   }
 
@@ -45,12 +45,11 @@ export class BackendService {
       catchError((error) => {
         this.catchError(error);
         return of(null as ArrayBuffer);
-      })
+      }),
     );
   }
 
   private catchError(error: any) {
-    console.log(error);
     this.notificationService.showException('Data error', error?.message || '');
   }
 }

@@ -1,6 +1,6 @@
-import { Audit } from '../shared/models/audit';
+import Audit from '../shared/models/audit';
 
-export interface FolderYear {
+export default interface FolderYear {
   folderId: number;
   yearId: number;
   year: number;

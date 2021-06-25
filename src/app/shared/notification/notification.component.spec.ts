@@ -3,10 +3,10 @@ import {
   MatSnackBarRef,
   MAT_SNACK_BAR_DATA,
 } from '@angular/material/snack-bar';
-import { TestingModule } from 'src/app/test/testing.module';
-import { NotificationConfigType } from './notification-config-type';
+import TestingModule from 'src/app/test/testing.module';
+import NotificationConfigType from './notification-config-type';
 
-import { NotificationComponent } from './notification.component';
+import NotificationComponent from './notification.component';
 
 describe('NotificationComponent', () => {
   let component: NotificationComponent;

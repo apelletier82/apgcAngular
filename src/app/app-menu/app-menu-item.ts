@@ -1,4 +1,4 @@
-export interface AppMenuItem {
+export default interface AppMenuItem {
   id: number;
   caption: string;
   icon?: string;

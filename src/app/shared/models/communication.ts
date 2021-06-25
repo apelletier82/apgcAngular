@@ -1,4 +1,4 @@
-export interface Communication {
+export default interface Communication {
   name: string;
   value: string;
 }

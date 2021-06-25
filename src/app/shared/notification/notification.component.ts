@@ -1,17 +1,17 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   MatSnackBarRef,
   MAT_SNACK_BAR_DATA,
 } from '@angular/material/snack-bar';
-import { NotificationConfig } from './notification-config';
-import { NotificationConfigTypeCast } from './notification-config-type-helper';
+import NotificationConfigTypeCast from './notification-config-type-helper';
+import NotificationConfig from './notification-config';
 
 @Component({
   selector: 'apgc-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
 })
-export class NotificationComponent {
+export default class NotificationComponent {
   private readonly notificationContainerCssClass = 'notification-container';
 
   get cssClass(): string {
@@ -21,12 +21,13 @@ export class NotificationComponent {
 
   constructor(
     private snackBarRef: MatSnackBarRef<NotificationComponent>,
-    @Inject(MAT_SNACK_BAR_DATA) public data: NotificationConfig
+    @Inject(MAT_SNACK_BAR_DATA) public data: NotificationConfig,
   ) {}
 
   close(): void {
     this.snackBarRef.dismiss();
   }
+
   onActionClick(): void {
     this.snackBarRef.dismissWithAction();
   }

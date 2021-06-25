@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../shared/guards/auth.guard';
-import { FolderListComponent } from './folder-list/folder-list.component';
-import { FolderResolverService } from './folder-resolver.service';
-import { FolderComponent } from './folder/folder.component';
+import AuthGuard from '../shared/guards/auth.guard';
+import FolderListComponent from './folder-list/folder-list.component';
+import FolderResolverService from './folder-resolver.service';
+import FolderComponent from './folder/folder.component';
 
 export const folderRoutes: Routes = [
   {

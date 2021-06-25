@@ -1,6 +1,6 @@
-import { DialogAction } from './dialog-action';
+import DialogAction from './dialog-action';
 
-export interface DialogData {
+export default interface DialogData {
   title?: string;
   description: string;
   actions?: DialogAction[];

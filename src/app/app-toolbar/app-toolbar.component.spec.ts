@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AppToolbarComponent } from './app-toolbar.component';
-import { FoldersModule } from '../folders/folders.module';
-import { TestingModule } from 'src/app/test/testing.module';
+import TestingModule from 'src/app/test/testing.module';
+import AppToolbarComponent from './app-toolbar.component';
+import FoldersModule from '../folders/folders.module';
 
 describe('AppToolbarComponent', () => {
   let component: AppToolbarComponent;
@@ -14,7 +14,7 @@ describe('AppToolbarComponent', () => {
         declarations: [AppToolbarComponent],
         imports: [FoldersModule, TestingModule],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

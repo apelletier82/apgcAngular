@@ -4,26 +4,26 @@ import {
   MatSnackBarConfig,
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
-import { DialogService } from '../dialog/dialog.service';
-import { NotificationConfig } from './notification-config';
-import { NotificationConfigType } from './notification-config-type';
-import { NotificationConfigTypeCast } from './notification-config-type-helper';
-import { NotificationComponent } from './notification.component';
+import DialogService from '../dialog/dialog.service';
+import NotificationConfig from './notification-config';
+import NotificationConfigType from './notification-config-type';
+import NotificationConfigTypeCast from './notification-config-type-helper';
+import NotificationComponent from './notification.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationService {
+export default class NotificationService {
   constructor(
     private snackBar: MatSnackBar,
-    private dialogService: DialogService
+    private dialogService: DialogService,
   ) {}
 
   showInformation(message: string, action?: string): MatSnackBarRef<any> {
     return this.customShowSnackBar(
       NotificationConfigType.information,
       message,
-      action
+      action,
     );
   }
 
@@ -31,7 +31,7 @@ export class NotificationService {
     return this.customShowSnackBar(
       NotificationConfigType.success,
       message,
-      action
+      action,
     );
   }
 
@@ -39,7 +39,7 @@ export class NotificationService {
     return this.customShowSnackBar(
       NotificationConfigType.warning,
       message,
-      action
+      action,
     );
   }
 
@@ -47,7 +47,7 @@ export class NotificationService {
     return this.customShowSnackBar(
       NotificationConfigType.error,
       message,
-      action
+      action,
     );
   }
 
@@ -77,7 +77,7 @@ export class NotificationService {
   showNotification(
     message: string,
     action?: string,
-    config?: MatSnackBarConfig<any>
+    config?: MatSnackBarConfig<any>,
   ): MatSnackBarRef<any> {
     return this.snackBar.open(message, action, config);
   }
@@ -95,7 +95,7 @@ export class NotificationService {
   private customShowSnackBar(
     type: NotificationConfigType,
     message: string,
-    action?: string
+    action?: string,
   ): MatSnackBarRef<any> {
     const config = {
       panelClass: NotificationConfigTypeCast.toString(type),

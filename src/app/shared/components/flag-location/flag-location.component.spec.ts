@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FlagLocationComponent } from './flag-location.component';
+import FlagLocationComponent from './flag-location.component';
 
 describe('FlagLocationComponent', () => {
   let component: FlagLocationComponent;

@@ -1,27 +1,32 @@
+/* eslint-disable max-classes-per-file */
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
-import { AppService } from 'src/app/app.service';
-import { TestingModule } from 'src/app/test/testing.module';
-import { FolderSelectionService } from './folder-selection.service';
+import AppService from 'src/app/app.service';
+import TestingModule from 'src/app/test/testing.module';
+import FolderSelectionService from './folder-selection.service';
 
 class FolderDialogMock {
+  private readonly openResult = {
+    afterClosed() {
+      return of({ folderId: 1, yearId: 1 });
+    },
+  };
+
   open() {
-    return {
-      afterClosed() {
-        return of({ folderId: 1, yearId: 1 });
-      },
-    };
+    return this.openResult;
   }
 }
 
 class FolderDialogCancelMock {
+  private readonly openResult = {
+    afterClosed() {
+      return of(undefined);
+    },
+  };
+
   open() {
-    return {
-      afterClosed() {
-        return of(undefined);
-      },
-    };
+    return this.openResult;
   }
 }
 

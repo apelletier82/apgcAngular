@@ -6,16 +6,17 @@ import * as localStorageConstant from './shared/constants/localStorage.constant'
 @Injectable({
   providedIn: 'root',
 })
-export class AppService {
+export default class AppService {
   private folderIdSubject = new BehaviorSubject<number>(
     +localStorage?.getItem(
-      localStorageConstant.storageAppContextFolderIdKeyName
-    ) ?? 0
+      localStorageConstant.storageAppContextFolderIdKeyName,
+    ) ?? 0,
   );
+
   private yearIdSubject = new BehaviorSubject<number>(
     +localStorage?.getItem(
-      localStorageConstant.storageAppContextYearIdKeyName
-    ) ?? 0
+      localStorageConstant.storageAppContextYearIdKeyName,
+    ) ?? 0,
   );
 
   private loadingSubject = new BehaviorSubject<number>(0);
@@ -42,26 +43,23 @@ export class AppService {
       .pipe(map((value) => (value ?? 0) > 0));
   }
 
-  constructor() {}
-
   updateAppFolderContext(folderId: number, yearId: number) {
     this.folderIdSubject.next(folderId);
     this.yearIdSubject.next(yearId);
 
     localStorage.setItem(
       localStorageConstant.storageAppContextFolderIdKeyName,
-      folderId.toString()
+      folderId.toString(),
     );
     localStorage.setItem(
       localStorageConstant.storageAppContextYearIdKeyName,
-      yearId.toString()
+      yearId.toString(),
     );
   }
 
   beginLoading() {
-    let loading =
-      (this.loadingSubject.value ?? 0) < 0 ? 0 : this.loadingSubject.value;
-    loading++;
+    let loading = (this.loadingSubject.value ?? 0) < 0 ? 0 : this.loadingSubject.value;
+    loading += 1;
     this.loadingSubject.next(loading);
   }
 
@@ -70,7 +68,7 @@ export class AppService {
     if (loading <= 0) {
       return;
     }
-    loading--;
+    loading -= 1;
     this.loadingSubject.next(loading);
   }
 }

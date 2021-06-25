@@ -6,12 +6,11 @@ import {
   fakeAsync,
 } from '@angular/core/testing';
 import { ActivatedRoute, Data } from '@angular/router';
-import { TestingModule } from 'src/app/test/testing.module';
+import TestingModule from 'src/app/test/testing.module';
 
-import { FolderComponent } from './folder.component';
-import * as testingConstants from '../../test/testing.constants';
 import { of } from 'rxjs';
-import { Folder } from '../folder';
+import FolderComponent from './folder.component';
+import * as testingConstants from '../../test/testing.constants';
 
 describe('FolderComponent', () => {
   let activatedRoute;
@@ -23,14 +22,14 @@ describe('FolderComponent', () => {
       activatedRoute = jasmine.createSpyObj(
         'activatedRoute',
         {},
-        { data: of<Data>({ '0': testingConstants.FOLDER_1_MOCK }) }
+        { data: of<Data>({ 0: testingConstants.FOLDER_1_MOCK }) },
       );
       TestBed.configureTestingModule({
         declarations: [FolderComponent],
         imports: [TestingModule],
         providers: [{ provide: ActivatedRoute, useValue: activatedRoute }],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

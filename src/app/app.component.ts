@@ -1,4 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component, OnDestroy, OnInit, ViewChild,
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
   Router,
@@ -9,18 +11,20 @@ import {
   NavigationStart,
 } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { AppService } from './app.service';
+import AppService from './app.service';
 
 @Component({
   selector: 'apgc-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
+export default class AppComponent implements OnInit, OnDestroy {
   private routerSubscription: Subscription;
+
   private sideNavClosing = false;
 
   title = 'apgc';
+
   @ViewChild(MatSidenav) sideNav: MatSidenav;
 
   get isLoading$(): Observable<boolean> {
@@ -32,14 +36,15 @@ export class AppComponent implements OnInit, OnDestroy {
       this.sideNav?.close();
     }
   }
+
   private checkRouterEvent(event: Event) {
     if (event instanceof NavigationStart) {
       this.closeSideNav();
       this.appService.beginLoading();
     } else if (
-      event instanceof NavigationEnd ||
-      event instanceof NavigationCancel ||
-      event instanceof NavigationError
+      event instanceof NavigationEnd
+      || event instanceof NavigationCancel
+      || event instanceof NavigationError
     ) {
       this.appService.endLoading();
     }
@@ -53,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routerSubscription = this.router.events.subscribe(
-      (routerEvent: Event) => this.checkRouterEvent(routerEvent)
+      (routerEvent: Event) => this.checkRouterEvent(routerEvent),
     );
   }
 }

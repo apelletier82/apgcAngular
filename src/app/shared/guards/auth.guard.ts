@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -10,15 +11,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export default class AuthGuard implements CanActivate {
+  private readonly canActivateGuard = true;
+
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
+    state: RouterStateSnapshot,
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return true;
+    return this.canActivateGuard;
   }
 }

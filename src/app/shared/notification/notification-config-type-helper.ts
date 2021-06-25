@@ -1,8 +1,8 @@
-import { NotificationConfigType } from './notification-config-type';
+import NotificationConfigType from './notification-config-type';
 
-export class NotificationConfigTypeCast {
+export default class NotificationConfigTypeCast {
   public static toString(
-    notificationConfigType: NotificationConfigType
+    notificationConfigType: NotificationConfigType,
   ): string {
     let result = '';
 

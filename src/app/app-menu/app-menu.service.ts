@@ -1,14 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { BackendService } from '../shared/services/backend.service';
-import { AppMenu } from './app-menu';
+import environment from 'src/environments/environment';
+import BackendService from '../shared/services/backend.service';
+import AppMenu from './app-menu';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppMenuService implements OnDestroy {
+export default class AppMenuService implements OnDestroy {
   private readonly emptyMenu: AppMenu = {
     home: {
       id: 1,
@@ -30,10 +30,10 @@ export class AppMenuService implements OnDestroy {
     return this.menuSubject?.value
       ? this.menuSubject.asObservable()
       : this.backendService
-          .get<AppMenu>(`${environment.assets}${environment.menu}`)
-          .pipe(
-            tap((result) => this.menuSubject.next(result)),
-            map((result) => result ?? this.emptyMenu)
-          );
+        .get<AppMenu>(`${environment.assets}${environment.menu}`)
+        .pipe(
+          tap((result) => this.menuSubject.next(result)),
+          map((result) => result ?? this.emptyMenu),
+        );
   }
 }

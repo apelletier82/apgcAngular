@@ -1,6 +1,6 @@
-import { AppMenuItem } from './app-menu-item';
+import AppMenuItem from './app-menu-item';
 
-export interface AppMenuCategory {
+export default interface AppMenuCategory {
   id: number;
   caption: string;
   icon?: string;

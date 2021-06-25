@@ -1,18 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { TestingModule } from 'src/app/test/testing.module';
-import { DialogData } from './dialog-data';
-
-import { DialogService } from './dialog.service';
+import TestingModule from 'src/app/test/testing.module';
+import DialogData from './dialog-data';
+import DialogService from './dialog.service';
 
 class DialogMock {
+  private readonly openResult = {
+    afterClose(): Observable<string> {
+      return of('Ok');
+    },
+  };
+
   open(): any {
-    return {
-      afterClosed(): Observable<string> {
-        return of('Ok');
-      },
-    };
+    return this.openResult;
   }
 }
 

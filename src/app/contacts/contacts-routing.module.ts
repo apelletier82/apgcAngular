@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContactListComponent } from './contact-list/contact-list.component';
 import { Routes } from '@angular/router';
+import ContactListComponent from './contact-list/contact-list.component';
 
 export const contactRoutes: Routes = [
   {

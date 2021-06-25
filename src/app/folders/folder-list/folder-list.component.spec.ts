@@ -1,17 +1,17 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FolderListComponent } from './folder-list.component';
-import { FolderService } from '../folder.service';
-import { Folder } from '../folder';
 import { of } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
-import { TestingModule } from 'src/app/test/testing.module';
+import TestingModule from 'src/app/test/testing.module';
+import FolderListComponent from './folder-list.component';
+import FolderService from '../folder.service';
+import Folder from '../folder';
+
+const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
 describe('FolderListComponent', () => {
   let component: FolderListComponent;
   let fixture: ComponentFixture<FolderListComponent>;
   let folderServiceMock;
-  const FOLDERS_MOCK: Folder[] = require('src/tests/mock/folders/folders.json');
 
   beforeEach(
     waitForAsync(() => {
@@ -25,7 +25,7 @@ describe('FolderListComponent', () => {
         imports: [TestingModule],
         providers: [{ provide: FolderService, useValue: folderServiceMock }],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {
@@ -50,7 +50,7 @@ describe('FolderListComponent', () => {
   it('should return folderId on trackByFolder', () => {
     const folderId = 1;
     const folder = FOLDERS_MOCK.find(
-      (searchFolder) => searchFolder.folderId === folderId
+      (searchFolder) => searchFolder.folderId === folderId,
     );
 
     expect(component.trackByFolderId(1, folder)).toBe(folderId);

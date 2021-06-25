@@ -11,7 +11,7 @@ describe('ContactListComponent', () => {
       TestBed.configureTestingModule({
         declarations: [ContactListComponent],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

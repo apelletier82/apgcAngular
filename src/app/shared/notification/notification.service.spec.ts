@@ -1,19 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { TestingModule } from 'src/app/test/testing.module';
-import { NotificationConfigType } from './notification-config-type';
+import TestingModule from 'src/app/test/testing.module';
+import NotificationConfigType from './notification-config-type';
 
-import { NotificationService } from './notification.service';
+import NotificationService from './notification.service';
 
 describe('SnackBarService', () => {
   let service: NotificationService;
-  let snackBar: MatSnackBar;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TestingModule],
     });
-    snackBar = TestBed.inject(MatSnackBar);
+    TestBed.inject(MatSnackBar);
     service = TestBed.inject(NotificationService);
   });
 
@@ -23,7 +22,7 @@ describe('SnackBarService', () => {
 
   it('should show information', () => {
     expect(
-      service.showInformation('Test message', 'action').instance
+      service.showInformation('Test message', 'action').instance,
     ).toBeTruthy();
   });
 
@@ -43,7 +42,7 @@ describe('SnackBarService', () => {
 
   it('should show exception', () => {
     expect(
-      service.showException('Test exception', 'exception message').instance
+      service.showException('Test exception', 'exception message').instance,
     ).toBeTruthy();
   });
 
@@ -53,7 +52,7 @@ describe('SnackBarService', () => {
         message: 'APGC Message',
         action: 'Action',
         showCloseButton: true,
-      }).instance
+      }).instance,
     ).toBeTruthy();
   });
 
@@ -64,7 +63,7 @@ describe('SnackBarService', () => {
         message: 'APGC Information',
         action: 'Ok',
         showCloseButton: true,
-      }).instance
+      }).instance,
     ).toBeTruthy();
   });
 
@@ -75,7 +74,7 @@ describe('SnackBarService', () => {
         message: 'APGC Successful test',
         action: 'Ok',
         showCloseButton: true,
-      }).instance
+      }).instance,
     ).toBeTruthy();
   });
 
@@ -86,7 +85,7 @@ describe('SnackBarService', () => {
         message: 'APGC Warning test',
         action: 'Ok',
         showCloseButton: true,
-      }).instance
+      }).instance,
     ).toBeTruthy();
   });
 
@@ -97,7 +96,7 @@ describe('SnackBarService', () => {
         message: 'APGC Error test',
         action: 'Ok',
         showCloseButton: true,
-      }).instance
+      }).instance,
     ).toBeTruthy();
   });
 });

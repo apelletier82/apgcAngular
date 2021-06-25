@@ -48,4 +48,4 @@ const modules = [
   imports: [...modules],
   exports: [...modules],
 })
-export class AppMaterialModule {}
+export default class AppMaterialModule {}

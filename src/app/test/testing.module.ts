@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppMaterialModule } from '../app-material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { SharedModule } from '../shared/shared.module';
+import AppMaterialModule from '../app-material.module';
+import SharedModule from '../shared/shared.module';
 import { routes } from '../app-routing.module';
 
 const modules = [
@@ -21,4 +21,4 @@ const exportModules = modules;
   imports: [...importModules],
   exports: [...exportModules],
 })
-export class TestingModule {}
+export default class TestingModule {}

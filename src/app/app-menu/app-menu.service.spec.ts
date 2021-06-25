@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BackendService } from '../shared/services/backend.service';
-import { TestingModule } from '../test/testing.module';
-
-import { AppMenuService } from './app-menu.service';
+import BackendService from '../shared/services/backend.service';
+import TestingModule from '../test/testing.module';
+import AppMenuService from './app-menu.service';
 
 describe('AppMenuService', () => {
   let service: AppMenuService;
