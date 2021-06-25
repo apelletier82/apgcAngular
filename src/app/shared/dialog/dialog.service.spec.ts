@@ -1,4 +1,3 @@
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';

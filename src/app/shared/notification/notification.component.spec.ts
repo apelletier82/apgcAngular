@@ -51,7 +51,6 @@ describe('NotificationComponent', () => {
     spyOn(snackBarRef, 'dismiss').and.callThrough();
     component.close();
 
-    // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
     expect(snackBarRef.dismiss).toHaveBeenCalled();
   });
 
@@ -59,7 +58,6 @@ describe('NotificationComponent', () => {
     spyOn(snackBarRef, 'dismissWithAction').and.callThrough();
     component.onActionClick();
 
-    // eslint-disable-next-line jasmine/prefer-toHaveBeenCalledWith
     expect(snackBarRef.dismissWithAction).toHaveBeenCalled();
   });
 

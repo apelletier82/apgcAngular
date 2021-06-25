@@ -22,19 +22,24 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/api/logos"                         
+              "src/api/logos"
             ],
-            "styles": [                  
+            "styles": [
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",
               "./node_modules/flag-icon-css/css/flag-icon.css",
               "src/styles.scss",
-              "src/theme.scss"              
+              "src/theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -65,7 +70,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -96,9 +102,9 @@
               "src/favicon.ico",
               "src/assets",
               "src/api/logos",
-              "src/tests/mock/folders"                    
+              "src/tests/mock/folders"
             ],
-            "styles": [              
+            "styles": [
               "./node_modules/@fortawesome/fontawesome-free/css/all.css",
               "./node_modules/flag-icon-css/css/flag-icon.css",
               "src/styles.scss",
@@ -112,7 +118,7 @@
           "options": {
             "lintFilePatterns": [
               "src/**/*.ts",
-              "src/**/*.component.html"
+              "src/**/*.html"
             ]
           }
         },
@@ -131,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "apgc"
+  "defaultProject": "apgc",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

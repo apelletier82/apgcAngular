@@ -1,5 +1,3 @@
-/* eslint-disable prefer-arrow/prefer-arrow-functions */
-/* eslint-disable jasmine/no-unsafe-spy */
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { of } from 'rxjs';
